@@ -1,0 +1,48 @@
+.breakpointNews, .topNews {
+	display: flex;
+	flex-direction: row;
+	gap: 25px;
+	padding-bottom: 20px;
+}
+
+.mainNews {
+	max-width: 785px;
+	width: 100%;
+	.mainNewsCard {
+		width: 100%;
+	}
+}
+
+.topNews {
+	a {
+		width: 245px;
+	}
+}
+
+.newsSectionRow {
+  justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+.swiperNews {
+	@media (max-width: 440px) {
+		width: 300px!important;
+	}
+}
+
+.news {
+	.newsSlider {
+		position: relative;
+	}
+}
+
+.newsSliderBtns {
+	top: 75%;
+	@media (max-width: 1024px) {
+		top: 45%;
+	}
+	@media (max-width: 440px) {
+		top: 55%;
+		width: 94%;
+	}
+}

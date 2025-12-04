@@ -1,0 +1,20 @@
+.footer {
+  background: #CC1746;
+  padding: 21px 0;
+  font-size: 17px;
+  color: #FFFFFF;
+  .footerRow {
+    justify-content: space-between;
+    align-items: center;
+    .socialsRow {
+      button {
+        width: 32px;
+        height: 32px;
+        background: #FFFFFF;
+        border-radius: 3px;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}

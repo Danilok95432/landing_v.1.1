@@ -1,0 +1,37 @@
+.programNav {
+	display: flex;
+	gap: 1px;
+	flex-wrap: wrap;
+	align-items: center;
+	margin: 13px 0;
+
+	@media (max-width: 768px) {
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 1px;
+	}
+
+	li {
+		font-size: 20px;
+		color: #ffffff;
+		font-weight: 400;
+		padding: 8px 24px;
+		background-color: #000000;
+		transition: all .3s ease-in-out;
+		cursor: pointer;
+		@media (max-width: 768px) {
+			font-size: 17px;
+			padding: 8px 7px;
+		}
+	}
+	._active {
+		background-color: #CC1746;
+		padding: 12px 24px;
+		border-radius: 5px;
+		color: #ffffff;
+		@media (max-width: 768px) {
+			font-size: 17px;
+			padding: 12px 7px;
+		}
+	}
+}
