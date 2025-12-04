@@ -1,11 +1,16 @@
 .navigation {
-	background: #cc1746;
+	background: var(--additional-theme-color);
 	width: 100%;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
+	padding: 20px 0;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 	.navigationCont {
-		max-width: 1430px;
+		max-width: 1220px;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
     @media (max-width: 1340px) {
       display: flex;
       flex-direction: row;
@@ -13,25 +18,29 @@
       align-items: center;
       padding: 10px 15px;
     }
-		.enterLK {
-			display: none;
+		.buyBtn {
+			display: flex;
 			flex-direction: row;
 			align-items: center;
+			justify-content: center;
 			border: none;
-			font-size: 20px;
-			color: #cc1746;
-			gap: 10px;
-      @media (max-width: 1340px) {
-        display: flex;
-      }
-			.vector {
-				border-radius: 50%;
-				width: 30px;
-				height: 30px;
-				background: #ffffff;
+			background: var(--main-theme-color);
+			border-radius: 12px;
+			padding: 12px 0;
+			width: 360px;
+			.text {
 				display: flex;
-				justify-content: center;
+				flex-direction: row;
 				align-items: center;
+				gap: 8px;
+				p {
+					font-size: 18px;
+					color: var(--additional-theme-color);
+					&:last-child {
+						border-left: 1px solid var(--additional-theme-color);
+						padding-left: 8px;
+					}
+				}
 			}
 		}
 	}
@@ -40,19 +49,20 @@
 		flex-direction: row;
 		align-items: center;
 		width: 100%;
-		justify-content: space-between;
-		padding: 15px 0;
+		gap: 40px;
+		padding: 0 39px;
 		@media (max-width: 1340px) {
 			display: none;
 		}
 		.navEl {
-			font-size: 20px;
-			color: #ffffff;
-			transition: all 0.2s ease-in-out;
-			padding: 7px 15px;
+			font-size: 18px;
+			color: var(--additional-theme-color-2);
+			transition: all 0.3s ease-in-out;
+			padding: 7px 10px;
 			text-align: center;
 			&:hover {
-				background: #7a0e2a;
+				background: var(--main-theme-color);
+				color: var(--additional-theme-color);
 				border-radius: 50px;
 			}
 		}

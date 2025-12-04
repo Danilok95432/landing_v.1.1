@@ -2,11 +2,11 @@ import { Container } from 'src/shared/ui/Container/Container'
 import { navigationElements } from './consts'
 import styles from './index.module.scss'
 import { BurgerMenu } from './components/burger-menu/burger-menu'
-import { PersonIconSvg } from 'src/shared/ui/icons/personIconSVG'
 // import { AuthModal } from 'src/modals/auth-modal/auth-modal'
 // import { useActions } from 'src/app/store/hooks/actions'
 import { useEffect } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { LogoSVG } from 'src/shared/ui/icons/logoSVG'
 
 export const MainNavigation = () => {
 	// const { openModal } = useActions()
@@ -58,6 +58,7 @@ export const MainNavigation = () => {
 		<nav className={styles.navigation}>
 			<Container className={styles.navigationCont}>
 				<BurgerMenu />
+				<LogoSVG />
 				<ul className={styles.navWrapper}>
 					{navigationElements.map((el, index) => (
 						<button key={index} className={styles.navEl} onClick={() => scrollToSection(el.link)}>
@@ -65,18 +66,12 @@ export const MainNavigation = () => {
 						</button>
 					))}
 				</ul>
-				<Link to={'https://lk.этноспорт.рф'} className={styles.enterLK}>
-					<div className={styles.vector}>
-						<PersonIconSvg color='#CC1746' />
-					</div>
-				</Link>
-				{/*
-					<button className={styles.enterLK} onClick={() => openModal(<AuthModal />)}>
-					<div className={styles.vector}>
-						<PersonIconSvg color='#CC1746' />
+				<button className={styles.buyBtn}>
+					<div className={styles.text}>
+						<p>Купить билет</p>
+						<p>от 8 000 ₽</p>
 					</div>
 				</button>
-					*/}
 			</Container>
 		</nav>
 	)

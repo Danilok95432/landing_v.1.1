@@ -26,6 +26,10 @@ export const MainSliderSection = () => {
 						return (
 							<SwiperSlide key={slideEl.id}>
 								<FlexRow className={styles.slideRow}>
+									<FlexRow className={styles.contentSlide}>
+										<p className={styles.slideTitle}>{slideEl.title}</p>
+										<p className={styles.slideDesc}>{slideEl.desc}</p>
+									</FlexRow>
 									<div className={styles.imgWrapper}>
 										{slideEl.original ? (
 											<img className={styles.sliderImg} src={slideEl.original} alt='image' />
@@ -33,16 +37,12 @@ export const MainSliderSection = () => {
 											<img className={styles.skeletonImg} src={skeletonImg} alt='image' />
 										)}
 									</div>
-									<FlexRow className={styles.contentSlide}>
-										<p className={styles.slideTitle}>{slideEl.title}</p>
-										<p className={styles.slideDesc}>{slideEl.desc}</p>
-										<SliderBtns className={styles.eventsSliderBtns} swiperRef={swiperRef} />
-									</FlexRow>
 								</FlexRow>
 							</SwiperSlide>
 						)
 					})}
 				</Swiper>
+				<div className={cn('custom-pagination', styles.paginationContainer)}></div>
 				<SliderBtns className={styles.eventsSliderBtnsMobile} swiperRef={swiperRef} />
 			</Container>
 		</Section>

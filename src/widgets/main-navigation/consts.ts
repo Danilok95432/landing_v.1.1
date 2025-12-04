@@ -1,30 +1,22 @@
 export const navigationElements = [
 	{
-		title: 'Организаторы',
-		link: 'orgs',
+		title: 'О событии',
+		link: 'event',
 	},
 	{
-		title: 'Новости',
-		link: 'news',
+		title: 'Фото',
+		link: 'photo',
 	},
 	{
 		title: 'Программа',
 		link: 'program',
 	},
 	{
-		title: 'События',
-		link: 'events',
+		title: 'Новости и видео',
+		link: 'content',
 	},
 	{
-		title: 'Партнеры',
-		link: 'partners',
-	},
-	{
-		title: 'Как добраться?',
-		link: 'pathways',
-	},
-	{
-		title: 'Размещение',
-		link: 'placement',
+		title: 'Частые вопросы',
+		link: 'faq',
 	},
 ]
