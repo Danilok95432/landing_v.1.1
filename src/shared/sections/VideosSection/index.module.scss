@@ -23,13 +23,7 @@
 	}
 
 	.videoSliderBtns {
-    top: 55%;
-		@media (max-width: 768px) {
-			top: 49%;
-			width: 90%;
-		}
-		@media (max-width: 440px) {
-			width: 93%;
-		}
+    top: 40%;
+		width: calc(100% + 80px);
 	}
 }

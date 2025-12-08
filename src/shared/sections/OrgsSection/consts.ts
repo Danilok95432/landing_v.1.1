@@ -4,9 +4,9 @@ import { type SwiperProps } from 'swiper/react/swiper-react'
 export const partnersSliderOptions: SwiperProps = {
 	slidesPerView: 2,
 	slidesPerGroup: 1,
-	spaceBetween: 17,
+	spaceBetween: 32,
 	autoHeight: false,
-	loop: true,
+	loop: false,
 	autoplay: {
 		delay: 2000,
 		disableOnInteraction: false,
@@ -29,13 +29,13 @@ export const partnersSliderOptions: SwiperProps = {
 			slidesPerView: 4,
 		},
 		[DisplayBreakpoints.Lg]: {
-			slidesPerView: 5,
+			slidesPerView: 4,
 		},
 		[DisplayBreakpoints.Xll]: {
-			slidesPerView: 6,
+			slidesPerView: 4,
 		},
 		[DisplayBreakpoints.Xxl]: {
-			slidesPerView: 6,
+			slidesPerView: 4,
 		},
 	},
 }

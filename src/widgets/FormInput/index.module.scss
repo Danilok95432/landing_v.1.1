@@ -9,9 +9,9 @@
 
 .inputWrapper {
   position: relative;
-  border: 1px solid #C5C5C5;
-  padding: 8px 0;
-  border-radius: 5px;
+  border: 1px solid #00000031;
+  padding: 6.56px 0;
+  border-radius: 8px;
   @media (max-width: 768px) {
     min-height: 50px;
   }
@@ -21,9 +21,10 @@
     right: 8px;
     border: none;
     cursor: pointer;
-    font-size: 17px;
-    height: 30px;
+    font-size: 14px;
+    height: 27px;
     padding: 7px 12px;
+    border-radius: 8px;
     @media (max-width: 768px) {
       left: 0px;
       top: 85px;
@@ -107,7 +108,7 @@
   padding: 12px 10px 0 10px;
   border: none;
   outline: none;
-  font-size: 18px;
+  font-size: 16px;
   background: transparent;
   @media (max-width: 768px) {
     font-size: 15px;

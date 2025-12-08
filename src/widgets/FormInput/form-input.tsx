@@ -19,6 +19,7 @@ interface CustomProps {
 	isPhone?: boolean
 	isSmallLabel?: boolean
 	isPhoneWithCode?: boolean
+	isEmailCode?: boolean
 	maskChar?: string
 	dynamicError?: FieldError | undefined
 	name: string
@@ -56,6 +57,7 @@ export const FormInput: React.FC<TextInputProps> = ({
 	setIsCodeAccepted,
 	setErrorForm,
 	isPhoneWithCode = false,
+	isEmailCode = false,
 	setRegionValue,
 	className,
 	errorForm,
@@ -291,6 +293,72 @@ export const FormInput: React.FC<TextInputProps> = ({
 					)
 				}}
 			/>
+		)
+	}
+
+	if (isEmailCode) {
+		return (
+			<div className={cn(styles.inputContainer, className)}>
+				<div
+					className={cn(styles.inputWrapper, {
+						[styles.focused]: isFocused,
+						[styles.error]: !!error,
+						[styles.disabled]: disabled,
+						[styles.accept]: accept,
+					})}
+				>
+					<Controller
+						name={name}
+						control={control}
+						render={({ field }) => (
+							<>
+								<input
+									{...register(name)}
+									className={styles.input}
+									disabled={disabled}
+									ref={(e) => {
+										register(name).ref(e)
+										;(inputRef as React.MutableRefObject<HTMLInputElement | null>).current = e
+									}}
+									onFocus={handleFocus}
+									onBlur={handleBlur}
+								/>
+								{isEmailCode && (
+									<MainButton
+										className={cn(sendCodeClass, styles.sendCodeBtn, {
+											[styles.resend]: countdown > 0 && !isCodeAccepted,
+											[styles.codeAccepted]: isCodeAccepted,
+										})}
+										onClick={async (e: { preventDefault: () => void }) => {
+											e.preventDefault()
+											await handleSendCode(fieldValue)
+										}}
+										disabled={
+											(!fieldValue || fieldValue.includes('_') || isSended) &&
+											countdown > 0 &&
+											!isCodeAccepted
+										}
+									>
+										{isCodeAccepted
+											? 'Код верный'
+											: countdown > 0
+												? `Повторная отправка: ${countdown}`
+												: 'Отправить код'}
+									</MainButton>
+								)}
+							</>
+						)}
+					/>
+					<label
+						className={cn(styles.label, {
+							[styles.raised]: shouldRaiseLabel,
+							[styles.smallLable]: isSmallLabel,
+						})}
+					>
+						{label}
+					</label>
+				</div>
+			</div>
 		)
 	}
 

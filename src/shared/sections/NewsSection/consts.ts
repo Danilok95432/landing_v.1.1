@@ -4,7 +4,7 @@ import { type SwiperProps } from 'swiper/react/swiper-react'
 export const newsSliderOptions: SwiperProps = {
 	slidesPerView: 1,
 	slidesPerGroup: 1,
-	spaceBetween: 25,
+	spaceBetween: 20,
 	breakpoints: {
 		[DisplayBreakpoints.Sm]: {
 			slidesPerView: 1,
@@ -19,7 +19,7 @@ export const newsSliderOptions: SwiperProps = {
 			slidesPerView: 4,
 		},
 		[DisplayBreakpoints.Xxl]: {
-			slidesPerView: 5,
+			slidesPerView: 4,
 		},
 	},
 }

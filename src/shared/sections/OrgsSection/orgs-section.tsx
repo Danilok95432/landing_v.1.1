@@ -16,9 +16,13 @@ export const OrgsSection = () => {
 	return (
 		<Section id='orgs' className={cn(styles.orgs)}>
 			<Container>
-				<h2>{'Организаторы игр'}</h2>
 				<div className={styles.partnerSlider}>
-					<Swiper modules={[Autoplay]} {...partnersSliderOptions} ref={swiperRef}>
+					<Swiper
+						modules={[Autoplay]}
+						{...partnersSliderOptions}
+						ref={swiperRef}
+						className={styles.slider}
+					>
 						{eventData?.organizerGameLinks.map((slideItem, idx) => (
 							<SwiperSlide key={idx} className={styles.partnerSlide}>
 								<div className={styles.partnerCard} key={slideItem.id}>
@@ -31,6 +35,7 @@ export const OrgsSection = () => {
 												height={105}
 												loading='lazy'
 											/>
+											<p>{slideItem.title}</p>
 										</a>
 									) : (
 										<div className={styles.partnersLink}>
@@ -41,13 +46,20 @@ export const OrgsSection = () => {
 												height={105}
 												loading='lazy'
 											/>
+											<p>{slideItem.title}</p>
 										</div>
 									)}
 								</div>
 							</SwiperSlide>
 						))}
 					</Swiper>
-					<SliderBtns className={styles.partnersSliderBtns} swiperRef={swiperRef} />
+					<SliderBtns
+						className={styles.partnersSliderBtns}
+						swiperRef={swiperRef}
+						color='#fff'
+						prevBtnColor='#00000010'
+						nextBtnColor='#00000010'
+					/>
 				</div>
 			</Container>
 		</Section>

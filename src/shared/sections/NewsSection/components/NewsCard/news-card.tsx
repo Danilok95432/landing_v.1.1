@@ -4,7 +4,7 @@ import { type FC } from 'react'
 import { Link } from 'react-router-dom'
 
 import styles from './index.module.scss'
-import { mainFormatDate } from 'src/shared/helpers/utils'
+import { formatSingleDate, mainFormatDate } from 'src/shared/helpers/utils'
 
 type NewsCardProps = {
 	className?: string
@@ -54,7 +54,7 @@ export const NewsCard: FC<NewsCardProps> = ({
 				</div>
 				<figcaption className={styles.newsItemContent}>
 					<h4 className={styles.newsItemTitle}>{title}</h4>
-					<p className={styles.newsDate}>{mainFormatDate(date)}</p>
+					<p className={styles.newsDate}>{formatSingleDate(date)}</p>
 					<p className={styles.newsDesc}>{desc}</p>
 				</figcaption>
 			</figure>

@@ -2,11 +2,10 @@
 
 .newsItem {
   display: block;
-  border-radius: var(--border-radius);
-  width: 245px;
+  border-radius: 16px;
+  width: 290px;
   height: 100%;
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 
   @media (max-width: 768px) {
@@ -19,17 +18,6 @@
     width: 245px;
     height: 100%;
     margin: 0 auto;
-  }
-
-  @include hover {
-    .newsItemContent {
-      background-color: var(--color-red);
-      color: var(--color-white);
-
-      .newsDate {
-        color: var(--color-white);
-      }
-    }
   }
 }
 
@@ -49,7 +37,7 @@
 
 .newsImgWrapper {
   width: 100%;
-  height: 160px;
+  height: 200px;
   border-radius: 5px 5px 0 0;
 
   @media (max-width: 768px) {
@@ -61,7 +49,7 @@
   }
 
   img {
-    border-radius: 5px 5px 0 0;
+    border-radius: 16px;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -71,24 +59,23 @@
 }
 
 .newsItemContent {
-  padding: 15px 15px 20px 15px;
+  padding: 12px 0 0;
   transition: all .3s;
-  border-radius: 0 0 5px 5px;
   min-height: 145px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 12px;
   background: var(--color-white);
 
   .newsDate,
   .newsDesc {
-    font-size: 15px;
+    font-size: 16px;
   }
 
   .newsItemTitle {
-    font-size: 15px;
+    font-size: 16px;
     line-height: 1.3;
-    font-weight: 400;
+    font-weight: 500;
   }
 }
 
@@ -97,7 +84,7 @@
 }
 
 .newsDesc {
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.2;
 
   @include mobile {

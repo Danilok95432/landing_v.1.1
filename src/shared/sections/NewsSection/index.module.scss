@@ -31,18 +31,13 @@
 }
 
 .news {
+	padding: 27px 0 11px;
 	.newsSlider {
 		position: relative;
 	}
 }
 
 .newsSliderBtns {
-	top: 75%;
-	@media (max-width: 1024px) {
-		top: 45%;
-	}
-	@media (max-width: 440px) {
-		top: 55%;
-		width: 94%;
-	}
+	top: 30%;
+	width: calc(100% + 80px);
 }

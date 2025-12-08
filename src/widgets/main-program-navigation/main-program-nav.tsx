@@ -25,6 +25,7 @@ export const MainProgramNav: FC<ProgramNavProps> = ({ days, activeDayId, changeS
 					onClick={() => changeSlide(el.id)}
 				>
 					{mainFormatDate(el.date, 'dd MMMM')}
+					<span className={cn(styles.line, { [styles._activeLine]: activeDayId === el.id })}></span>
 				</li>
 			))}
 		</ul>

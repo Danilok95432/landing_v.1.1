@@ -3,13 +3,14 @@ import { navigationElements } from './consts'
 import styles from './index.module.scss'
 import { BurgerMenu } from './components/burger-menu/burger-menu'
 // import { AuthModal } from 'src/modals/auth-modal/auth-modal'
-// import { useActions } from 'src/app/store/hooks/actions'
+import { useActions } from 'src/app/store/hooks/actions'
 import { useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { LogoSVG } from 'src/shared/ui/icons/logoSVG'
+import { BuyTicketModal } from 'src/modals/buy-ticket-modal/buy-ticket-modal'
 
 export const MainNavigation = () => {
-	// const { openModal } = useActions()
+	const { openModal } = useActions()
 	const location = useLocation()
 	const navigate = useNavigate()
 
@@ -66,7 +67,7 @@ export const MainNavigation = () => {
 						</button>
 					))}
 				</ul>
-				<button className={styles.buyBtn}>
+				<button className={styles.buyBtn} onClick={() => openModal(<BuyTicketModal id='1' />)}>
 					<div className={styles.text}>
 						<p>Купить билет</p>
 						<p>от 8 000 ₽</p>

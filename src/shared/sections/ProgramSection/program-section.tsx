@@ -4,22 +4,23 @@ import styles from './index.module.scss'
 import cn from 'classnames'
 import { Section } from 'src/shared/ui/Section/section'
 import { FlexRow } from 'src/shared/ui/FlexRow/FlexRow'
-import { useState } from 'react'
+import { useState, useRef, type RefObject } from 'react'
 import { MainProgramNav } from 'src/widgets/main-program-navigation/main-program-nav'
-import { DefisSVG } from 'src/shared/ui/icons/defisSVG'
 import { Swiper, type SwiperRef, SwiperSlide } from 'swiper/react'
-import { type RefObject, useRef } from 'react'
 import { programSliderOptions } from './consts'
-import { useBreakPoint } from 'src/features/useBreakPoint/useBreakPoint'
 import { Link } from 'react-router-dom'
 import { MainButton } from 'src/shared/ui/MainButton/MainButton'
 import { toast } from 'react-toastify'
+import { CopySVG } from 'src/shared/ui/icons/copySVG'
+import { LocationSVG } from 'src/shared/ui/icons/locationSVG'
 
 export const ProgramSection = () => {
 	const { data: programDays } = useGetEventProgramByIdQuery('1')
 	const [activeDayId, setActiveDayId] = useState(1)
 	const swiperRef: RefObject<SwiperRef> = useRef<SwiperRef>(null)
-	const breakPoint = useBreakPoint()
+
+	// состояние "развернуто/свернуто"
+	const [isExpanded, setIsExpanded] = useState<boolean>(false)
 
 	const navDays = programDays?.map((day) => ({ id: day.id, date: day.date }))
 
@@ -27,6 +28,9 @@ export const ProgramSection = () => {
 		setActiveDayId(dayId)
 		const index = programDays?.findIndex((day) => day.id === dayId) ?? 0
 		swiperRef.current?.swiper.slideTo(index, 500)
+
+		// при смене дня сворачиваем список
+		setIsExpanded(false)
 	}
 
 	const getGroupedProgram = () => {
@@ -79,7 +83,7 @@ export const ProgramSection = () => {
 			.writeText(textToCopy)
 			.then(() => {
 				toast.success('Данные программы в буфере обмена', {
-					position: 'bottom-right',
+					position: 'top-right',
 					autoClose: 5000,
 					hideProgressBar: false,
 					closeOnClick: true,
@@ -101,17 +105,28 @@ export const ProgramSection = () => {
 				<FlexRow className={styles.programWrapper}>
 					<FlexRow className={styles.programHeadRow}>
 						<h1>Программа</h1>
-						<MainProgramNav
-							days={navDays ?? [{ id: 1, date: new Date() }]}
-							activeDayId={activeDayId}
-							changeSlide={goToDay}
-						/>
-						<MainButton onClick={handleCopyDataProgram}>Копировать программу дня</MainButton>
+						<FlexRow className={styles.programControlsRow}>
+							<MainProgramNav
+								days={navDays ?? [{ id: 1, date: new Date() }]}
+								activeDayId={activeDayId}
+								changeSlide={goToDay}
+							/>
+							<FlexRow className={styles.copyRow}>
+								<p className={styles.day}>
+									{activeDayId === 1
+										? 'Основной день игр'
+										: activeDayId === 2
+											? 'Последний день игр'
+											: 'Первый день игр'}
+								</p>
+								<MainButton className={styles.copyBtn} onClick={handleCopyDataProgram}>
+									<CopySVG />
+									<p>Копировать программу дня</p>
+								</MainButton>
+							</FlexRow>
+						</FlexRow>
 					</FlexRow>
 					<FlexRow className={styles.contentRow}>
-						<div className={styles.imgWrapper}>
-							<img src='src/assets/img/programImg.png' alt='' />
-						</div>
 						<Swiper
 							{...programSliderOptions}
 							ref={swiperRef}
@@ -122,42 +137,63 @@ export const ProgramSection = () => {
 								const currentDayId = programDays?.[currentIndex]?.id
 								if (currentDayId !== undefined) {
 									setActiveDayId(currentDayId)
+									// при смене слайда тоже сворачиваем список
+									setIsExpanded(false)
 								}
 							}}
 						>
-							{programDays?.map((day) => (
-								<SwiperSlide key={day.id}>
-									<FlexRow className={styles.programList}>
-										<h2>
-											{day.id === 1
-												? 'Основной день игр'
-												: day.id === 2
-													? 'Последний день игр'
-													: 'Первый день игр'}
-										</h2>
-										{Object.entries(getGroupedProgram()).map(([place, items]) => (
-											<div key={place} className={styles.group}>
-												<p className={styles.placeTitle}>{place}</p>
-												{items.map((programEl) => (
-													<FlexRow key={programEl.id} className={styles.elRow}>
-														<p>{programEl.time}</p>
-														{breakPoint === 'S' ? null : <DefisSVG />}
-														{programEl?.use_real ? (
-															<Link
-																to={`https://этноспорт.рф/events/1/event-program/${programEl.id}`}
-															>
-																{programEl.title}
-															</Link>
-														) : (
-															<p>{programEl.title}</p>
-														)}
+							{programDays?.map((day) => {
+								// группы для активного дня
+								const groupedProgramEntries = Object.entries(getGroupedProgram())
+								const visibleGroups = isExpanded
+									? groupedProgramEntries
+									: groupedProgramEntries.slice(0, 1)
+								const hasMoreGroups = groupedProgramEntries.length > 1
+
+								return (
+									<SwiperSlide key={day.id}>
+										<FlexRow
+											className={cn(styles.programList, {
+												[styles.programList_collapsed]: !isExpanded,
+											})}
+										>
+											{visibleGroups.map(([place, items]) => (
+												<div key={place} className={styles.group}>
+													<FlexRow className={styles.location}>
+														<LocationSVG />
+														<p className={styles.placeTitle}>{place}</p>
 													</FlexRow>
-												))}
-											</div>
-										))}
-									</FlexRow>
-								</SwiperSlide>
-							))}
+													{items.map((programEl) => (
+														<FlexRow key={programEl.id} className={styles.elRow}>
+															<p>{programEl.time}</p>
+															{programEl?.use_real ? (
+																<Link
+																	to={`https://этноспорт.рф/events/1/event-program/${programEl.id}`}
+																>
+																	{programEl.title}
+																</Link>
+															) : (
+																<p>{programEl.title}</p>
+															)}
+														</FlexRow>
+													))}
+												</div>
+											))}
+										</FlexRow>
+
+										{hasMoreGroups && (
+											<button
+												className={cn(styles.showMoreBtn, {
+													[styles._active]: isExpanded,
+												})}
+												onClick={() => setIsExpanded((prev) => !prev)}
+											>
+												{isExpanded ? 'Свернуть' : 'Показать ещё'}
+											</button>
+										)}
+									</SwiperSlide>
+								)
+							})}
 						</Swiper>
 					</FlexRow>
 				</FlexRow>

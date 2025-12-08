@@ -9,10 +9,18 @@ import { SlideNextSvg } from 'src/shared/ui/icons/slideNextSVG'
 type SliderProps = {
 	swiperRef: RefObject<SwiperRef>
 	className?: string
+	prevBtnColor?: string
+	nextBtnColor?: string
 	color?: string
 }
 
-export const SliderBtns: FC<SliderProps> = ({ swiperRef, className, color }) => {
+export const SliderBtns: FC<SliderProps> = ({
+	swiperRef,
+	className,
+	color,
+	prevBtnColor,
+	nextBtnColor,
+}) => {
 	const handlePrev = () => {
 		swiperRef.current?.swiper.slidePrev()
 	}
@@ -22,10 +30,10 @@ export const SliderBtns: FC<SliderProps> = ({ swiperRef, className, color }) => 
 	}
 	return (
 		<div className={cn(className, styles.sliderBtnsWrapper)}>
-			<button type='button' onClick={handlePrev}>
+			<button type='button' onClick={handlePrev} style={{ background: prevBtnColor }}>
 				<SlidePrevSvg color={color} />
 			</button>
-			<button type='button' onClick={handleNext}>
+			<button type='button' onClick={handleNext} style={{ background: nextBtnColor }}>
 				<SlideNextSvg color={color} />
 			</button>
 		</div>

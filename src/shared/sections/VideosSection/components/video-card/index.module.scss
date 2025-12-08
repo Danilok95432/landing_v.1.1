@@ -1,6 +1,6 @@
 .videoCard {
 	display: block;
-	width: 245px;
+	width: 290px;
 	@media (max-width: 768px) {
 		max-width: 300px;
 		width: 300px;
@@ -15,8 +15,8 @@
 }
 
 .videoThumbWrapper {
-	border-radius: 10px;
-	height: 160px;
+	border-radius: 16px;
+	height: 163px;
 	margin-bottom: 7px;
 	width: 100%;
 	position: relative;
@@ -31,7 +31,7 @@
 	}
 
 	img {
-		border-radius: 10px;
+		border-radius: 16px;
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
@@ -70,7 +70,8 @@
 }
 
 .videoTitle {
-	font-size: 15px;
+	font-size: 16px;
+	color: var(--main-link-color);
 
 	@include mobile {
 		font-size: 16px;
