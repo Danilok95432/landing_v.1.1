@@ -80,7 +80,7 @@ div.ticketModal {
 				.first {
 					min-width: 468px;
 					width: 100%;
-          @media (max-width: 768px) {
+          @media (max-width: 850px) {
             min-width: unset;
           }
 				}
@@ -184,7 +184,7 @@ div.ticketModal {
 				.first {
 					width: 100%;
 					min-width: 468px;
-          @media (max-width: 768px) {
+          @media (max-width: 850px) {
             min-width: unset;
           }
 				}
@@ -243,6 +243,7 @@ div.ticketModal {
 
 	.disclaimer {
 		gap: 10px;
+    width: 100%;
 		.title {
 			font-size: 26px;
 			font-weight: 500;
@@ -251,6 +252,7 @@ div.ticketModal {
 			}
 		}
 		.grayBox {
+      width: 100%;
 			background: #cae5f07a;
 			padding: 10px;
 			font-size: 16px;

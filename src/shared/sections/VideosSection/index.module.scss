@@ -23,7 +23,11 @@
 	}
 
 	.videoSliderBtns {
-    top: 40%;
+		top: 40%;
 		width: calc(100% + 80px);
+		@media (max-width: 768px) {
+			display: none;
+		}
 	}
 }
+

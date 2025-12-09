@@ -28,6 +28,9 @@
 			border-radius: 12px;
 			padding: 12px 0;
 			width: 360px;
+			@media (max-width: 768px) {
+				display: none;
+			}
 			.text {
 				display: flex;
 				flex-direction: row;

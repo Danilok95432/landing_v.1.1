@@ -11,12 +11,12 @@ import { NewsCard } from './components/NewsCard/news-card'
 
 export const NewsSection = () => {
 	const { data: newsList } = useGetEventNewsByIdQuery('1')
-	const [, setIsMobile] = useState(false)
+	const [isMobile, setIsMobile] = useState(false)
 	const swiperRef: RefObject<SwiperRef> = useRef<SwiperRef>(null)
 
 	useEffect(() => {
 		const handleResize = () => {
-			setIsMobile(window.innerWidth <= 1024)
+			setIsMobile(window.innerWidth <= 768)
 		}
 		handleResize()
 		window.addEventListener('resize', handleResize)
@@ -25,7 +25,7 @@ export const NewsSection = () => {
 
 	return (
 		<Section id='news' className={cn(styles.news)}>
-			<Container>
+			<Container off={isMobile}>
 				{newsList && newsList?.length > 0 && (
 					<>
 						<Swiper {...newsSliderOptions} ref={swiperRef} className={styles.newsSlider}>

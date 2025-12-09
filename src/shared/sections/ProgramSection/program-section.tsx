@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom'
 import { MainButton } from 'src/shared/ui/MainButton/MainButton'
 import { toast } from 'react-toastify'
 import { CopySVG } from 'src/shared/ui/icons/copySVG'
-import { LocationSVG } from 'src/shared/ui/icons/locationSVG'
+import { MainInfoPlaceSVG } from 'src/shared/ui/icons/mainInfoPlaceSVG'
 
 export const ProgramSection = () => {
 	const { data: programDays } = useGetEventProgramByIdQuery('1')
@@ -160,7 +160,7 @@ export const ProgramSection = () => {
 											{visibleGroups.map(([place, items]) => (
 												<div key={place} className={styles.group}>
 													<FlexRow className={styles.location}>
-														<LocationSVG />
+														<MainInfoPlaceSVG />
 														<p className={styles.placeTitle}>{place}</p>
 													</FlexRow>
 													{items.map((programEl) => (
@@ -196,6 +196,10 @@ export const ProgramSection = () => {
 							})}
 						</Swiper>
 					</FlexRow>
+					<MainButton className={styles.copyBtn} onClick={handleCopyDataProgram}>
+						<CopySVG />
+						<p>Копировать программу дня</p>
+					</MainButton>
 				</FlexRow>
 			</Container>
 		</Section>

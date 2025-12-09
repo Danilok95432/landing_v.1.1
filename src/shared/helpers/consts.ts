@@ -1,5 +1,6 @@
 export enum ReducerPath {
 	Home = 'home/api',
+	Content = 'content/api',
 	About = 'about/api',
 	Objects = 'objects/api',
 	News = 'news/api',

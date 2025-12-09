@@ -41,6 +41,15 @@
     }
   }
 
+  .sendCodeBtnEmail {
+    @media (max-width: 633px) {
+      top: 105px;
+    }
+    @media (max-width: 368px) {
+      top: 125px;
+    }
+  }
+
   .resend {
     font-size: 14px;
     color: #000;

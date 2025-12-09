@@ -2,7 +2,7 @@ import { DisplayBreakpoints } from 'src/shared/helpers/consts'
 import { type SwiperProps } from 'swiper/react/swiper-react'
 
 export const partnersSliderOptions: SwiperProps = {
-	slidesPerView: 2,
+	slidesPerView: 1.3,
 	slidesPerGroup: 1,
 	spaceBetween: 32,
 	autoHeight: false,
@@ -14,7 +14,7 @@ export const partnersSliderOptions: SwiperProps = {
 	},
 	breakpoints: {
 		[DisplayBreakpoints.Xss]: {
-			slidesPerView: 1,
+			slidesPerView: 1.3,
 		},
 		[DisplayBreakpoints.Xs]: {
 			slidesPerView: 2,

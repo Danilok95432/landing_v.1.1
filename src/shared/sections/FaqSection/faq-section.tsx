@@ -14,8 +14,9 @@ export const FaqSection = () => {
 				<h2>Часто задаваемые вопросы</h2>
 				<div className={styles.homeFaqList}>
 					{faqEvent &&
-						[...faqEvent?.faq]
-							.sort((a, b) => Number(a?.id) - Number(b?.id))
+						[...(faqEvent?.faq || [])]
+							.sort((a, b) => Number(a?.id || 0) - Number(b?.id || 0))
+							.filter((faqEl) => faqEl?.title)
 							.map((faqEl, index) => (
 								<AccordionItem
 									className={styles.faqItem}

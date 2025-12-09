@@ -40,4 +40,7 @@
 .newsSliderBtns {
 	top: 30%;
 	width: calc(100% + 80px);
+	@media (max-width: 768px) {
+			display: none;
+		}
 }

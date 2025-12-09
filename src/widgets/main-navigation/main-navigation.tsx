@@ -16,6 +16,7 @@ export const MainNavigation = () => {
 
 	const scrollToSection = (sectionId: string) => {
 		const element = document.getElementById(sectionId)
+		navigate(sectionId)
 		if (element) {
 			window.history.pushState(null, '', `#${sectionId}`)
 
@@ -58,8 +59,8 @@ export const MainNavigation = () => {
 	return (
 		<nav className={styles.navigation}>
 			<Container className={styles.navigationCont}>
-				<BurgerMenu />
 				<LogoSVG />
+				<BurgerMenu />
 				<ul className={styles.navWrapper}>
 					{navigationElements.map((el, index) => (
 						<button key={index} className={styles.navEl} onClick={() => scrollToSection(el.link)}>

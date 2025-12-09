@@ -4,6 +4,13 @@
   position: relative;
   width: 100%;
   @media (max-width: 768px) {
-    padding: 20px;
+    padding: 24px 24px 32px 24px;
+  }
+}
+
+.offCont {
+  max-width: max-content;
+  @media (max-width: 768px) {
+    padding: 24px 0 0 24px;
   }
 }

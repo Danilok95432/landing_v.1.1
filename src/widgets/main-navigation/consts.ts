@@ -13,7 +13,7 @@ export const navigationElements = [
 	},
 	{
 		title: 'Новости и видео',
-		link: 'content',
+		link: '/content',
 	},
 	{
 		title: 'Частые вопросы',

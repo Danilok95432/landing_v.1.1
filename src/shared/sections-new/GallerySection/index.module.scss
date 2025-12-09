@@ -2,12 +2,18 @@ section.gallerySection {
   position: relative;
   padding: 52px 0 36px;
   div.galleryCont {
+		@media (max-width: 768px) {
+			padding: 0 0 0 24px;
+		}
     div.sliderBtns {
       bottom: -30px;
       top: unset;
       width: 88px;
       left: unset;
       right: -45px;
+			@media (max-width: 768px) {
+				display: none;
+			}
     }
   }
 	.sliderMain {
@@ -29,9 +35,8 @@ section.gallerySection {
 				align-items: center;
 				border-radius: 16px;
 				@media (max-width: 768px) {
-					width: 300px;
-					height: 200px;
-					margin: 0 auto;
+					width: 292px;
+					height: 160px;
 				}
 				.sliderImg {
 					width: 100%;

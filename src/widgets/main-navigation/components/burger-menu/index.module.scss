@@ -16,7 +16,7 @@
   height: 17px;
 
   span {
-    background-color: #ffffff;
+    background-color: var(--additional-theme-color-2);
     height: 3px;
     border-radius: 5px;
     transition: transform 0.3s ease;
@@ -28,7 +28,7 @@
   position: fixed;
   border-top: 1px solid #E1E1E1;
   inset: 0;
-  background-color: #CC1746;
+  background-color: var(--main-theme-color);
   transform: translateX(-100%);
   transition: all .3s;
   padding: 35px 15px 15px 15px;

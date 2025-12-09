@@ -5,9 +5,12 @@ import cn from 'classnames'
 import { Link } from 'react-router-dom'
 
 import styles from './index.module.scss'
+import { PlayVideoSVG } from 'src/shared/ui/icons/playVideoSVG'
+import { mainFormatDate } from 'src/shared/helpers/utils'
 
 type VideoCardProps = {
 	className?: string
+	shouldDate?: boolean
 } & VideoItem
 
 export const VideoCard: FC<VideoCardProps> = ({
@@ -17,16 +20,20 @@ export const VideoCard: FC<VideoCardProps> = ({
 	mainphoto,
 	duration,
 	date,
+	shouldDate = false,
 }) => {
 	return (
-		<Link className={cn(styles.videoCard, className)} to={`https://этноспорт.рф/videos/${id}`}>
+		<Link className={cn(styles.videoCard, className)} to={`/content/videos/${id}`}>
 			<div className={styles.videoThumbWrapper}>
 				<img src={mainphoto[0]?.original} alt={title} />
-				{/* {date && (
-					<span className={styles.videoDate}>{mainFormatDate(new Date(date), 'dd.MM.yyyy')}</span>
-				)} */}
+				<div className={styles.playVector}>
+					<PlayVideoSVG />
+				</div>
 			</div>
 			<p className={styles.videoTitle}>{title}</p>
+			{date && shouldDate && (
+				<span className={styles.date}>{mainFormatDate(date, 'dd.MM.yyyy')}</span>
+			)}
 		</Link>
 	)
 }

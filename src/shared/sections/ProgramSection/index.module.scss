@@ -7,55 +7,79 @@
 		@media (max-width: 768px) {
 			gap: 15px;
 		}
-		.programHeadRow { 
-      width: 100%; 
-      gap: 20px; 
-      flex-direction: column; 
-      @media (max-width: 768px) { 
-        flex-direction: column; 
-        align-items: start; 
-        gap: 15px; 
-      } 
-      h1 { 
-        font-size: 36px; 
-        font-weight: 500; 
-        @media (max-width: 768px) { 
-          font-size: 36px; 
-        } 
-      } 
-      .programControlsRow { 
-        gap: 50px; 
-        align-items: center; 
-        justify-content: space-between; 
-        width: 100%; 
-        border-bottom: 1px solid #00000010; 
-        .copyRow { 
-          gap: 32px; 
-          align-items: center; 
-          .day { 
-            color: var(--main-theme-color); 
-            font-size: 16px; 
-            font-weight: 500; 
-          } 
-          .copyBtn { 
-            display: flex; 
-            gap: 4px; 
-            background-color: unset; 
-            align-items: center; 
-            svg { 
-              width: 16px; 
-              height: 16px; 
-              transform: rotate(90deg); 
-            } 
-            p { 
-              color: var(--additional-theme-color-2); 
-              font-size: 16px; 
-              font-weight: 500; 
-            } 
-          } 
-        } 
-      }
-    }
+		.copyBtn {
+			display: none;
+			gap: 4px;
+			background-color: unset;
+			align-items: center;
+			background: #cae5f080;
+			border-radius: 8px;
+			svg {
+				width: 16px;
+				height: 16px;
+				transform: rotate(90deg);
+			}
+			p {
+				color: var(--additional-theme-color-2);
+				font-size: 16px;
+				font-weight: 500;
+			}
+			@media (max-width: 768px) {
+				display: flex;
+			}
+		}
+		.programHeadRow {
+			width: 100%;
+			gap: 20px;
+			flex-direction: column;
+			@media (max-width: 768px) {
+				flex-direction: column;
+				align-items: start;
+				gap: 15px;
+			}
+			h1 {
+				font-size: 36px;
+				font-weight: 500;
+				@media (max-width: 768px) {
+					font-size: 36px;
+				}
+			}
+			.programControlsRow {
+				gap: 50px;
+				align-items: center;
+				justify-content: space-between;
+				width: 100%;
+				border-bottom: 1px solid #00000010;
+				.copyRow {
+					gap: 32px;
+					align-items: center;
+					.day {
+						color: var(--main-theme-color);
+						font-size: 16px;
+						font-weight: 500;
+					}
+					.copyBtn {
+						display: flex;
+						gap: 4px;
+						background-color: unset;
+						align-items: center;
+						svg {
+							width: 16px;
+							height: 16px;
+							transform: rotate(90deg);
+						}
+						p {
+							color: var(--additional-theme-color-2);
+							font-size: 16px;
+							font-weight: 500;
+						}
+						@media (max-width: 768px) {
+							display: none;
+						}
+					}
+				}
+			}
+		}
 		.contentRow {
 			width: 100%;
 			gap: 50px;
@@ -191,3 +215,4 @@
 .program :global(.programList:not(.programList_collapsed) .group) {
 	animation: programGroupFadeIn 0.25s ease-out;
 }
+

@@ -9,15 +9,14 @@
   cursor: pointer;
 
   @media (max-width: 768px) {
-    width: 300px;
-    max-width: 300px;
-    margin: 0 auto;
-  }
-
-  @media (max-width: 440px) {
-    width: 245px;
+    width: 290px;
     height: 100%;
-    margin: 0 auto;
+  }
+}
+
+.contentItem {
+  .newsImgWrapper {
+    height: 163px;
   }
 }
 
@@ -90,4 +89,8 @@
   @include mobile {
     display: none;
   }
+}
+
+.linkTitle {
+  color: var(--main-link-color);
 }

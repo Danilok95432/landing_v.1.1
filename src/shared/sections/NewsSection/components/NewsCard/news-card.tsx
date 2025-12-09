@@ -9,6 +9,7 @@ import { formatSingleDate, mainFormatDate } from 'src/shared/helpers/utils'
 type NewsCardProps = {
 	className?: string
 	mainStatus?: boolean
+	titleLink?: boolean
 } & CardNewsItem
 
 export const NewsCard: FC<NewsCardProps> = ({
@@ -19,12 +20,13 @@ export const NewsCard: FC<NewsCardProps> = ({
 	desc,
 	mainStatus,
 	className,
+	titleLink = false,
 }) => {
 	if (mainStatus) {
 		return (
 			<Link
 				className={cn(styles.newsItem, className)}
-				to={`https://этноспорт.рф/news/${id}`}
+				to={`/content/news/${id}`}
 				aria-label={title}
 				title={title}
 			>
@@ -33,7 +35,7 @@ export const NewsCard: FC<NewsCardProps> = ({
 						<img src={mainphoto[0]?.original} alt={title} width={286} height={160} loading='lazy' />
 					</div>
 					<figcaption className={styles.newsItemContent}>
-						<h4 className={styles.newsItemTitle}>{title}</h4>
+						<h4 className={cn(styles.newsItemTitle, { [styles.linkTitle]: titleLink })}>{title}</h4>
 						<p className={styles.newsDate}>{mainFormatDate(date)}</p>
 						<p className={styles.newsDesc}>{desc}</p>
 					</figcaption>
@@ -43,8 +45,8 @@ export const NewsCard: FC<NewsCardProps> = ({
 	}
 	return (
 		<Link
-			className={styles.newsItem}
-			to={`https://этноспорт.рф/news/${id}`}
+			className={cn(styles.newsItem, { [styles.contentItem]: titleLink })}
+			to={`/content/news/${id}`}
 			aria-label={title}
 			title={title}
 		>
@@ -53,7 +55,7 @@ export const NewsCard: FC<NewsCardProps> = ({
 					<img src={mainphoto[0]?.original} alt={title} width={286} height={160} loading='lazy' />
 				</div>
 				<figcaption className={styles.newsItemContent}>
-					<h4 className={styles.newsItemTitle}>{title}</h4>
+					<h4 className={cn(styles.newsItemTitle, { [styles.linkTitle]: titleLink })}>{title}</h4>
 					<p className={styles.newsDate}>{formatSingleDate(date)}</p>
 					<p className={styles.newsDesc}>{desc}</p>
 				</figcaption>

@@ -325,7 +325,7 @@ export const FormInput: React.FC<TextInputProps> = ({
 								/>
 								{isEmailCode && (
 									<MainButton
-										className={cn(sendCodeClass, styles.sendCodeBtn, {
+										className={cn(sendCodeClass, styles.sendCodeBtn, styles.sendCodeBtnEmail, {
 											[styles.resend]: countdown > 0 && !isCodeAccepted,
 											[styles.codeAccepted]: isCodeAccepted,
 										})}
