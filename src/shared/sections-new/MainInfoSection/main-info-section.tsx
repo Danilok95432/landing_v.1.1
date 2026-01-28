@@ -14,24 +14,27 @@ import { MainInfoLocationSVG } from 'src/shared/ui/icons/mainInfoLocationSVG'
 import { MainInfoOrgSVG } from 'src/shared/ui/icons/mainInfoOrgSVG'
 import { BuyTicketModal } from 'src/modals/buy-ticket-modal/buy-ticket-modal'
 import { useActions } from 'src/app/store/hooks/actions'
+import { useGetEventByIdQuery } from 'src/features/home/api/home.api'
+import { formatMainDateRange, formatRangeMeta } from 'src/shared/helpers/utils'
 
 export const MainInfoSection = () => {
+	const { data: eventData } = useGetEventByIdQuery('1')
 	const [activeCont, setActiveCont] = useState<boolean>(false)
 	const { openModal } = useActions()
 
 	return (
 		<Section className={cn(styles.mainInfo)}>
 			<Container className={styles.offContainer} off>
-				<img src={mainImg} alt='main' className={styles.mobileImg} />
+				<img src={eventData?.mainphoto[0].original} alt='main' className={styles.mobileImg} />
 			</Container>
 			<Container>
 				<FlexRow className={styles.mainRow}>
-					<img src={mainImg} alt='main' className={styles.imgMain} />
-					<h1>{'Этнофестиваль «Атмановские кулачки-2025»'}</h1>
+					<img src={eventData?.mainphoto[0].original} alt='main' className={styles.imgMain} />
+					<h1 id='event'>{eventData?.title}</h1>
 					<FlexRow className={styles.additionalInfoRow}>
 						<FlexRow className={styles.rowEl}>
 							<MainInfoTypeSVG />
-							<p>{'Фестиваль'}</p>
+							<p>{eventData?.event_type_name}</p>
 						</FlexRow>
 						<FlexRow className={styles.rowEl}>
 							<MainInfoKindSVG />
@@ -43,11 +46,11 @@ export const MainInfoSection = () => {
 						</FlexRow>
 						<FlexRow className={cn(styles.rowEl, styles.noMargin, styles.locationEl)}>
 							<MainInfoPlaceSVG />
-							<a href='#'>С. Атманов Угол, Сосновский округ, Тамбовская область, Россия</a>
+							<a href='#'>{eventData?.location.address}</a>
 						</FlexRow>
 						<FlexRow className={cn(styles.rowEl, styles.ageRowEl)}>
 							<div className={styles.dot}></div>
-							<p className={styles.age}>{'0+'}</p>
+							<p className={styles.age}>{`${eventData?.ageRating}+`}</p>
 						</FlexRow>
 						<FlexRow className={cn(styles.rowEl, styles.mobileRow)}>
 							<button
@@ -64,8 +67,22 @@ export const MainInfoSection = () => {
 					<FlexRow className={styles.blocksRow}>
 						<FlexRow className={styles.blockEl}>
 							<FlexRow className={styles.infoBlock}>
-								<p className={styles.title}>{'24 авг 2025, 09:00 — 27 авг 2025, 22:30'}</p>
-								<p>{'Всего 3 дня 20 часов Через 27 дней'}</p>
+								<p className={styles.title}>
+									{formatMainDateRange(
+										(eventData?.date as [string, string]) ?? [
+											'2025-08-22T08:15:00+03:00',
+											'2025-08-24T10:00:00+03:00',
+										],
+									)}
+								</p>
+								<p>
+									{formatRangeMeta(
+										(eventData?.date as [string, string]) ?? [
+											'2025-08-22T08:15:00+03:00',
+											'2025-08-24T10:00:00+03:00',
+										],
+									)}
+								</p>
 							</FlexRow>
 							<div className={styles.vector}>
 								<MainInfoDateSVG />
@@ -73,9 +90,15 @@ export const MainInfoSection = () => {
 						</FlexRow>
 						<FlexRow className={styles.blockEl}>
 							<FlexRow className={styles.infoBlock}>
-								<p className={styles.title}>{'ТРК «Сельский клуб»'}</p>
-								<p>{'С. Атманов Угол, пр. Первых Пятилеток, 22'}</p>
-								<a href='#'>На карте</a>
+								<p className={styles.title}>{eventData?.location.title}</p>
+								<p>{eventData?.location.address}</p>
+								<a
+									href='https://yandex.ru/maps/geo/selo_atmanov_ugol/53031405/?ll=41.390478%2C53.131514&utm_source=main_stripe_big&z=14.95'
+									target='_blank'
+									rel='noreferrer'
+								>
+									На карте
+								</a>
 							</FlexRow>
 							<div className={styles.vector}>
 								<MainInfoLocationSVG />
@@ -93,17 +116,9 @@ export const MainInfoSection = () => {
 					<FlexRow className={styles.infoRow}>
 						<div className={styles.textCont}>
 							<p className={cn(styles.text, { [styles.activeText]: activeCont })}>
-								«Атмановские кулачки» — народное название праздничных кулачных боёв, которые
-								проходят в Атмановом Углу со дня основания села в 1648 году. Также на фестивале
-								проводятся состязания по лапте, стрельбе из лука, борьбе за вороток, силовой игре в
-								мяч и в других дисциплинах. <br />
-								«Атмановские кулачки» — народное название праздничных кулачных боёв, которые
-								проходят в Атмановом Углу со дня основания села в 1648 году. Также на фестивале
-								проводятся состязания по лапте, стрельбе из лука, борьбе за вороток, силовой игре в
-								мяч и в других дисциплинах. <br /> «Атмановские кулачки» — народное название
-								праздничных кулачных боёв, которые проходят в Атмановом Углу со дня основания села в
-								1648 году. Также на фестивале проводятся состязания по лапте, стрельбе из лука,
-								борьбе за вороток, силовой игре в мяч и в других дисциплинах.
+								{eventData?.description && (
+									<div dangerouslySetInnerHTML={{ __html: eventData?.description[0] }} />
+								)}
 							</p>
 							<button
 								className={cn(styles.openContBtn, { [styles.active]: activeCont })}

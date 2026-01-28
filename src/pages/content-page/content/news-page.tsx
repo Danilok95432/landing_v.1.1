@@ -1,6 +1,6 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import { Helmet } from 'react-helmet-async'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 
 import styles from './index.module.scss'
 import {
@@ -23,14 +23,28 @@ export const NewsPage = () => {
 	const { data: newsList = [] } = useGetEventNewsByIdQuery('1')
 	const { data: videos = [] } = useGetEventVideosByIdQuery('1')
 	const breakpoint = useBreakPoint()
-	const [isChecked, setIsChecked] = useState(false)
+	const [searchParams, setSearchParams] = useSearchParams()
+
+	const [isChecked, setIsChecked] = useState(() => searchParams.get('onlyVideo') === '1')
 	const [currentPage, setCurrentPage] = useState(1)
 	const itemsPerPage = 8 // Количество элементов на странице
 
 	const handleCheckboxChange = (checked: boolean) => {
 		setIsChecked(checked)
-		setCurrentPage(1) // Сбрасываем на первую страницу при изменении фильтра
+		setCurrentPage(1)
+
+		if (checked) {
+			setSearchParams({ onlyVideo: '1' }, { replace: true })
+		} else {
+			setSearchParams({}, { replace: true })
+		}
 	}
+
+	useEffect(() => {
+		const onlyVideo = searchParams.get('onlyVideo') === '1'
+		setIsChecked(onlyVideo)
+		setCurrentPage(1)
+	}, [searchParams])
 
 	// Создаем объединенный и отсортированный список
 	const mixedAndSortedList = useMemo(() => {

@@ -8,10 +8,14 @@ import { type RefObject, useRef, useEffect, useState } from 'react'
 import { SliderBtns } from 'src/widgets/slider-btns/slider-btns'
 import { newsSliderOptions } from './consts'
 import { NewsCard } from './components/NewsCard/news-card'
+import { MainButton } from 'src/shared/ui/MainButton/MainButton'
+import { useNavigate } from 'react-router-dom'
+import { FlexRow } from 'src/shared/ui/FlexRow/FlexRow'
 
 export const NewsSection = () => {
 	const { data: newsList } = useGetEventNewsByIdQuery('1')
 	const [isMobile, setIsMobile] = useState(false)
+	const navigate = useNavigate()
 	const swiperRef: RefObject<SwiperRef> = useRef<SwiperRef>(null)
 
 	useEffect(() => {
@@ -25,7 +29,12 @@ export const NewsSection = () => {
 
 	return (
 		<Section id='news' className={cn(styles.news)}>
-			<Container off={isMobile}>
+			<Container off={isMobile} className={styles.newsCont}>
+				<FlexRow className={styles.btnRow}>
+					<MainButton className={styles.allBtn} onClick={() => navigate('/content')}>
+						Все новости
+					</MainButton>
+				</FlexRow>
 				{newsList && newsList?.length > 0 && (
 					<>
 						<Swiper {...newsSliderOptions} ref={swiperRef} className={styles.newsSlider}>

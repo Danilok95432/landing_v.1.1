@@ -15,12 +15,14 @@ import './index.scss'
 import { ScrollToTop } from './widgets/scroll-to-top/scroll-to-top'
 import { store } from './app/store'
 import { Modal } from './features/modal/modal'
+import { ScrollToTopOnRouteChange } from './widgets/scroll-to-top-on-route-change/ScrollToTopOnRouteChange'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 	<Provider store={store}>
 		<HelmetProvider>
 			<BrowserRouter>
 				<ScrollToTop />
+				<ScrollToTopOnRouteChange />
 				<ToastContainer />
 				<App />
 				<Modal />

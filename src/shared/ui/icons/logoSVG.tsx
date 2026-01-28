@@ -1,4 +1,10 @@
-export const LogoSVG = () => {
+import { type FC } from 'react'
+
+type LogoSVGProps = {
+	handlerClick?: () => void
+}
+
+export const LogoSVG: FC<LogoSVGProps> = ({ handlerClick }) => {
 	return (
 		<svg
 			width='36'
@@ -7,6 +13,7 @@ export const LogoSVG = () => {
 			fill='none'
 			xmlns='http://www.w3.org/2000/svg'
 			xlinkHref='http://www.w3.org/1999/xlink'
+			onClick={handlerClick}
 		>
 			<rect width='36' height='36' rx='6' fill='#E73810' />
 			<rect width='28' height='28' transform='translate(4 4)' fill='url(#pattern0_4563_42180)' />

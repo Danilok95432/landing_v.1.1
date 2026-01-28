@@ -35,7 +35,6 @@ export const OrgsSection = () => {
 												height={105}
 												loading='lazy'
 											/>
-											<p>{slideItem.title}</p>
 										</a>
 									) : (
 										<div className={styles.partnersLink}>
@@ -46,7 +45,6 @@ export const OrgsSection = () => {
 												height={105}
 												loading='lazy'
 											/>
-											<p>{slideItem.title}</p>
 										</div>
 									)}
 								</div>

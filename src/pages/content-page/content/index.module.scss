@@ -3,11 +3,15 @@ section.newsListPage {
 	flex: 1 0 auto;
 	@media (max-width: 768px) {
 		min-height: auto;
+		margin-top: 15px;
 	}
 	.newsContainer {
     display: flex;
     flex-direction: column;
     gap: 32px;
+		@media (max-width: 1220px) {
+			padding: 0 15px;
+		}
     .linkBack {
       color: var(--main-link-color);
       font-size: 16px;

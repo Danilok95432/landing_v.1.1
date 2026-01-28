@@ -480,3 +480,119 @@ export const formatDateToString = (date: Date): string => {
 
 	return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}${sign}${offsetHours}:${offsetMinutes}`
 }
+
+type DateRangeISO = [string, string]
+
+const MONTHS_RU = [
+	'янв',
+	'фев',
+	'мар',
+	'апр',
+	'мая',
+	'июн',
+	'июл',
+	'авг',
+	'сен',
+	'окт',
+	'ноя',
+	'дек',
+]
+
+function pluralRu(n: number, one: string, few: string, many: string): string {
+	const mod10 = n % 10
+	const mod100 = n % 100
+	if (mod100 >= 11 && mod100 <= 14) return many
+	if (mod10 === 1) return one
+	if (mod10 >= 2 && mod10 <= 4) return few
+	return many
+}
+
+function partsInTimeZone(date: Date, timeZone?: string) {
+	const dtf = new Intl.DateTimeFormat('ru-RU', {
+		timeZone,
+		year: 'numeric',
+		month: '2-digit',
+		day: '2-digit',
+		hour: '2-digit',
+		minute: '2-digit',
+		hour12: false,
+	})
+
+	const parts = dtf.formatToParts(date)
+	const get = (type: Intl.DateTimeFormatPartTypes) =>
+		parts.find((p) => p.type === type)?.value ?? ''
+
+	return {
+		year: Number(get('year')),
+		month: Number(get('month')), // 1..12
+		day: Number(get('day')),
+		hour: get('hour'),
+		minute: get('minute'),
+	}
+}
+
+function formatDateTimeRu(date: Date, timeZone?: string): string {
+	const p = partsInTimeZone(date, timeZone)
+	return `${p.day} ${MONTHS_RU[p.month - 1]} ${p.year}, ${p.hour}:${p.minute}`
+}
+
+function normalizeRange(range: DateRangeISO): [Date, Date] {
+	const a = new Date(range[0])
+	const b = new Date(range[1])
+	return a <= b ? [a, b] : [b, a]
+}
+
+/**
+ * 1) "24 авг 2025, 09:00 — 27 авг 2025, 22:30"
+ */
+export function formatMainDateRange(range: DateRangeISO, timeZone?: string): string {
+	const [start, end] = normalizeRange(range)
+	return `${formatDateTimeRu(start, timeZone)} — ${formatDateTimeRu(end, timeZone)}`
+}
+
+/**
+ * 2) "Всего 3 дня 20 часов Через 27 дней"
+ *    (длительность диапазона + через сколько дней начнётся относительно now)
+ */
+export function formatRangeMeta(
+	range: DateRangeISO,
+	now: Date = new Date(),
+	timeZone?: string,
+): string {
+	const [start, end] = normalizeRange(range)
+
+	// Длительность
+	const durationMs = Math.max(0, end.getTime() - start.getTime())
+	const totalMinutes = Math.floor(durationMs / 60000)
+
+	const days = Math.floor(totalMinutes / (60 * 24))
+	const hours = Math.floor((totalMinutes - days * 24 * 60) / 60)
+	const minutes = totalMinutes - days * 24 * 60 - hours * 60
+
+	const durationParts: string[] = []
+	if (days) durationParts.push(`${days} ${pluralRu(days, 'день', 'дня', 'дней')}`)
+	if (hours) durationParts.push(`${hours} ${pluralRu(hours, 'час', 'часа', 'часов')}`)
+	if (minutes) durationParts.push(`${minutes} ${pluralRu(minutes, 'минута', 'минуты', 'минут')}`)
+	if (durationParts.length === 0)
+		durationParts.push(`0 ${pluralRu(0, 'минута', 'минуты', 'минут')}`)
+
+	const durationStr = `Всего ${durationParts.join(' ')}`
+
+	// Через сколько дней начнётся
+	const diffMs = start.getTime() - now.getTime()
+
+	let whenStr: string
+	if (diffMs <= 0) {
+		const passedDays = Math.floor(Math.abs(diffMs) / 86400000)
+		whenStr =
+			passedDays === 0
+				? 'Уже началось'
+				: `Началось ${passedDays} ${pluralRu(passedDays, 'день', 'дня', 'дней')} назад`
+	} else {
+		// чаще ожидают округление вверх: "через 1 день", даже если осталось 2 часа до завтра
+		const inDays = Math.ceil(diffMs / 86400000)
+		whenStr = `Через ${inDays} ${pluralRu(inDays, 'день', 'дня', 'дней')}`
+	}
+
+	return `${durationStr} ${whenStr}`
+}

@@ -1,4 +1,5 @@
-.breakpointNews, .topNews {
+.breakpointNews,
+.topNews {
 	display: flex;
 	flex-direction: row;
 	gap: 25px;
@@ -20,13 +21,13 @@
 }
 
 .newsSectionRow {
-  justify-content: space-between;
+	justify-content: space-between;
 	margin-bottom: 20px;
 }
 
 .swiperNews {
 	@media (max-width: 440px) {
-		width: 300px!important;
+		width: 300px !important;
 	}
 }
 
@@ -35,12 +36,23 @@
 	.newsSlider {
 		position: relative;
 	}
+	.newsCont {
+		position: relative;
+		.btnRow {
+			justify-content: end;
+			.allBtn {
+				background: var(--main-theme-color);
+				margin-bottom: 20px;
+			}
+		}
+	}
 }
 
 .newsSliderBtns {
-	top: 30%;
+	top: 40%;
 	width: calc(100% + 80px);
 	@media (max-width: 768px) {
-			display: none;
-		}
+		display: none;
+	}
 }
+

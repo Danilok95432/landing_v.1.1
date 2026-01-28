@@ -8,11 +8,15 @@ import { useGetEventVideosByIdQuery } from 'src/features/home/api/home.api'
 import { type RefObject, useEffect, useRef, useState } from 'react'
 import { VideoCard } from './components/video-card/video-card'
 import { homeVideosSliderOptions } from './consts'
+import { MainButton } from 'src/shared/ui/MainButton/MainButton'
+import { useNavigate } from 'react-router-dom'
+import { FlexRow } from 'src/shared/ui/FlexRow/FlexRow'
 
 export const VideosSection = () => {
 	const { data: videos } = useGetEventVideosByIdQuery('1')
 	const [isMobile, setIsMobile] = useState(false)
 	const swiperRef: RefObject<SwiperRef> = useRef<SwiperRef>(null)
+	const navigate = useNavigate()
 
 	useEffect(() => {
 		const handleResize = () => {
@@ -25,6 +29,11 @@ export const VideosSection = () => {
 	return (
 		<Section className={cn(styles.videos)}>
 			<Container off={isMobile}>
+				<FlexRow className={styles.btnRow}>
+					<MainButton className={styles.allBtn} onClick={() => navigate('/content?onlyVideo=1')}>
+						Все видео
+					</MainButton>
+				</FlexRow>
 				<div>
 					<Swiper {...homeVideosSliderOptions} ref={swiperRef}>
 						{videos?.map((slideItem, idx) => (

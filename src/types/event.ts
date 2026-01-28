@@ -102,7 +102,7 @@ export type EventItem = {
 	ageRating: string
 	status: 'cancel' | 'current' | 'future' | 'finished'
 	description: string
-	date: [Date, Date] | [Date]
+	date: [Date, Date] | [Date] | [string, string]
 	sections: string[]
 	mainBrand: SimpleLinkType
 	object: { id: string; title: string }

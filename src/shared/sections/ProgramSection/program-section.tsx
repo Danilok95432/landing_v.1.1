@@ -8,7 +8,6 @@ import { useState, useRef, type RefObject } from 'react'
 import { MainProgramNav } from 'src/widgets/main-program-navigation/main-program-nav'
 import { Swiper, type SwiperRef, SwiperSlide } from 'swiper/react'
 import { programSliderOptions } from './consts'
-import { Link } from 'react-router-dom'
 import { MainButton } from 'src/shared/ui/MainButton/MainButton'
 import { toast } from 'react-toastify'
 import { CopySVG } from 'src/shared/ui/icons/copySVG'
@@ -166,15 +165,7 @@ export const ProgramSection = () => {
 													{items.map((programEl) => (
 														<FlexRow key={programEl.id} className={styles.elRow}>
 															<p>{programEl.time}</p>
-															{programEl?.use_real ? (
-																<Link
-																	to={`https://этноспорт.рф/events/1/event-program/${programEl.id}`}
-																>
-																	{programEl.title}
-																</Link>
-															) : (
-																<p>{programEl.title}</p>
-															)}
+															<p>{programEl.title}</p>
 														</FlexRow>
 													))}
 												</div>

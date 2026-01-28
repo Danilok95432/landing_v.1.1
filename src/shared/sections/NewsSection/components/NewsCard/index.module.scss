@@ -53,7 +53,20 @@
     height: 100%;
     object-fit: cover;
   	object-position: top left;
-    aspect-ratio: 3 / 2;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+    
+    /* Улучшает рендеринг в WebKit */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    
+    /* Предотвращает размытие при трансформациях */
+    filter: blur(0);
+    -webkit-filter: blur(0);
+    
+    /* Для скругленных углов */
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
   }
 }
 

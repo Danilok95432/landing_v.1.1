@@ -5,6 +5,13 @@
 		justify-content: space-between;
 		gap: 17px;
 	}
+	.btnRow {
+		justify-content: end;
+	}
+	.allBtn {
+		background: var(--main-theme-color);
+		margin-bottom: 20px;
+	}
 
 	@media (max-width: 768) {
 		padding: 0px 0 37px;
@@ -23,7 +30,7 @@
 	}
 
 	.videoSliderBtns {
-		top: 40%;
+		top: 50%;
 		width: calc(100% + 80px);
 		@media (max-width: 768px) {
 			display: none;

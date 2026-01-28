@@ -1,4 +1,4 @@
-import { Pagination } from 'swiper'
+import { Pagination, Autoplay } from 'swiper' // Добавьте Autoplay
 import { type SwiperProps } from 'swiper/react'
 
 export const eventsSliderOptions: SwiperProps = {
@@ -6,7 +6,12 @@ export const eventsSliderOptions: SwiperProps = {
 	slidesPerGroup: 1,
 	spaceBetween: 0,
 	autoHeight: false,
-	loop: true,
+	loop: false,
+	autoplay: {
+		delay: 6000,
+		disableOnInteraction: false,
+		pauseOnMouseEnter: true,
+	},
 	pagination: {
 		clickable: true,
 		dynamicBullets: false,
@@ -15,5 +20,5 @@ export const eventsSliderOptions: SwiperProps = {
 		bulletClass: 'swiper-pagination-bullet',
 		bulletActiveClass: 'swiper-pagination-bullet-active',
 	},
-	modules: [Pagination],
+	modules: [Pagination, Autoplay], // Добавьте Autoplay сюда
 }
