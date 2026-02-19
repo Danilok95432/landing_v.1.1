@@ -1,17 +1,27 @@
 import { FlexRow } from 'src/shared/ui/FlexRow/FlexRow'
 import styles from '../../index.module.scss'
 import { type FC } from 'react'
-import { type SelOption } from 'src/types/select'
 import { ControlledSelect } from 'src/widgets/controlled-select/controlled-select'
 import { FormInput } from 'src/widgets/FormInput/form-input'
+import { type TicketOptions } from 'src/types/ticket'
+import { useFormContext, useWatch } from 'react-hook-form'
 
 type InfoSectionProps = {
-	ticketTypeList?: SelOption[]
+	ticketTypeList?: TicketOptions[]
 }
 
 export const HeadSection: FC<InfoSectionProps> = ({
-	ticketTypeList = [{ label: 'Премиум Бизнес (включает ужин со звездой)', value: '0' }],
+	ticketTypeList = [{ label: 'Не выбрано', value: '0', price: '0' }],
 }) => {
+	const { control } = useFormContext()
+
+	// Отслеживаем изменение значения селекта
+	const selectedTicketType = useWatch({
+		control,
+		name: 'ticketTypeList',
+		defaultValue: ticketTypeList[0]?.value || '0',
+	})
+
 	return (
 		<div className={styles.formSection}>
 			<span className={styles.title}>Купить билеты</span>
@@ -22,11 +32,18 @@ export const HeadSection: FC<InfoSectionProps> = ({
 					selectOptions={ticketTypeList}
 					label='Выбор вида билета'
 				/>
-				<FormInput name='count' label='Количество' className={styles.inputCont} />
+				<FormInput
+					name='count'
+					label='Количество'
+					className={styles.inputCont}
+					defaultValue={'1'}
+				/>
 			</FlexRow>
 			<p className={styles.billTotal}>
 				{`1 билет на сумму`}
-				<strong>{`2000 ₽`}</strong>
+				<strong>
+					{ticketTypeList?.find((el) => el.value === selectedTicketType)?.price ?? '0'}
+				</strong>
 			</p>
 			<FlexRow className={styles.infoBlock}>
 				<p>

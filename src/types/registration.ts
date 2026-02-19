@@ -68,3 +68,26 @@ export type GuestCarsList = {
 	car_type: string
 	car_number: string
 }
+
+export type FieldType = {
+	active: boolean
+	req: boolean
+}
+
+export type FieldsType = {
+	surname: FieldType
+	name: FieldType
+	patronymic: FieldType
+	birthday: FieldType
+	phone: FieldType & { use_sms: boolean }
+	email: FieldType & { use_email: boolean }
+	region: FieldType
+}
+
+export type RegType = {
+	status: boolean
+	regFields: FieldsType
+	use_bank: boolean
+	use_sbp: boolean
+	use_sber_pay: boolean
+}

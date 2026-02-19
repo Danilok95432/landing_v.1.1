@@ -8,9 +8,11 @@ import { type RefObject, useRef } from 'react'
 import { useGetEventByIdQuery } from 'src/features/home/api/home.api'
 import { partnersSliderOptions } from './consts'
 import { Autoplay } from 'swiper'
+import { useEvent } from 'src/app/context/event-context'
 
 export const OrgsSection = () => {
-	const { data: eventData } = useGetEventByIdQuery('1')
+	const { eventId } = useEvent()
+	const { data: eventData } = useGetEventByIdQuery(eventId ?? '1', { skip: !eventId })
 	const swiperRef: RefObject<SwiperRef> = useRef<SwiperRef>(null)
 	if (!eventData?.organizerGameLinks) return ''
 	return (

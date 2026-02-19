@@ -11,9 +11,11 @@ import { NewsCard } from './components/NewsCard/news-card'
 import { MainButton } from 'src/shared/ui/MainButton/MainButton'
 import { useNavigate } from 'react-router-dom'
 import { FlexRow } from 'src/shared/ui/FlexRow/FlexRow'
+import { useEvent } from 'src/app/context/event-context'
 
 export const NewsSection = () => {
-	const { data: newsList } = useGetEventNewsByIdQuery('1')
+	const { eventId } = useEvent()
+	const { data: newsList } = useGetEventNewsByIdQuery(eventId ?? '1', { skip: !eventId })
 	const [isMobile, setIsMobile] = useState(false)
 	const navigate = useNavigate()
 	const swiperRef: RefObject<SwiperRef> = useRef<SwiperRef>(null)

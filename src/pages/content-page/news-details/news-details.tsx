@@ -10,6 +10,8 @@ import { useGetNewsByIdQuery } from 'src/features/content/api/content'
 import { useGetEventNewsByIdQuery } from 'src/features/home/api/home.api'
 import { AsideNews } from 'src/widgets/aside-news/aside-news'
 
+import skeletonImg from 'src/assets/img/skeleton.jpg'
+
 export const NewsDetailsNew = () => {
 	const { id } = useParams()
 	const { data: newsItemData } = useGetNewsByIdQuery(id ?? '')
@@ -48,7 +50,14 @@ export const NewsDetailsNew = () => {
 							<Link to={'/'} className={styles.linkBack}>
 								Назад на главную
 							</Link>
-							<img src={newsItemData?.mainphoto[0].original} alt='' />
+							<img
+								src={
+									newsItemData?.mainphoto.length > 0
+										? newsItemData?.mainphoto[0].original
+										: skeletonImg
+								}
+								alt=''
+							/>
 							<div className={styles.newsItemInfoContent}>
 								<div className={styles.contentInfo}>
 									<h2>{newsItemData.title}</h2>

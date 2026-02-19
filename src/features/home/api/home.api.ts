@@ -8,6 +8,8 @@ import {
 } from 'src/types/event'
 import { type CardNewsItem } from 'src/types/news'
 import { type ProgramDay, type SubEventResponse } from 'src/types/program'
+import { type RegType } from 'src/types/registration'
+import { type TicketTypes } from 'src/types/ticket'
 import { type VideoItem } from 'src/types/videos'
 
 export const homeApi = createApi({
@@ -17,6 +19,27 @@ export const homeApi = createApi({
 		baseUrl: MAIN_PROD_URL,
 	}),
 	endpoints: (build) => ({
+		getCurrentEventId: build.query<{ status: string; id_event: string; errorText: string }, null>({
+			query: () => ({
+				url: `get_event`,
+			}),
+		}),
+		getRegList: build.query<TicketTypes, string>({
+			query: (id) => ({
+				url: `event_registration/getregdata`,
+				params: {
+					id_event: id,
+				},
+			}),
+		}),
+		getRegSettings: build.query<RegType, string>({
+			query: (id) => ({
+				url: `event_registration/getregsettings`,
+				params: {
+					id_event: id,
+				},
+			}),
+		}),
 		getEventsMonths: build.query<CardEventItem[], { date: string; category: string }>({
 			query: ({ date = '0', category = '0' }) => ({
 				url: 'events',
@@ -81,6 +104,7 @@ export const homeApi = createApi({
 
 export const {
 	useGetEventsMonthsQuery,
+	useGetCurrentEventIdQuery,
 	useGetEventByIdQuery,
 	useGetEventAwardsByIdQuery,
 	useGetEventNewsByIdQuery,
@@ -88,4 +112,6 @@ export const {
 	useGetEventVideosByIdQuery,
 	useGetSubEventProgramByIdQuery,
 	useGetFaqByIdQuery,
+	useGetRegListQuery,
+	useGetRegSettingsQuery,
 } = homeApi

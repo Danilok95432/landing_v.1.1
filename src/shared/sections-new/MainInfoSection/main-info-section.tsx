@@ -1,4 +1,3 @@
-import mainImg from 'src/assets/img/main-img.png'
 import styles from './index.module.scss'
 import { Section } from 'src/shared/ui/Section/section'
 import { Container } from 'src/shared/ui/Container/Container'
@@ -16,9 +15,11 @@ import { BuyTicketModal } from 'src/modals/buy-ticket-modal/buy-ticket-modal'
 import { useActions } from 'src/app/store/hooks/actions'
 import { useGetEventByIdQuery } from 'src/features/home/api/home.api'
 import { formatMainDateRange, formatRangeMeta } from 'src/shared/helpers/utils'
+import { useEvent } from 'src/app/context/event-context'
 
 export const MainInfoSection = () => {
-	const { data: eventData } = useGetEventByIdQuery('1')
+	const { eventId } = useEvent()
+	const { data: eventData } = useGetEventByIdQuery(eventId ?? '1', { skip: !eventId })
 	const [activeCont, setActiveCont] = useState<boolean>(false)
 	const { openModal } = useActions()
 
@@ -55,11 +56,11 @@ export const MainInfoSection = () => {
 						<FlexRow className={cn(styles.rowEl, styles.mobileRow)}>
 							<button
 								className={styles.buyBtn}
-								onClick={() => openModal(<BuyTicketModal id='1' />)}
+								onClick={() => openModal(<BuyTicketModal id={eventId ?? '1'} />)}
 							>
 								<div className={styles.text}>
 									<p>Купить билет</p>
-									<p>от 8 000 ₽</p>
+									<p>от {eventData?.min_price} ₽</p>
 								</div>
 							</button>
 						</FlexRow>
@@ -127,10 +128,13 @@ export const MainInfoSection = () => {
 								{activeCont ? 'Свернуть' : 'Развернуть'}
 							</button>
 						</div>
-						<button className={styles.buyBtn} onClick={() => openModal(<BuyTicketModal id='1' />)}>
+						<button
+							className={styles.buyBtn}
+							onClick={() => openModal(<BuyTicketModal id={eventId ?? '1'} />)}
+						>
 							<div className={styles.text}>
 								<p>Купить билет</p>
-								<p>от 8 000 ₽</p>
+								<p>от {eventData?.min_price} ₽</p>
 							</div>
 						</button>
 					</FlexRow>

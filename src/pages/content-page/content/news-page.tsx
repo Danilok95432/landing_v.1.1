@@ -18,10 +18,12 @@ import { type VideoItem } from 'src/types/videos'
 import { type CardNewsItem } from 'src/types/news'
 import { VideoCard } from 'src/shared/sections/VideosSection/components/video-card/video-card'
 import { Pagination } from 'src/widgets/pagination/pagination'
+import { useEvent } from 'src/app/context/event-context'
 
 export const NewsPage = () => {
-	const { data: newsList = [] } = useGetEventNewsByIdQuery('1')
-	const { data: videos = [] } = useGetEventVideosByIdQuery('1')
+	const { eventId } = useEvent()
+	const { data: newsList = [] } = useGetEventNewsByIdQuery(eventId ?? '1', { skip: !eventId })
+	const { data: videos = [] } = useGetEventVideosByIdQuery(eventId ?? '1', { skip: !eventId })
 	const breakpoint = useBreakPoint()
 	const [searchParams, setSearchParams] = useSearchParams()
 

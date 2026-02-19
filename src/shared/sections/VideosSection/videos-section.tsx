@@ -11,9 +11,11 @@ import { homeVideosSliderOptions } from './consts'
 import { MainButton } from 'src/shared/ui/MainButton/MainButton'
 import { useNavigate } from 'react-router-dom'
 import { FlexRow } from 'src/shared/ui/FlexRow/FlexRow'
+import { useEvent } from 'src/app/context/event-context'
 
 export const VideosSection = () => {
-	const { data: videos } = useGetEventVideosByIdQuery('1')
+	const { eventId } = useEvent()
+	const { data: videos } = useGetEventVideosByIdQuery(eventId ?? '1', { skip: !eventId })
 	const [isMobile, setIsMobile] = useState(false)
 	const swiperRef: RefObject<SwiperRef> = useRef<SwiperRef>(null)
 	const navigate = useNavigate()

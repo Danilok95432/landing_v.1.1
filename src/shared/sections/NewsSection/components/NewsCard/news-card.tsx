@@ -2,6 +2,7 @@ import { type CardNewsItem } from 'src/types/news'
 import cn from 'classnames'
 import { type FC } from 'react'
 import { Link } from 'react-router-dom'
+import skeletonImg from 'src/assets/img/skeleton.jpg'
 
 import styles from './index.module.scss'
 import { formatSingleDate, mainFormatDate } from 'src/shared/helpers/utils'
@@ -32,7 +33,13 @@ export const NewsCard: FC<NewsCardProps> = ({
 			>
 				<figure className={styles.mainNewsContainer}>
 					<div className={styles.newsImgWrapper}>
-						<img src={mainphoto[0]?.original} alt={title} width={286} height={160} loading='lazy' />
+						<img
+							src={mainphoto.length > 0 ? mainphoto[0]?.original : skeletonImg}
+							alt={title}
+							width={286}
+							height={160}
+							loading='lazy'
+						/>
 					</div>
 					<figcaption className={styles.newsItemContent}>
 						<h4 className={cn(styles.newsItemTitle, { [styles.linkTitle]: titleLink })}>{title}</h4>
@@ -52,7 +59,13 @@ export const NewsCard: FC<NewsCardProps> = ({
 		>
 			<figure>
 				<div className={styles.newsImgWrapper}>
-					<img src={mainphoto[0]?.original} alt={title} width={286} height={160} loading='lazy' />
+					<img
+						src={mainphoto.length > 0 ? mainphoto[0]?.original : skeletonImg}
+						alt={title}
+						width={286}
+						height={160}
+						loading='lazy'
+					/>
 				</div>
 				<figcaption className={styles.newsItemContent}>
 					<h4 className={cn(styles.newsItemTitle, { [styles.linkTitle]: titleLink })}>{title}</h4>

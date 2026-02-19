@@ -10,15 +10,12 @@ import cn from 'classnames'
 import { toast } from 'react-toastify'
 import {
 	useGetCityByRegionQuery,
-	useGetInfoRegistationQuery,
 	useGetRegionsByValueQuery,
 	useSendRegistrationFormMutation,
 } from 'src/features/auth/api/auth.api'
-import { useGetEventByIdQuery } from 'src/features/home/api/home.api'
+import { useGetRegListQuery } from 'src/features/home/api/home.api'
 import { useBreakPoint } from 'src/features/useBreakPoint/useBreakPoint'
 import { booleanToNumberString, formatDateRange, mainFormatDate } from 'src/shared/helpers/utils'
-import { LogoModalMobileSVG } from 'src/shared/ui/icons/logoModalMobileSVG'
-import { LogoModalSVG } from 'src/shared/ui/icons/logoModalSVG'
 import { FlexRow } from 'src/shared/ui/FlexRow/FlexRow'
 import { MainButton } from 'src/shared/ui/MainButton/MainButton'
 import { useActions } from 'src/app/store/hooks/actions'
@@ -34,9 +31,8 @@ type RegEventPartModalProps = {
 export const BuyTicketModal: FC<RegEventPartModalProps> = ({ id }) => {
 	const { closeModal } = useActions()
 	const modalRef = useRef<HTMLDivElement>(null)
-	const { data: eventDataInfo } = useGetEventByIdQuery('1')
-	const { data: selectOptions } = useGetInfoRegistationQuery('1')
 	const { data: regions } = useGetRegionsByValueQuery('')
+	const { data: tickets } = useGetRegListQuery(id)
 	const [saveRegForm] = useSendRegistrationFormMutation()
 	const [isCodeAccepted, setIsCodeAccepted] = useState(false)
 	const [errorForm, setErrorForm] = useState<string>('')
@@ -257,8 +253,8 @@ export const BuyTicketModal: FC<RegEventPartModalProps> = ({ id }) => {
 							noValidate
 							className={styles.ticketForm}
 						>
-							<HeadSection />
-							<RegSection />
+							<HeadSection ticketTypeList={tickets?.ticket_types} />
+							<RegSection id={id} />
 							<FlexRow className={cn(styles.disclaimer, styles._last)}>
 								<div className={styles.grayBox}>
 									<p>

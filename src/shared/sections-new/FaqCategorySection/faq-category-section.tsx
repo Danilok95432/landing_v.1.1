@@ -7,9 +7,11 @@ import { HomeFaqArrow } from 'src/shared/ui/icons/homeFaqArrow'
 import { AccordionItem } from 'src/widgets/accordion-item/accordion-item'
 import { FlexRow } from 'src/shared/ui/FlexRow/FlexRow'
 import { useState } from 'react'
+import { useEvent } from 'src/app/context/event-context'
 
 export const FaqCategorySection = () => {
-	const { data: faqEvent } = useGetEventByIdQuery('1')
+	const { eventId } = useEvent()
+	const { data: faqEvent } = useGetEventByIdQuery(eventId ?? '1', { skip: !eventId })
 	const [activeIdx, setActiveIdx] = useState<number>(0)
 	const categories = [
 		{ id: '1', title: 'О событии' },

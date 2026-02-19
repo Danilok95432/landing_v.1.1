@@ -100,6 +100,7 @@ export type InfoBlockContent = {
 
 export type EventItem = {
 	ageRating: string
+	min_price: string
 	status: 'cancel' | 'current' | 'future' | 'finished'
 	description: string
 	date: [Date, Date] | [Date] | [string, string]

@@ -9,10 +9,12 @@ import { eventsSliderOptions } from './consts'
 import { FlexRow } from 'src/shared/ui/FlexRow/FlexRow'
 import skeletonImg from 'src/assets/img/skeleton-img.png'
 import { useGetEventByIdQuery } from 'src/features/home/api/home.api'
+import { useEvent } from 'src/app/context/event-context'
 
 export const MainSliderSection = () => {
+	const { eventId } = useEvent()
 	const swiperRef: RefObject<SwiperRef> = useRef<SwiperRef>(null)
-	const { data: eventData } = useGetEventByIdQuery('1')
+	const { data: eventData } = useGetEventByIdQuery(eventId ?? '1', { skip: !eventId })
 
 	const sortedPromo = eventData?.promo
 		? [...eventData.promo].sort((a, b) => Number(a.id) - Number(b.id))

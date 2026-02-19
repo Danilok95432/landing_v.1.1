@@ -15,12 +15,14 @@ import { CloseSvg } from 'src/shared/ui/icons/closeSVG'
 import classNames from 'classnames'
 import 'swiper/css'
 import 'swiper/css/pagination'
+import { useEvent } from 'src/app/context/event-context'
 
 export const GallerySection = () => {
+	const { eventId } = useEvent()
 	const swiperRef: RefObject<SwiperRef> = useRef<SwiperRef>(null)
 	const fullscreenSwiperRef: RefObject<SwiperRef> = useRef<SwiperRef>(null)
 
-	const { data: eventData } = useGetEventByIdQuery('1')
+	const { data: eventData } = useGetEventByIdQuery(eventId ?? '1', { skip: !eventId })
 
 	const [activeIndex, setActiveIndex] = useState(0)
 	const [allPagePhoto, setAllPagePhoto] = useState<ImageItemWithText[]>([])

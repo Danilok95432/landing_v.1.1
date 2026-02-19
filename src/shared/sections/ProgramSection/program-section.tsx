@@ -12,9 +12,11 @@ import { MainButton } from 'src/shared/ui/MainButton/MainButton'
 import { toast } from 'react-toastify'
 import { CopySVG } from 'src/shared/ui/icons/copySVG'
 import { MainInfoPlaceSVG } from 'src/shared/ui/icons/mainInfoPlaceSVG'
+import { useEvent } from 'src/app/context/event-context'
 
 export const ProgramSection = () => {
-	const { data: programDays } = useGetEventProgramByIdQuery('1')
+	const { eventId } = useEvent()
+	const { data: programDays } = useGetEventProgramByIdQuery(eventId ?? '1', { skip: !eventId })
 	const [activeDayId, setActiveDayId] = useState(1)
 	const swiperRef: RefObject<SwiperRef> = useRef<SwiperRef>(null)
 

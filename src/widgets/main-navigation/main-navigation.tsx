@@ -8,8 +8,12 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { LogoSVG } from 'src/shared/ui/icons/logoSVG'
 import { BuyTicketModal } from 'src/modals/buy-ticket-modal/buy-ticket-modal'
 import { FlexRow } from 'src/shared/ui/FlexRow/FlexRow'
+import { useEvent } from 'src/app/context/event-context'
+import { useGetEventByIdQuery } from 'src/features/home/api/home.api'
 
 export const MainNavigation = () => {
+	const { eventId } = useEvent()
+	const { data: eventData } = useGetEventByIdQuery(eventId ?? '1', { skip: !eventId })
 	const { openModal } = useActions()
 	const location = useLocation()
 	const navigate = useNavigate()
@@ -169,11 +173,11 @@ export const MainNavigation = () => {
 						<BurgerMenu />
 						<button
 							className={styles.buyBtnMobile}
-							onClick={() => openModal(<BuyTicketModal id='1' />)}
+							onClick={() => openModal(<BuyTicketModal id={eventId ?? '1'} />)}
 						>
 							<div className={styles.text}>
 								<p>Купить билет</p>
-								<p>от 8 000 ₽</p>
+								<p>от {eventData?.min_price} ₽</p>
 							</div>
 						</button>
 					</FlexRow>
@@ -186,10 +190,13 @@ export const MainNavigation = () => {
 						))}
 					</ul>
 
-					<button className={styles.buyBtn} onClick={() => openModal(<BuyTicketModal id='1' />)}>
+					<button
+						className={styles.buyBtn}
+						onClick={() => openModal(<BuyTicketModal id={eventId ?? '1'} />)}
+					>
 						<div className={styles.text}>
 							<p>Купить билет</p>
-							<p>от 8 000 ₽</p>
+							<p>от {eventData?.min_price} ₽</p>
 						</div>
 					</button>
 				</Container>
