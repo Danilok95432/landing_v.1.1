@@ -26,11 +26,27 @@ export const MainInfoSection = () => {
 	return (
 		<Section className={cn(styles.mainInfo)}>
 			<Container className={styles.offContainer} off>
-				<img src={eventData?.mainphoto[0].original} alt='main' className={styles.mobileImg} />
+				<img
+					src={
+						eventData?.mainphoto && eventData?.mainphoto.length > 0
+							? eventData?.mainphoto[0].original
+							: ''
+					}
+					alt='main'
+					className={styles.mobileImg}
+				/>
 			</Container>
 			<Container>
 				<FlexRow className={styles.mainRow}>
-					<img src={eventData?.mainphoto[0].original} alt='main' className={styles.imgMain} />
+					<img
+						src={
+							eventData?.mainphoto && eventData?.mainphoto.length > 0
+								? eventData?.mainphoto[0].original
+								: ''
+						}
+						alt='main'
+						className={styles.imgMain}
+					/>
 					<h1 id='event'>{eventData?.title}</h1>
 					<FlexRow className={styles.additionalInfoRow}>
 						<FlexRow className={styles.rowEl}>
@@ -69,20 +85,24 @@ export const MainInfoSection = () => {
 						<FlexRow className={styles.blockEl}>
 							<FlexRow className={styles.infoBlock}>
 								<p className={styles.title}>
-									{formatMainDateRange(
-										(eventData?.date as [string, string]) ?? [
-											'2025-08-22T08:15:00+03:00',
-											'2025-08-24T10:00:00+03:00',
-										],
-									)}
+									{eventData?.date &&
+										eventData?.date.length > 1 &&
+										formatMainDateRange(
+											(eventData?.date as [string, string]) ?? [
+												'2025-08-22T08:15:00+03:00',
+												'2025-08-24T10:00:00+03:00',
+											],
+										)}
 								</p>
 								<p>
-									{formatRangeMeta(
-										(eventData?.date as [string, string]) ?? [
-											'2025-08-22T08:15:00+03:00',
-											'2025-08-24T10:00:00+03:00',
-										],
-									)}
+									{eventData?.date &&
+										eventData?.date.length > 1 &&
+										formatRangeMeta(
+											(eventData?.date as [string, string]) ?? [
+												'2025-08-22T08:15:00+03:00',
+												'2025-08-24T10:00:00+03:00',
+											],
+										)}
 								</p>
 							</FlexRow>
 							<div className={styles.vector}>
