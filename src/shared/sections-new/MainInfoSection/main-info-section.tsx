@@ -92,7 +92,17 @@ export const MainInfoSection = () => {
 												'2025-08-22T08:15:00+03:00',
 												'2025-08-24T10:00:00+03:00',
 											],
-										)}
+										)[0]}
+									{' — '}
+									<br />
+									{eventData?.date &&
+										eventData?.date.length > 1 &&
+										formatMainDateRange(
+											(eventData?.date as [string, string]) ?? [
+												'2025-08-22T08:15:00+03:00',
+												'2025-08-24T10:00:00+03:00',
+											],
+										)[1]}
 								</p>
 								<p>
 									{eventData?.date &&
@@ -102,7 +112,16 @@ export const MainInfoSection = () => {
 												'2025-08-22T08:15:00+03:00',
 												'2025-08-24T10:00:00+03:00',
 											],
-										)}
+										)[0]}
+									<br />
+									{eventData?.date &&
+										eventData?.date.length > 1 &&
+										formatRangeMeta(
+											(eventData?.date as [string, string]) ?? [
+												'2025-08-22T08:15:00+03:00',
+												'2025-08-24T10:00:00+03:00',
+											],
+										)[1]}
 								</p>
 							</FlexRow>
 							<div className={styles.vector}>
@@ -127,7 +146,8 @@ export const MainInfoSection = () => {
 						</FlexRow>
 						<FlexRow className={styles.blockEl}>
 							<FlexRow className={styles.infoBlock}>
-								<p className={styles.title}>{'Правительство Тамбовской области'}</p>
+								<p className={styles.title}>{'Стоимость билета'}</p>
+								<p className={styles.title}>от {eventData?.min_price} ₽</p>
 							</FlexRow>
 							<div className={styles.vector}>
 								<MainInfoOrgSVG />

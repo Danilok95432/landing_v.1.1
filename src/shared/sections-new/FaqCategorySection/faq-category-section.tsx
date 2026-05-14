@@ -1,4 +1,4 @@
-import { useGetEventByIdQuery } from 'src/features/home/api/home.api'
+import { useGetAllFaqByIdQuery } from 'src/features/home/api/home.api'
 import { Container } from '../../ui/Container/Container'
 import styles from './index.module.scss'
 import cn from 'classnames'
@@ -11,7 +11,8 @@ import { useEvent } from 'src/app/context/event-context'
 
 export const FaqCategorySection = () => {
 	const { eventId } = useEvent()
-	const { data: faqEvent } = useGetEventByIdQuery(eventId ?? '1', { skip: !eventId })
+	// const { data: faqEvent } = useGetEventByIdQuery(eventId ?? '1', { skip: !eventId })
+	const { data: faqList } = useGetAllFaqByIdQuery(eventId)
 	const [activeIdx, setActiveIdx] = useState<number>(0)
 	const categories = [
 		{ id: '1', title: 'О событии' },
@@ -43,16 +44,16 @@ export const FaqCategorySection = () => {
 				</FlexRow>
 				<FlexRow className={styles.faqCont}>
 					<p className={styles.title}>{categories[Number(activeIdx)].title}</p>
-					<p className={styles.desc}>
+					{/* <p className={styles.desc}>
 						{faqEvent?.description && (
 							<div dangerouslySetInnerHTML={{ __html: faqEvent?.description[0] }} />
 						)}
-					</p>
+					</p> */}
 					<div className={styles.homeFaqList}>
-						{faqEvent &&
-							[...(faqEvent?.faq || [])]
+						{faqList?.items &&
+							[...(faqList?.items || [])]
 								.sort((a, b) => Number(a?.id || 0) - Number(b?.id || 0))
-								.filter((faqEl) => faqEl?.title)
+								.filter((faqEl) => faqEl?.cat_name === categories[activeIdx].title)
 								.map((faqEl, index) => (
 									<AccordionItem
 										className={styles.faqItem}

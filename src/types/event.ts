@@ -29,6 +29,17 @@ export type EventAwardResponse = {
 	dates: EventAward[]
 }
 
+export type FaqListItem = {
+	title: string
+	content: string
+	id: string
+	cat_name: string
+}
+
+export type FaqListResponse = {
+	items: FaqListItem[]
+}
+
 export type EventFaq = {
 	id: string
 	title: string

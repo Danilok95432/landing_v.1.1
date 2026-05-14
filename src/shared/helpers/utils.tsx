@@ -545,9 +545,9 @@ function normalizeRange(range: DateRangeISO): [Date, Date] {
 /**
  * 1) "24 авг 2025, 09:00 — 27 авг 2025, 22:30"
  */
-export function formatMainDateRange(range: DateRangeISO, timeZone?: string): string {
+export function formatMainDateRange(range: DateRangeISO, timeZone?: string): [string, string] {
 	const [start, end] = normalizeRange(range)
-	return `${formatDateTimeRu(start, timeZone)} — ${formatDateTimeRu(end, timeZone)}`
+	return [formatDateTimeRu(start, timeZone), formatDateTimeRu(end, timeZone)]
 }
 
 /**
@@ -558,7 +558,7 @@ export function formatRangeMeta(
 	range: DateRangeISO,
 	now: Date = new Date(),
 	timeZone?: string,
-): string {
+): [string, string] {
 	const [start, end] = normalizeRange(range)
 
 	// Длительность
@@ -594,5 +594,5 @@ export function formatRangeMeta(
 		whenStr = `Через ${inDays} ${pluralRu(inDays, 'день', 'дня', 'дней')}`
 	}
 
-	return `${durationStr} ${whenStr}`
+	return [durationStr, whenStr]
 }

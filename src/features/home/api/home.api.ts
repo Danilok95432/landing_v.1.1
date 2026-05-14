@@ -5,6 +5,7 @@ import {
 	type EventItem,
 	type EventAwardResponse,
 	type EventFaq,
+	type FaqListResponse,
 } from 'src/types/event'
 import { type CardNewsItem } from 'src/types/news'
 import { type ProgramDay, type SubEventResponse } from 'src/types/program'
@@ -99,6 +100,14 @@ export const homeApi = createApi({
 				},
 			}),
 		}),
+		getAllFaqById: build.query<FaqListResponse, string>({
+			query: (idEvent) => ({
+				url: `faq/list`,
+				params: {
+					id_event: idEvent,
+				},
+			}),
+		}),
 	}),
 })
 
@@ -114,4 +123,5 @@ export const {
 	useGetFaqByIdQuery,
 	useGetRegListQuery,
 	useGetRegSettingsQuery,
+	useGetAllFaqByIdQuery,
 } = homeApi
