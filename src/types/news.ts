@@ -1,6 +1,11 @@
 import { type CategoryFilterItem } from './global'
 import { type ImageItem, type ImageItemWithText } from './photos'
 
+export type ErrorResponse = {
+	error: string
+	status: string
+}
+
 export type NewsItem = {
 	id: string
 	title: string

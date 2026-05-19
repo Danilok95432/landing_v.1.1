@@ -9,15 +9,17 @@ import { useGetEventByIdQuery } from 'src/features/home/api/home.api'
 import { partnersSliderOptions } from './consts'
 import { Autoplay } from 'swiper'
 import { useEvent } from 'src/app/context/event-context'
+import { useBreakPoint } from 'src/features/useBreakPoint/useBreakPoint'
 
 export const OrgsSection = () => {
 	const { eventId } = useEvent()
 	const { data: eventData } = useGetEventByIdQuery(eventId ?? '1', { skip: !eventId })
 	const swiperRef: RefObject<SwiperRef> = useRef<SwiperRef>(null)
+	const breakPoint = useBreakPoint()
 	if (!eventData?.organizerGameLinks) return ''
 	return (
 		<Section id='orgs' className={cn(styles.orgs)}>
-			<Container>
+			<Container off={breakPoint === 'S'}>
 				<div className={styles.partnerSlider}>
 					<Swiper
 						modules={[Autoplay]}

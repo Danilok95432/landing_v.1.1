@@ -9,7 +9,8 @@ import { LogoSVG } from 'src/shared/ui/icons/logoSVG'
 import { BuyTicketModal } from 'src/modals/buy-ticket-modal/buy-ticket-modal'
 import { FlexRow } from 'src/shared/ui/FlexRow/FlexRow'
 import { useEvent } from 'src/app/context/event-context'
-import { useGetEventByIdQuery } from 'src/features/home/api/home.api'
+import { useGetEventByIdQuery, useGetRegSettingsQuery } from 'src/features/home/api/home.api'
+import classNames from 'classnames'
 
 export const MainNavigation = () => {
 	const { eventId } = useEvent()
@@ -17,6 +18,8 @@ export const MainNavigation = () => {
 	const { openModal } = useActions()
 	const location = useLocation()
 	const navigate = useNavigate()
+	const { data: regSettings } = useGetRegSettingsQuery(eventId)
+	const useReg = regSettings?.status
 
 	const navRef = useRef<HTMLElement | null>(null)
 	const [navHeight, setNavHeight] = useState(0)
@@ -172,8 +175,11 @@ export const MainNavigation = () => {
 					<FlexRow className={styles.mobileRow}>
 						<BurgerMenu />
 						<button
-							className={styles.buyBtnMobile}
+							className={classNames(styles.buyBtnMobile, {
+								[styles.disabled]: !useReg,
+							})}
 							onClick={() => openModal(<BuyTicketModal id={eventId ?? '1'} />)}
+							disabled={!useReg}
 						>
 							<div className={styles.text}>
 								<p>Купить билет</p>
@@ -191,8 +197,9 @@ export const MainNavigation = () => {
 					</ul>
 
 					<button
-						className={styles.buyBtn}
+						className={classNames(styles.buyBtn, { [styles.disabled]: !useReg })}
 						onClick={() => openModal(<BuyTicketModal id={eventId ?? '1'} />)}
+						disabled={!useReg}
 					>
 						<div className={styles.text}>
 							<p>Купить билет</p>

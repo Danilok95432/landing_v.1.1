@@ -26,6 +26,9 @@
 		.logoCont {
 			cursor: pointer;
 		}
+		button.disabled {
+			background: #e7371080;
+		}
 		.buyBtn {
 			display: flex;
 			flex-direction: row;

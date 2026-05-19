@@ -10,6 +10,9 @@
 		justify-content: center;
 		align-items: center;
 		gap: 15px;
+		button.disabled {
+			background: #ffffff80;
+		}
 		.buyBtn {
 			display: flex;
 			flex-direction: row;

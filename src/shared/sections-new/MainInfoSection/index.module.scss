@@ -58,6 +58,9 @@
 					margin-right: 0;
 					margin-bottom: 12px;
 				}
+				button.disabled {
+					background: #e7371080;
+				}
 				.buyBtn {
 					display: flex;
 					flex-direction: row;
@@ -154,8 +157,9 @@
 				flex-direction: row;
 				flex-wrap: nowrap;
 				max-width: 390px;
-				min-height: 145px;
-				max-height: 145px;
+				min-height: 165px;
+				max-height: 165px;
+				width: 100%;
 				gap: 24px;
 				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 				border-radius: 16px;
@@ -266,6 +270,9 @@
 						background-image: url("data:image/svg+xml,%3Csvg width='9' height='5' viewBox='0 0 9 5' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4.43507 5C4.30511 5 4.1101 4.9361 4.04512 4.8083L0.146209 0.974442C-0.0487364 0.782749 -0.0487364 0.399361 0.146209 0.14377C0.341155 -0.0479233 0.731077 -0.0479233 0.991005 0.14377L4.50004 3.59424L8.00908 0.14377C8.20402 -0.0479233 8.59386 -0.0479233 8.85379 0.14377C9.04874 0.335463 9.04874 0.718851 8.85379 0.974442L4.95488 4.8083C4.75994 4.9361 4.56504 5 4.43507 5Z' fill='%230077CC'/%3E%3C/svg%3E%0A");
 					}
 				}
+			}
+			button.disabled {
+				background: #e7371080;
 			}
 			.buyBtn {
 				display: flex;

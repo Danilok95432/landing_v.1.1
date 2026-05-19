@@ -36,6 +36,9 @@
 			@media (max-width: 768px) {
 				margin: 0 auto;
 			}
+			.slide {
+				min-height: 100%;
+			}
 		}
 	}
 	.controlsMobile {
@@ -61,7 +64,7 @@
 		}
 	}
 	.slideRow {
-		justify-content: space-between;
+		min-height: 100%;
 		flex-wrap: nowrap;
 		align-items: unset;
 		gap: 0;
@@ -117,6 +120,7 @@
 				margin: 0;
 				border-radius: 0 0 24px 24px;
 				gap: 12px;
+				max-height: none;
 			}
 			.slideTitle {
 				font-size: 36px;

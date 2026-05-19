@@ -13,7 +13,7 @@ import { MainInfoLocationSVG } from 'src/shared/ui/icons/mainInfoLocationSVG'
 import { MainInfoOrgSVG } from 'src/shared/ui/icons/mainInfoOrgSVG'
 import { BuyTicketModal } from 'src/modals/buy-ticket-modal/buy-ticket-modal'
 import { useActions } from 'src/app/store/hooks/actions'
-import { useGetEventByIdQuery } from 'src/features/home/api/home.api'
+import { useGetEventByIdQuery, useGetRegSettingsQuery } from 'src/features/home/api/home.api'
 import { formatMainDateRange, formatRangeMeta } from 'src/shared/helpers/utils'
 import { useEvent } from 'src/app/context/event-context'
 
@@ -22,6 +22,8 @@ export const MainInfoSection = () => {
 	const { data: eventData } = useGetEventByIdQuery(eventId ?? '1', { skip: !eventId })
 	const [activeCont, setActiveCont] = useState<boolean>(false)
 	const { openModal } = useActions()
+	const { data: regSettings } = useGetRegSettingsQuery(eventId)
+	const useReg = regSettings?.status
 
 	return (
 		<Section className={cn(styles.mainInfo)}>
@@ -71,8 +73,9 @@ export const MainInfoSection = () => {
 						</FlexRow>
 						<FlexRow className={cn(styles.rowEl, styles.mobileRow)}>
 							<button
-								className={styles.buyBtn}
+								className={cn(styles.buyBtn, { [styles.disabled]: !useReg })}
 								onClick={() => openModal(<BuyTicketModal id={eventId ?? '1'} />)}
+								disabled={!useReg}
 							>
 								<div className={styles.text}>
 									<p>Купить билет</p>
@@ -169,8 +172,9 @@ export const MainInfoSection = () => {
 							</button>
 						</div>
 						<button
-							className={styles.buyBtn}
+							className={cn(styles.buyBtn, { [styles.disabled]: !useReg })}
 							onClick={() => openModal(<BuyTicketModal id={eventId ?? '1'} />)}
+							disabled={!useReg}
 						>
 							<div className={styles.text}>
 								<p>Купить билет</p>

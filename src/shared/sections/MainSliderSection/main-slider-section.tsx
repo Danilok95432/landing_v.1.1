@@ -26,7 +26,7 @@ export const MainSliderSection = () => {
 				<Swiper {...eventsSliderOptions} ref={swiperRef} className={styles.sliderMain}>
 					{sortedPromo.map((slideEl) => {
 						return (
-							<SwiperSlide key={slideEl.id}>
+							<SwiperSlide key={slideEl.id} className={styles.slide}>
 								<FlexRow className={styles.slideRow}>
 									<FlexRow className={styles.contentSlide}>
 										<p className={styles.slideTitle}>{slideEl.title}</p>

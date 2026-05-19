@@ -13,8 +13,6 @@ import type { Swiper as SwiperType } from 'swiper'
 import { type ImageItemWithText } from 'src/types/photos'
 import { CloseSvg } from 'src/shared/ui/icons/closeSVG'
 import classNames from 'classnames'
-import 'swiper/css'
-import 'swiper/css/pagination'
 import { useEvent } from 'src/app/context/event-context'
 
 export const GallerySection = () => {
@@ -37,7 +35,7 @@ export const GallerySection = () => {
 
 	const getButtonColors = () => {
 		const isFirstSlide = activeIndex === 0
-		const isLastSlide = eventData?.promo ? activeIndex === eventData.promo.length - 2 : false
+		const isLastSlide = eventData?.photos ? activeIndex === eventData.photos.length - 2 : false
 
 		return {
 			prevBtnColor: isFirstSlide ? '#00000040' : '#000',
@@ -48,8 +46,8 @@ export const GallerySection = () => {
 	const { prevBtnColor, nextBtnColor } = getButtonColors()
 
 	useEffect(() => {
-		if (eventData?.promo && Array.isArray(eventData.promo)) {
-			setAllPagePhoto(eventData.promo)
+		if (eventData?.photos && Array.isArray(eventData.photos)) {
+			setAllPagePhoto(eventData.photos)
 		}
 	}, [eventData])
 
@@ -85,7 +83,7 @@ export const GallerySection = () => {
 					onSlideChange={handleSlideChange}
 					onInit={(swiper) => setActiveIndex(swiper.activeIndex)}
 				>
-					{eventData?.promo.map((slideEl, idx) => {
+					{eventData?.photos.map((slideEl, idx) => {
 						return (
 							<SwiperSlide key={slideEl.id}>
 								<FlexRow className={styles.slideRow}>

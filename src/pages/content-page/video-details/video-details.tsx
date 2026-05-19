@@ -9,11 +9,13 @@ import { useGetVideoByIdQuery } from 'src/features/content/api/content'
 import { AsideVideos } from 'src/widgets/aside-videos/aside-videos'
 import { Section } from 'src/shared/ui/Section/section'
 import { Container } from 'src/shared/ui/Container/Container'
+import { useEvent } from 'src/app/context/event-context'
 
 export const VideoDetails: FC = () => {
 	const { id } = useParams()
+	const { eventId } = useEvent()
 	const { data: videoDetails } = useGetVideoByIdQuery(id ?? '')
-	const { data: videosList = [] } = useGetEventVideosByIdQuery('1')
+	const { data: videosList = [] } = useGetEventVideosByIdQuery(eventId)
 
 	const [isSmallScreen, setIsSmallScreen] = useState(false)
 	const [, setPreviewCount] = useState<number>(1)

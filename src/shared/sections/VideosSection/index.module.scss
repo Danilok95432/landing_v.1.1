@@ -11,6 +11,9 @@
 	.allBtn {
 		background: var(--main-theme-color);
 		margin-bottom: 20px;
+		@media (max-width: 768px) {
+			margin-right: 24px;
+		}
 	}
 
 	@media (max-width: 768) {
@@ -37,4 +40,3 @@
 		}
 	}
 }
-

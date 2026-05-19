@@ -5,19 +5,23 @@ import styles from './index.module.scss'
 import { BuyTicketModal } from 'src/modals/buy-ticket-modal/buy-ticket-modal'
 import { useActions } from 'src/app/store/hooks/actions'
 import { useEvent } from 'src/app/context/event-context'
-import { useGetEventByIdQuery } from 'src/features/home/api/home.api'
+import { useGetEventByIdQuery, useGetRegSettingsQuery } from 'src/features/home/api/home.api'
+import classNames from 'classnames'
 
 export const Footer = () => {
 	const { eventId } = useEvent()
 	const { data: eventData } = useGetEventByIdQuery(eventId ?? '1', { skip: !eventId })
 	const { openModal } = useActions()
+	const { data: regSettings } = useGetRegSettingsQuery(eventId)
+	const useReg = regSettings?.status
 	return (
 		<footer className={styles.footer}>
 			<Container>
 				<FlexRow className={styles.footerCont}>
 					<button
-						className={styles.buyBtn}
+						className={classNames(styles.buyBtn, { [styles.disabled]: !useReg })}
 						onClick={() => openModal(<BuyTicketModal id={eventId ?? '1'} />)}
+						disabled={!useReg}
 					>
 						<div className={styles.text}>
 							<p>Купить билет</p>
