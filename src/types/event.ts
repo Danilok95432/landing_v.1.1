@@ -168,3 +168,7 @@ export type CardEventItem = {
 		title: string
 	}
 }
+
+export type SiteSettings = {
+	metric: string
+}

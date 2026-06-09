@@ -6,6 +6,7 @@ import {
 	type EventAwardResponse,
 	type EventFaq,
 	type FaqListResponse,
+	type SiteSettings,
 } from 'src/types/event'
 import { type CardNewsItem } from 'src/types/news'
 import { type ProgramDay, type SubEventResponse } from 'src/types/program'
@@ -108,6 +109,11 @@ export const homeApi = createApi({
 				},
 			}),
 		}),
+		getSettingsSite: build.query<SiteSettings, null>({
+			query: () => ({
+				url: `settings/getinfo`,
+			}),
+		}),
 	}),
 })
 
@@ -124,4 +130,5 @@ export const {
 	useGetRegListQuery,
 	useGetRegSettingsQuery,
 	useGetAllFaqByIdQuery,
+	useGetSettingsSiteQuery,
 } = homeApi
