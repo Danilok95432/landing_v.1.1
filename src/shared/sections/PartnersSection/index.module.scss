@@ -1,24 +1,85 @@
 .partners {
-	h2 {
+	.btnRow {
+		justify-content: space-between;
+		align-items: center;
 		margin-bottom: 20px;
+		.sectionTitle {
+			font-size: 24px;
+			font-weight: 500;
+			@media (max-width: 768px) {
+				font-size: 20px;
+			}
+		}
+		.allBtn {
+			font-size: 18px;
+			padding: 12px 24px;
+			border-radius: 0px;
+			background: var(--main-theme-color);
+			height: max-content;
+			transition: all .3s ease-in-out;
+			&:hover {
+					background: #B30834;
+				}
+			@media (max-width: 768px) {
+				color: var(--main-link-color);
+				background: none;
+				font-size: 16px;
+				padding: 0;
+			}
+		}
 	}
 	.partnersSliderBtns {
-		top: 62%;
+		top: 65%;
+		width: calc(100% + 118px);
 		@media (max-width: 768px) {
-			width: 97%;
+			display: none;
 		}
 	}
 	.partnerSlider {
-		img {
-			width: 100%;
-			object-fit: contain;
-			@media (max-width: 499px) {
+		.slider {
+			height: 100%;
+			padding: 10px 5px;
+			@media (max-width: 768px) {
+				padding: 10px 0;
+			}
+		}
+		.partnerCard {
+			max-width: 180px;
+			box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.12);
+			height: 120px;
+			border-radius: 4px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background: transparent;
+			@media (max-width: 768px) {
+				box-shadow: 0 0 0;
+				margin: 0 auto;
+			}
+			.partnersLink {
 				height: 100%;
-				object-fit: none;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 12px;
+				color: var(--additional-theme-color-2);
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: contain;
+					@media (max-width: 499px) {
+						height: 100%;
+						object-fit: cover;
+					}
+				}
+				p {
+					font-size: 14px;
+				}
 			}
 		}
 		@media (max-width: 768px) {
-			margin: 0 20px;
+			margin: 0;
 		}
 	}
 }
+

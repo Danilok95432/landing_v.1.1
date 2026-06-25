@@ -1,10 +1,10 @@
 import { DisplayBreakpoints } from 'src/shared/helpers/consts'
-import { type SwiperProps } from 'swiper/react/swiper-react'
+import { type SwiperProps } from 'swiper/react'
 
 export const partnersSliderOptions: SwiperProps = {
 	slidesPerView: 2,
 	slidesPerGroup: 1,
-	spaceBetween: 17,
+	spaceBetween: 28,
 	autoHeight: false,
 	loop: true,
 	autoplay: {

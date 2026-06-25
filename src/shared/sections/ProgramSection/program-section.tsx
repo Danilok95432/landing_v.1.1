@@ -167,7 +167,15 @@ export const ProgramSection = () => {
 													{items.map((programEl) => (
 														<FlexRow key={programEl.id} className={styles.elRow}>
 															<p>{programEl.time}</p>
-															<p>{programEl.title}</p>
+															{programEl.use_real ? (
+																<a
+																	href={`https://этноспорт.рф/events/1/event-program/${programEl.id}`}
+																>
+																	{programEl.title}
+																</a>
+															) : (
+																<p>{programEl.title}</p>
+															)}
 														</FlexRow>
 													))}
 												</div>

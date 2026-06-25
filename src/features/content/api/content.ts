@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { MAIN_PROD_URL, ReducerPath } from 'src/shared/helpers/consts'
 import { type NewsItem } from 'src/types/news'
+import { type PagesHeader } from 'src/types/pages'
 import { type VideoItem } from 'src/types/videos'
 
 export const contentApi = createApi({
@@ -20,7 +21,15 @@ export const contentApi = createApi({
 				url: `videos/${videoId}`,
 			}),
 		}),
+		getPageHeader: build.query<{ page: PagesHeader }, string>({
+			query: (pageType) => ({
+				url: `pages/getinfo`,
+				params: {
+					page_type: pageType,
+				},
+			}),
+		}),
 	}),
 })
 
-export const { useGetNewsByIdQuery, useGetVideoByIdQuery } = contentApi
+export const { useGetNewsByIdQuery, useGetVideoByIdQuery, useGetPageHeaderQuery } = contentApi

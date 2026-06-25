@@ -1,0 +1,142 @@
+import React, { useState, useMemo, useEffect } from 'react'
+import { Helmet } from 'react-helmet-async'
+import { Link, useSearchParams } from 'react-router-dom'
+
+import styles from './index.module.scss'
+import { useGetEventVideosByIdQuery } from 'src/features/home/api/home.api'
+import { useBreakPoint } from 'src/features/useBreakPoint/useBreakPoint'
+import { NewsCard } from 'src/shared/sections/NewsSection/components/NewsCard/news-card'
+import { Container } from 'src/shared/ui/Container/Container'
+import { Section } from 'src/shared/ui/Section/section'
+import { MobileList } from 'src/widgets/mobile-list/mobile-list'
+import { FlexRow } from 'src/shared/ui/FlexRow/FlexRow'
+import { type VideoItem } from 'src/types/videos'
+import { type CardNewsItem } from 'src/types/news'
+import { VideoCard } from 'src/shared/sections/VideosSection/components/video-card/video-card'
+import { Pagination } from 'src/widgets/pagination/pagination'
+import { useEvent } from 'src/app/context/event-context'
+
+export const VideosPage = () => {
+	const { eventId } = useEvent()
+	const { data: videos = [] } = useGetEventVideosByIdQuery(eventId ?? '1', { skip: !eventId })
+	const breakpoint = useBreakPoint()
+	const [searchParams] = useSearchParams()
+
+	const [isChecked, setIsChecked] = useState(() => searchParams.get('onlyVideo') === '1')
+	const [currentPage, setCurrentPage] = useState(1)
+	const itemsPerPage = 8 // Количество элементов на странице
+
+	useEffect(() => {
+		const onlyVideo = searchParams.get('onlyVideo') === '1'
+		setIsChecked(onlyVideo)
+		setCurrentPage(1)
+	}, [searchParams])
+
+	// Создаем объединенный и отсортированный список
+	const mixedAndSortedList = useMemo(() => {
+		if (isChecked) {
+			return videos
+				.map((video) => ({
+					...video,
+					date: video.date || new Date().toISOString(),
+				}))
+				.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+		}
+
+		const videosWithType = videos.map((video) => ({
+			...video,
+			date: video.date || new Date().toISOString(),
+		}))
+
+		return [...videosWithType].sort(
+			(a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+		)
+	}, [videos, isChecked])
+
+	// Вычисляем данные для пагинации
+	const paginationData = useMemo(() => {
+		const totalItems = mixedAndSortedList.length
+		const totalPages = Math.ceil(totalItems / itemsPerPage)
+
+		// Получаем элементы для текущей страницы
+		const startIndex = (currentPage - 1) * itemsPerPage
+		const endIndex = startIndex + itemsPerPage
+		const currentItems = mixedAndSortedList.slice(startIndex, endIndex)
+
+		return {
+			totalItems,
+			totalPages,
+			currentItems,
+			startIndex: startIndex + 1,
+			endIndex: Math.min(endIndex, totalItems),
+		}
+	}, [mixedAndSortedList, currentPage, itemsPerPage])
+
+	// Обработчик изменения страницы
+	const handlePageChange = (page: number) => {
+		setCurrentPage(page)
+		// Прокручиваем к началу списка
+		window.scrollTo({ top: 0, behavior: 'smooth' })
+	}
+
+	// Функция для рендеринга элемента в зависимости от типа
+	const renderItem = (item: VideoItem | CardNewsItem) => {
+		if ('duration' in item) {
+			return <VideoCard key={item.id} shouldDate {...item} smallCard />
+		}
+		return <NewsCard key={item.id} titleLink {...item} noShadow />
+	}
+
+	return (
+		<>
+			<Helmet>
+				<title>Видео</title>
+			</Helmet>
+			<Section className={styles.newsListPage}>
+				<Container className={styles.newsContainer}>
+					<Link to={'/'} className={styles.linkBack}>
+						Назад на главную
+					</Link>
+					<FlexRow className={styles.titleRow}>
+						<h2 className={styles.title}>{'Видеолента'}</h2>
+					</FlexRow>
+
+					{/* Информация о пагинации
+					{paginationData.totalItems > 0 && (
+						<div className={styles.paginationInfo}>
+							Показано {paginationData.startIndex}-{paginationData.endIndex} из{' '}
+							{paginationData.totalItems}
+						</div>
+					)}
+						*/}
+
+					{paginationData.currentItems.length > 0 ? (
+						breakpoint === 'S' ? (
+							<MobileList
+								items={mixedAndSortedList}
+								renderItem={renderItem}
+								classListItems={styles.newsList}
+							/>
+						) : (
+							<>
+								<div className={styles.newsList}>
+									{paginationData.currentItems.map((item) => renderItem(item))}
+								</div>
+								{paginationData.totalPages > 1 && (
+									<Pagination
+										currentPage={currentPage}
+										totalPages={paginationData.totalPages}
+										onPageChange={handlePageChange}
+										className={styles.pagination}
+									/>
+								)}
+							</>
+						)
+					) : (
+						<p className={styles.newsAbsence}>{'Нет доступных видео.'}</p>
+					)}
+				</Container>
+			</Section>
+		</>
+	)
+}

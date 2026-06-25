@@ -1,7 +1,7 @@
 export const navigationElements = [
 	{
 		title: 'О событии',
-		link: 'event',
+		link: '/about',
 	},
 	{
 		title: 'Фото',
@@ -12,11 +12,15 @@ export const navigationElements = [
 		link: 'program',
 	},
 	{
-		title: 'Новости и видео',
+		title: 'Новости',
 		link: 'news',
 	},
 	{
-		title: 'Частые вопросы',
+		title: 'Видео',
+		link: 'videos',
+	},
+	{
+		title: 'Вопросы',
 		link: 'faq',
 	},
 ]

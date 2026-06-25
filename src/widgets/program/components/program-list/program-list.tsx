@@ -5,7 +5,6 @@ import skeleton from 'src/assets/img/skeleton-img.png'
 import styles from './index.module.scss'
 import { Link } from 'react-router-dom'
 // import { MainButton } from 'src/shared/ui/MainButton/MainButton'
-import { useBreakPoint } from 'src/features/useBreakPoint/useBreakPoint'
 import { Swiper, type SwiperRef, SwiperSlide } from 'swiper/react'
 import { homeVideosSliderOptions } from './consts'
 import { SliderBtns } from 'src/widgets/slider-btns/slider-btns'
@@ -17,7 +16,6 @@ type ProgramListProps = {
 
 export const ProgramList: FC<ProgramListProps> = ({ list, viewMode = 'list' }) => {
 	const swiperRef: RefObject<SwiperRef> = useRef<SwiperRef>(null)
-	const breakPoint = useBreakPoint()
 	if (!list?.length) return null
 	return (
 		<>
@@ -39,9 +37,9 @@ export const ProgramList: FC<ProgramListProps> = ({ list, viewMode = 'list' }) =
 						</li>
 					))}
 				</ul>
-			) : breakPoint === 'S' ? (
-				<>
-					<Swiper {...homeVideosSliderOptions} ref={swiperRef}>
+			) : (
+				<div className={styles.sliderWrapper}>
+					<Swiper {...homeVideosSliderOptions} ref={swiperRef} className={styles.slider}>
 						<div className={styles.listTabs}>
 							{list.map((programEL, idx) => (
 								<SwiperSlide key={idx} className={styles.listTabSlide}>
@@ -72,29 +70,6 @@ export const ProgramList: FC<ProgramListProps> = ({ list, viewMode = 'list' }) =
 						swiperRef={swiperRef}
 						color={'black'}
 					/>
-				</>
-			) : (
-				<div className={styles.listTabs}>
-					{list.map((programEL) => (
-						<figure className={styles.listTabCard} key={programEL.id}>
-							<div className={styles.imgWrapper}>
-								<img src={programEL?.photo[0]?.original ?? skeleton} alt='' />
-							</div>
-							<figcaption>
-								<Link to={`https://этноспорт.рф/events/1/event-program/${programEL.id}`}>
-									<h3 className={styles.programTitle}>{programEL.title}</h3>
-								</Link>
-								<p className={styles.programTime}>{programEL.time}</p>
-								<p className={styles.programPlace}>{programEL.place}</p>
-								{/* {programEL.use_reg === 1 && (
-												<MainButton as='route' to={'#'} className={styles.requestBtn}>
-													Подать заявку
-												</MainButton>
-											)}
-												*/}
-							</figcaption>
-						</figure>
-					))}
 				</div>
 			)}
 		</>

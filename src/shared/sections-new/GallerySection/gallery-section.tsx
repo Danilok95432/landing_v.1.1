@@ -22,7 +22,7 @@ export const GallerySection = () => {
 
 	const { data: eventData } = useGetEventByIdQuery(eventId ?? '1', { skip: !eventId })
 
-	const [activeIndex, setActiveIndex] = useState(0)
+	const [, setActiveIndex] = useState(0)
 	const [allPagePhoto, setAllPagePhoto] = useState<ImageItemWithText[]>([])
 
 	// fullscreen state
@@ -34,12 +34,9 @@ export const GallerySection = () => {
 	}
 
 	const getButtonColors = () => {
-		const isFirstSlide = activeIndex === 0
-		const isLastSlide = eventData?.photos ? activeIndex === eventData.photos.length - 2 : false
-
 		return {
-			prevBtnColor: isFirstSlide ? '#00000040' : '#000',
-			nextBtnColor: isLastSlide ? '#00000040' : '#000',
+			prevBtnColor: 'rgba(0, 0, 0, 0.05)',
+			nextBtnColor: 'rgba(0, 0, 0, 0.05)',
 		}
 	}
 

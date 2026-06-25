@@ -14,13 +14,13 @@ export const homeVideosSliderOptions: SwiperProps = {
 			slidesPerView: 2,
 		},
 		[DisplayBreakpoints.Lg]: {
-			slidesPerView: 3,
+			slidesPerView: 2,
 		},
 		[DisplayBreakpoints.Xl]: {
-			slidesPerView: 4,
+			slidesPerView: 3,
 		},
 		[DisplayBreakpoints.Xxl]: {
-			slidesPerView: 5,
+			slidesPerView: 3,
 		},
 	},
 }

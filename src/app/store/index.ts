@@ -4,10 +4,12 @@ import { contentApi } from 'src/features/content/api/content'
 import { homeApi } from 'src/features/home/api/home.api'
 import { modalReducer } from 'src/features/modal/store/modal.slice'
 import { NameSpace } from 'src/shared/helpers/consts'
+import { breadCrumbsReducer } from 'src/widgets/bread-crumbs/store/bread-crumbs.slice'
 
 export const store = configureStore({
 	reducer: {
 		[NameSpace.Modal]: modalReducer,
+		[NameSpace.BreadCrumbs]: breadCrumbsReducer,
 		[homeApi.reducerPath]: homeApi.reducer,
 		[authApi.reducerPath]: authApi.reducer,
 		[contentApi.reducerPath]: contentApi.reducer,

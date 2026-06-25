@@ -11,6 +11,7 @@ import { mainFormatDate } from 'src/shared/helpers/utils'
 type VideoCardProps = {
 	className?: string
 	shouldDate?: boolean
+	smallCard?: boolean
 } & VideoItem
 
 export const VideoCard: FC<VideoCardProps> = ({
@@ -21,9 +22,13 @@ export const VideoCard: FC<VideoCardProps> = ({
 	duration,
 	date,
 	shouldDate = false,
+	smallCard = false,
 }) => {
 	return (
-		<Link className={cn(styles.videoCard, className)} to={`/content/videos/${id}`}>
+		<Link
+			className={cn(styles.videoCard, className, { [styles.smallCard]: smallCard })}
+			to={`/videos/${id}`}
+		>
 			<div className={styles.videoThumbWrapper}>
 				<img src={mainphoto[0]?.original} alt={title} />
 				<div className={styles.playVector}>

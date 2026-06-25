@@ -3,17 +3,13 @@ import { Helmet } from 'react-helmet-async'
 import { Link, useSearchParams } from 'react-router-dom'
 
 import styles from './index.module.scss'
-import {
-	useGetEventNewsByIdQuery,
-	useGetEventVideosByIdQuery,
-} from 'src/features/home/api/home.api'
+import { useGetEventNewsByIdQuery } from 'src/features/home/api/home.api'
 import { useBreakPoint } from 'src/features/useBreakPoint/useBreakPoint'
 import { NewsCard } from 'src/shared/sections/NewsSection/components/NewsCard/news-card'
 import { Container } from 'src/shared/ui/Container/Container'
 import { Section } from 'src/shared/ui/Section/section'
 import { MobileList } from 'src/widgets/mobile-list/mobile-list'
 import { FlexRow } from 'src/shared/ui/FlexRow/FlexRow'
-import { CommonCheckbox } from 'src/widgets/CommonCheckbox/common-checkbox'
 import { type VideoItem } from 'src/types/videos'
 import { type CardNewsItem } from 'src/types/news'
 import { VideoCard } from 'src/shared/sections/VideosSection/components/video-card/video-card'
@@ -23,24 +19,12 @@ import { useEvent } from 'src/app/context/event-context'
 export const NewsPage = () => {
 	const { eventId } = useEvent()
 	const { data: newsList = [] } = useGetEventNewsByIdQuery(eventId ?? '1', { skip: !eventId })
-	const { data: videos = [] } = useGetEventVideosByIdQuery(eventId ?? '1', { skip: !eventId })
 	const breakpoint = useBreakPoint()
-	const [searchParams, setSearchParams] = useSearchParams()
+	const [searchParams] = useSearchParams()
 
 	const [isChecked, setIsChecked] = useState(() => searchParams.get('onlyVideo') === '1')
 	const [currentPage, setCurrentPage] = useState(1)
 	const itemsPerPage = 8 // Количество элементов на странице
-
-	const handleCheckboxChange = (checked: boolean) => {
-		setIsChecked(checked)
-		setCurrentPage(1)
-
-		if (checked) {
-			setSearchParams({ onlyVideo: '1' }, { replace: true })
-		} else {
-			setSearchParams({}, { replace: true })
-		}
-	}
 
 	useEffect(() => {
 		const onlyVideo = searchParams.get('onlyVideo') === '1'
@@ -50,29 +34,13 @@ export const NewsPage = () => {
 
 	// Создаем объединенный и отсортированный список
 	const mixedAndSortedList = useMemo(() => {
-		if (isChecked) {
-			return videos
-				.map((video) => ({
-					...video,
-					date: video.date || new Date().toISOString(),
-				}))
-				.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-		}
-
 		const newsWithType = newsList.map((news) => ({
 			...news,
 			date: news.date || new Date().toISOString(),
 		}))
 
-		const videosWithType = videos.map((video) => ({
-			...video,
-			date: video.date || new Date().toISOString(),
-		}))
-
-		return [...newsWithType, ...videosWithType].sort(
-			(a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
-		)
-	}, [newsList, videos, isChecked])
+		return [...newsWithType].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+	}, [newsList, isChecked])
 
 	// Вычисляем данные для пагинации
 	const paginationData = useMemo(() => {
@@ -105,7 +73,7 @@ export const NewsPage = () => {
 		if ('duration' in item) {
 			return <VideoCard key={item.id} shouldDate {...item} />
 		}
-		return <NewsCard key={item.id} titleLink {...item} />
+		return <NewsCard key={item.id} {...item} />
 	}
 
 	return (
@@ -120,11 +88,6 @@ export const NewsPage = () => {
 					</Link>
 					<FlexRow className={styles.titleRow}>
 						<h2 className={styles.title}>Новости</h2>
-						<CommonCheckbox
-							checked={isChecked}
-							onChange={handleCheckboxChange}
-							label='Только видео'
-						/>
 					</FlexRow>
 
 					{/* Информация о пагинации

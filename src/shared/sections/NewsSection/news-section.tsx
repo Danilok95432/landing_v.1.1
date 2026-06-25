@@ -33,6 +33,7 @@ export const NewsSection = () => {
 		<Section id='news' className={cn(styles.news)}>
 			<Container off={isMobile} className={styles.newsCont}>
 				<FlexRow className={styles.btnRow}>
+					<h2 className={styles.sectionTitle}>Новости</h2>
 					<MainButton className={styles.allBtn} onClick={() => navigate('/content')}>
 						Все новости
 					</MainButton>
@@ -50,8 +51,8 @@ export const NewsSection = () => {
 							className={styles.newsSliderBtns}
 							swiperRef={swiperRef}
 							color={'#fff'}
-							nextBtnColor='#000'
-							prevBtnColor='#000'
+							nextBtnColor='#0000000D'
+							prevBtnColor='#0000000D'
 						/>
 					</>
 				)}

@@ -23,19 +23,19 @@ export const partnersSliderOptions: SwiperProps = {
 			slidesPerView: 5,
 		},
 		[DisplayBreakpoints.Md]: {
-			slidesPerView: 6,
+			slidesPerView: 5,
 		},
 		[DisplayBreakpoints.ShortLg]: {
-			slidesPerView: 9,
+			slidesPerView: 6,
 		},
 		[DisplayBreakpoints.Lg]: {
-			slidesPerView: 9,
+			slidesPerView: 6,
 		},
 		[DisplayBreakpoints.Xll]: {
-			slidesPerView: 9,
+			slidesPerView: 6,
 		},
 		[DisplayBreakpoints.Xxl]: {
-			slidesPerView: 9,
+			slidesPerView: 6,
 		},
 	},
 }

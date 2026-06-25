@@ -138,6 +138,10 @@ export const MainNavigation = () => {
 			navigate('/', { state: { scrollTo: sectionId } })
 			return
 		}
+		if (sectionId.includes('/')) {
+			navigate(sectionId)
+			return
+		}
 		window.history.replaceState(null, '', `/#${sectionId}`)
 		startSmoothScrollToId(sectionId)
 	}

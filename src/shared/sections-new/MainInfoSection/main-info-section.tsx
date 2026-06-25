@@ -3,28 +3,21 @@ import { Section } from 'src/shared/ui/Section/section'
 import { Container } from 'src/shared/ui/Container/Container'
 import cn from 'classnames'
 import { FlexRow } from 'src/shared/ui/FlexRow/FlexRow'
-import { MainInfoTypeSVG } from 'src/shared/ui/icons/mainInfoTypeSVG'
-import { MainInfoKindSVG } from 'src/shared/ui/icons/mainInfoKindSVG'
-import { MainInfoFreqSVG } from 'src/shared/ui/icons/mainInfoFreqSVG'
-import { MainInfoPlaceSVG } from 'src/shared/ui/icons/mainInfoPlaceSVG'
 import { useState } from 'react'
 import { MainInfoDateSVG } from 'src/shared/ui/icons/mainInfoDateSVG'
 import { MainInfoLocationSVG } from 'src/shared/ui/icons/mainInfoLocationSVG'
 import { MainInfoOrgSVG } from 'src/shared/ui/icons/mainInfoOrgSVG'
-import { BuyTicketModal } from 'src/modals/buy-ticket-modal/buy-ticket-modal'
-import { useActions } from 'src/app/store/hooks/actions'
-import { useGetEventByIdQuery, useGetRegSettingsQuery } from 'src/features/home/api/home.api'
+import { useGetEventByIdQuery } from 'src/features/home/api/home.api'
 import { formatMainDateRange, formatRangeMeta } from 'src/shared/helpers/utils'
 import { useEvent } from 'src/app/context/event-context'
+import { MainButton } from 'src/shared/ui/MainButton/MainButton'
+import { useNavigate } from 'react-router-dom'
 
 export const MainInfoSection = () => {
 	const { eventId } = useEvent()
 	const { data: eventData } = useGetEventByIdQuery(eventId ?? '1', { skip: !eventId })
-	const [activeCont, setActiveCont] = useState<boolean>(false)
-	const { openModal } = useActions()
-	const { data: regSettings } = useGetRegSettingsQuery(eventId)
-	const useReg = regSettings?.status
-
+	const [activeCont] = useState<boolean>(false)
+	const navigate = useNavigate()
 	return (
 		<Section className={cn(styles.mainInfo)}>
 			<Container className={styles.offContainer} off>
@@ -50,7 +43,7 @@ export const MainInfoSection = () => {
 						className={styles.imgMain}
 					/>
 					<h1 id='event'>{eventData?.title}</h1>
-					<FlexRow className={styles.additionalInfoRow}>
+					{/* <FlexRow className={styles.additionalInfoRow}>
 						<FlexRow className={styles.rowEl}>
 							<MainInfoTypeSVG />
 							<p>{eventData?.event_type_name}</p>
@@ -83,7 +76,7 @@ export const MainInfoSection = () => {
 								</div>
 							</button>
 						</FlexRow>
-					</FlexRow>
+					</FlexRow> */}
 					<FlexRow className={styles.blocksRow}>
 						<FlexRow className={styles.blockEl}>
 							<FlexRow className={styles.infoBlock}>
@@ -108,14 +101,14 @@ export const MainInfoSection = () => {
 										)[1]}
 								</p>
 								<p>
-									{eventData?.date &&
+									{/* {eventData?.date &&
 										eventData?.date.length > 1 &&
 										formatRangeMeta(
 											(eventData?.date as [string, string]) ?? [
 												'2025-08-22T08:15:00+03:00',
 												'2025-08-24T10:00:00+03:00',
 											],
-										)[0]}
+										)[0]} */}
 									<br />
 									{eventData?.date &&
 										eventData?.date.length > 1 &&
@@ -149,8 +142,10 @@ export const MainInfoSection = () => {
 						</FlexRow>
 						<FlexRow className={styles.blockEl}>
 							<FlexRow className={styles.infoBlock}>
-								<p className={styles.title}>{'Стоимость билета'}</p>
-								<p className={styles.title}>от {eventData?.min_price} ₽</p>
+								<p className={styles.title}>{'НКО «Атмановские кулачки»'}</p>
+								<p className={styles.title}>
+									<a href={`https://t6event${eventId}.npotau.ru`}>На страницу организатора</a>
+								</p>
 							</FlexRow>
 							<div className={styles.vector}>
 								<MainInfoOrgSVG />
@@ -164,14 +159,8 @@ export const MainInfoSection = () => {
 									<div dangerouslySetInnerHTML={{ __html: eventData?.description[0] }} />
 								)}
 							</p>
-							<button
-								className={cn(styles.openContBtn, { [styles.active]: activeCont })}
-								onClick={() => setActiveCont(!activeCont)}
-							>
-								{activeCont ? 'Свернуть' : 'Развернуть'}
-							</button>
 						</div>
-						<button
+						{/* <button
 							className={cn(styles.buyBtn, { [styles.disabled]: !useReg })}
 							onClick={() => openModal(<BuyTicketModal id={eventId ?? '1'} />)}
 							disabled={!useReg}
@@ -180,7 +169,10 @@ export const MainInfoSection = () => {
 								<p>Купить билет</p>
 								<p>от {eventData?.min_price} ₽</p>
 							</div>
-						</button>
+						</button> */}
+						<MainButton className={styles.aboutBtn} onClick={() => navigate('/about')}>
+							Все о событии
+						</MainButton>
 					</FlexRow>
 				</FlexRow>
 			</Container>

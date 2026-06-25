@@ -1,0 +1,81 @@
+.headMenu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 32px;
+	padding-bottom: 30px;
+  width: 100%;
+  overflow-x: scroll;
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none; // Альтернативный вариант
+  }
+}
+
+.menuBottomItem {
+  &:first-child {
+    border-top: 5px solid #F2F5F8;
+  }
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+.menuItem {
+  position: relative;
+  overflow: visible;
+  min-width: max-content;
+
+  a {
+    display: block;
+    padding-top: 5px;
+    text-decoration: none;
+    color: #000;
+    transition: color 0.3s ease;
+    position: relative;
+    z-index: 1;
+    font-size: 16px;
+    font-weight: 500;
+
+    &:hover,
+    &.activeLink {
+      color: var(--main-theme-color);
+    }
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--main-theme-color);
+    transition: width 0.3s ease;
+    z-index: 2;
+  }
+
+  &:hover::before {
+		width: 100%;
+	}
+  .activeLink::before {
+    width: 100%;
+  }
+}
+
+.activeLink {
+  color: var(--main-theme-color);
+	&::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--main-theme-color);
+    transition: width 0.3s ease;
+    z-index: 2;
+  }
+}

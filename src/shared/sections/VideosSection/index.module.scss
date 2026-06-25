@@ -6,11 +6,21 @@
 		gap: 17px;
 	}
 	.btnRow {
-		justify-content: end;
+		justify-content: space-between;
+		.sectionTitle {
+			font-size: 32px;
+			font-weight: 600;
+		}
 	}
 	.allBtn {
 		background: var(--main-theme-color);
 		margin-bottom: 20px;
+		padding: 12px 32px;
+		height: max-content;
+		border-radius: 0;
+		&:hover {
+			background: #b30834;
+		}
 		@media (max-width: 768px) {
 			margin-right: 24px;
 		}
@@ -34,7 +44,7 @@
 
 	.videoSliderBtns {
 		top: 50%;
-		width: calc(100% + 80px);
+		width: calc(100% + 118px);
 		@media (max-width: 768px) {
 			display: none;
 		}

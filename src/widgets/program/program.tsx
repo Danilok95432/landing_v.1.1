@@ -9,14 +9,19 @@ type EventProgramProps = {
 	programDays: ProgramDay[] | []
 	parentView?: string
 	defaultActiveDay?: number
+	showAll?: boolean
 }
 
 export const Program: FC<EventProgramProps> = ({
 	programDays,
 	parentView = 'list',
 	defaultActiveDay = 0,
+	showAll = false,
 }) => {
 	const [activeDayId, setActiveDayId] = useState(defaultActiveDay)
+	const allDays = programDays.flatMap((day) =>
+		day.programList.filter((program) => program.use_real === 1),
+	)
 
 	const filteredDays = programDays.filter((day) =>
 		day.programList.some((program) => program.use_real === 1),
@@ -44,14 +49,16 @@ export const Program: FC<EventProgramProps> = ({
 
 	return (
 		<div className={styles.head}>
-			<FlexRow className={styles.headProgram}>
-				<ProgramNav
-					days={navDays}
-					activeDayId={safeActiveDayId}
-					onChangeActiveDay={handleChangeActiveDay}
-				/>
-			</FlexRow>
-			<ProgramList list={getActiveProgram()} viewMode={'tab'} />
+			{!showAll && (
+				<FlexRow className={styles.headProgram}>
+					<ProgramNav
+						days={navDays}
+						activeDayId={safeActiveDayId}
+						onChangeActiveDay={handleChangeActiveDay}
+					/>
+				</FlexRow>
+			)}
+			<ProgramList list={showAll ? allDays : getActiveProgram()} viewMode={'tab'} />
 		</div>
 	)
 }

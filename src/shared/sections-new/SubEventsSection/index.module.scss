@@ -1,0 +1,49 @@
+.videos {
+	.videotapeSectionRow {
+		margin: 0 0 20px 0;
+		align-items: center;
+		justify-content: space-between;
+		gap: 17px;
+	}
+	.btnRow {
+		justify-content: space-between;
+		.sectionTitle {
+			font-size: 32px;
+			font-weight: 600;
+		}
+	}
+	.allBtn {
+		background: var(--main-theme-color);
+		margin-bottom: 20px;
+		padding: 12px 32px;
+		height: max-content;
+		border-radius: 0;
+		@media (max-width: 768px) {
+			margin-right: 24px;
+		}
+	}
+
+	@media (max-width: 768) {
+		padding: 0px 0 37px;
+	}
+
+	h4 {
+		@media (max-width: 550px) {
+			margin-bottom: 1px;
+		}
+	}
+
+	.videotapeTop {
+		@media (max-width: 550px) {
+			margin-bottom: 17px;
+		}
+	}
+
+	.videoSliderBtns {
+		top: 50%;
+		width: calc(100% + 118px);
+		@media (max-width: 768px) {
+			display: none;
+		}
+	}
+}

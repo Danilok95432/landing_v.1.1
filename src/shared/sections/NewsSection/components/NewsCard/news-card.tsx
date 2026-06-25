@@ -11,6 +11,7 @@ type NewsCardProps = {
 	className?: string
 	mainStatus?: boolean
 	titleLink?: boolean
+	noShadow?: boolean
 } & CardNewsItem
 
 export const NewsCard: FC<NewsCardProps> = ({
@@ -22,6 +23,7 @@ export const NewsCard: FC<NewsCardProps> = ({
 	mainStatus,
 	className,
 	titleLink = false,
+	noShadow,
 }) => {
 	if (mainStatus) {
 		return (

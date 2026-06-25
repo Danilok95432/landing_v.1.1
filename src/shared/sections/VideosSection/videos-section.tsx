@@ -29,10 +29,11 @@ export const VideosSection = () => {
 		return () => window.removeEventListener('resize', handleResize)
 	}, [])
 	return (
-		<Section className={cn(styles.videos)}>
+		<Section id='videos' className={cn(styles.videos)}>
 			<Container off={isMobile}>
 				<FlexRow className={styles.btnRow}>
-					<MainButton className={styles.allBtn} onClick={() => navigate('/content?onlyVideo=1')}>
+					<h2 className={styles.sectionTitle}>Видео</h2>
+					<MainButton className={styles.allBtn} onClick={() => navigate('/videos')}>
 						Все видео
 					</MainButton>
 				</FlexRow>
@@ -48,8 +49,8 @@ export const VideosSection = () => {
 						className={styles.videoSliderBtns}
 						swiperRef={swiperRef}
 						color={'#fff'}
-						nextBtnColor='#000'
-						prevBtnColor='#000'
+						nextBtnColor='#0000000D'
+						prevBtnColor='#0000000D'
 					/>
 				</div>
 			</Container>

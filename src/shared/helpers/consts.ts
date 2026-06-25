@@ -18,6 +18,7 @@ export enum ReducerPath {
 export const ImagesFormat = ['png', 'jpeg', 'jpg', 'webp', 'gif']
 export enum NameSpace {
 	Modal = 'MODAL',
+	BreadCrumbs = 'BREAD_CRUMBS',
 }
 
 export enum DisplayBreakpoints {
