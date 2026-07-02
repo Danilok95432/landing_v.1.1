@@ -12,6 +12,8 @@ import { AppRoute } from './consts'
 import { AboutTickets } from 'src/pages/about-page/layout/tickets/tickets'
 import { AboutPlacement } from 'src/pages/about-page/layout/placement/placement'
 import { AboutRoute } from 'src/pages/about-page/layout/route/route'
+import { AboutRules } from 'src/pages/about-page/layout/rules/rules'
+import { AboutSchema } from 'src/pages/about-page/layout/schema/schema'
 
 export const MainRoutes = () => {
 	return (
@@ -29,6 +31,8 @@ export const MainRoutes = () => {
 				<Route path={AppRoute.About} element={<AboutLayout />}>
 					<Route index element={<AboutHistory />} />
 					<Route path={AppRoute.AboutDocs} element={<AboutDocs />} />
+					<Route path={AppRoute.AboutRules} element={<AboutRules />} />
+					<Route path={AppRoute.AboutSchema} element={<AboutSchema />} />
 					<Route path={AppRoute.AboutRoute} element={<AboutRoute />} />
 					<Route path={AppRoute.AboutPlacement} element={<AboutPlacement />} />
 					<Route path={AppRoute.AboutTickets} element={<AboutTickets />} />

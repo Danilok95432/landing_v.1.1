@@ -124,33 +124,36 @@ export const MainInfoSection = () => {
 								<MainInfoDateSVG />
 							</div>
 						</FlexRow>
-						<FlexRow className={styles.blockEl}>
-							<FlexRow className={styles.infoBlock}>
-								<p className={styles.title}>{eventData?.location.title}</p>
-								<p>{eventData?.location.address}</p>
-								<a
-									href='https://yandex.ru/maps/geo/selo_atmanov_ugol/53031405/?ll=41.390478%2C53.131514&utm_source=main_stripe_big&z=14.95'
-									target='_blank'
-									rel='noreferrer'
-								>
-									На карте
-								</a>
+						<a
+							href='https://yandex.ru/maps/geo/selo_atmanov_ugol/53031405/?ll=41.390478%2C53.131514&utm_source=main_stripe_big&z=14.95'
+							target='_blank'
+							rel='noreferrer'
+							className={styles.link}
+						>
+							<FlexRow className={styles.blockEl}>
+								<FlexRow className={styles.infoBlock}>
+									<p className={styles.title}>{eventData?.location.title}</p>
+									<p>{eventData?.location.address}</p>
+									<p className={styles.link}>На карте</p>
+								</FlexRow>
+								<div className={styles.vector}>
+									<MainInfoLocationSVG />
+								</div>
 							</FlexRow>
-							<div className={styles.vector}>
-								<MainInfoLocationSVG />
-							</div>
-						</FlexRow>
-						<FlexRow className={styles.blockEl}>
-							<FlexRow className={styles.infoBlock}>
-								<p className={styles.title}>{'НКО «Атмановские кулачки»'}</p>
-								<p className={styles.title}>
-									<a href={`https://t6event${eventId}.npotau.ru`}>На страницу организатора</a>
-								</p>
+						</a>
+						<a href={`https://t6site.npotau.ru/`} className={styles.link}>
+							<FlexRow className={styles.blockEl}>
+								<FlexRow className={styles.infoBlock}>
+									<p className={styles.title}>{'НКО «Атмановские кулачки»'}</p>
+									<p className={styles.title}>
+										<p className={styles.link}>На страницу организатора</p>
+									</p>
+								</FlexRow>
+								<div className={styles.vector}>
+									<MainInfoOrgSVG />
+								</div>
 							</FlexRow>
-							<div className={styles.vector}>
-								<MainInfoOrgSVG />
-							</div>
-						</FlexRow>
+						</a>
 					</FlexRow>
 					<FlexRow className={styles.infoRow}>
 						<div className={styles.textCont}>

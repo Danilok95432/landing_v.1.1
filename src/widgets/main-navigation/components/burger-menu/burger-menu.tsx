@@ -4,7 +4,8 @@ import cn from 'classnames'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 import styles from './index.module.scss'
-import { navigationElements } from '../../consts'
+import { getNavigationElements } from '../../consts'
+import { useGetSettingsSiteQuery } from 'src/features/home/api/home.api'
 
 export const BurgerMenu = () => {
 	const [isOpen, setIsOpen] = useState(false)
@@ -15,6 +16,10 @@ export const BurgerMenu = () => {
 
 	const location = useLocation()
 	const navigate = useNavigate()
+
+	const { data: settingsData } = useGetSettingsSiteQuery(null)
+
+	const navigationElements = getNavigationElements(settingsData)
 
 	const navRef = useRef<HTMLElement | null>(null)
 

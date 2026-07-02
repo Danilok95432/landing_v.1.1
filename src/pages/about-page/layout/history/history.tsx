@@ -5,23 +5,25 @@ import styles from './index.module.scss'
 import { type ImageItemWithText } from 'src/types/photos'
 
 import { GalleryImg } from 'src/widgets/gallery-img/gallery-img'
-import { useGetPageHeaderQuery } from 'src/features/content/api/content'
+import { useEvent } from 'src/app/context/event-context'
+import { useGetEventByIdQuery } from 'src/features/home/api/home.api'
 
 export const AboutHistory: FC = () => {
 	const [allPagePhoto, setAllPagePhoto] = useState<ImageItemWithText[]>([])
-	const { data: aboutPageData } = useGetPageHeaderQuery('about')
+	const { eventId } = useEvent()
+	const { data: eventData } = useGetEventByIdQuery(eventId ?? '1', { skip: !eventId })
 	useEffect(() => {
-		if (aboutPageData) {
+		if (eventData) {
 			const images: ImageItemWithText[] = []
-			if (aboutPageData?.page.mainphoto[0]) {
-				images.push(aboutPageData?.page.mainphoto[0])
+			if (eventData?.mainphoto[0]) {
+				images.push(eventData?.mainphoto[0])
 			}
-			if (aboutPageData.page.photoGallery && Array.isArray(aboutPageData.page.photoGallery)) {
-				images.push(...aboutPageData.page.photoGallery)
+			if (eventData?.photos && Array.isArray(eventData?.photos)) {
+				images.push(...eventData?.photos)
 			}
 			setAllPagePhoto(images)
 		}
-	}, [aboutPageData])
+	}, [eventData])
 
 	return (
 		<div className={styles.aboutGeneralPage}>
@@ -31,11 +33,16 @@ export const AboutHistory: FC = () => {
 
 			<div className={styles.inner}>
 				<h2>Информация</h2>
-				<GalleryImg variant='slider' allPageImages={allPagePhoto} className={styles.gallery} />
-				{aboutPageData?.page.full2 && (
+				<GalleryImg
+					variant='slider'
+					images={eventData?.photos}
+					allPageImages={allPagePhoto}
+					className={styles.gallery}
+				/>
+				{eventData?.description && (
 					<div
 						className={styles.mainDescs}
-						dangerouslySetInnerHTML={{ __html: aboutPageData.page.full2 }}
+						dangerouslySetInnerHTML={{ __html: eventData?.description }}
 					/>
 				)}
 				{/* <div className={styles.infoWrapper}>
@@ -71,13 +78,13 @@ export const AboutHistory: FC = () => {
 				{/* <HistorySection noTitle className={styles.historySection} /> */}
 
 				{/* <FlexRow className={styles.contactsRow}>
-					<h3>Контакты Оргкомитета Беляевской премии</h3>
+					<h3>Контакты оргкомитета</h3>
 					<FlexRow className={styles.wrapper}>
 						<FlexRow className={styles.iconWrapper}>
-							<TgEventIconSVG />
+							<TgContactEventIconSVG />
 							<p>+7 (925) 314-38-58</p>
 						</FlexRow>
-						<p>belyaevprize@gmail.com</p>
+						<a href={`mailto:${'atmanki@gmail.ru'}`}>atmanki@gmail.ru</a>
 					</FlexRow>
 				</FlexRow> */}
 			</div>

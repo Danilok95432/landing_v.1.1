@@ -93,8 +93,8 @@
 			padding-right: 24px;
 		}
 		h3 {
-			font-size: 32px;
-			font-weight: 300;
+			font-size: 24px;
+			font-weight: 400;
 		}
 		.wrapper {
 			gap: 64px;
@@ -103,11 +103,12 @@
 				gap: 8px;
 				align-items: center;
 				p {
-					font-size: 18px;
+					font-size: 16px;
 				}
 			}
-			p {
-				font-size: 18px;
+			a {
+				font-size: 16px;
+				color: #0077CC;
 			}
 		}
 	}

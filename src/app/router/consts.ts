@@ -6,4 +6,6 @@ export enum AppRoute {
 	AboutRoute = 'route',
 	AboutPlacement = 'placement',
 	AboutTickets = 'tickets',
+	AboutRules = 'rules',
+	AboutSchema = 'schema',
 }

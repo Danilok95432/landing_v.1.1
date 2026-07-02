@@ -1,5 +1,5 @@
 import { Container } from 'src/shared/ui/Container/Container'
-import { navigationElements } from './consts'
+import { getNavigationElements } from './consts'
 import styles from './index.module.scss'
 import { BurgerMenu } from './components/burger-menu/burger-menu'
 import { useActions } from 'src/app/store/hooks/actions'
@@ -9,7 +9,11 @@ import { LogoSVG } from 'src/shared/ui/icons/logoSVG'
 import { BuyTicketModal } from 'src/modals/buy-ticket-modal/buy-ticket-modal'
 import { FlexRow } from 'src/shared/ui/FlexRow/FlexRow'
 import { useEvent } from 'src/app/context/event-context'
-import { useGetEventByIdQuery, useGetRegSettingsQuery } from 'src/features/home/api/home.api'
+import {
+	useGetEventByIdQuery,
+	useGetRegSettingsQuery,
+	useGetSettingsSiteQuery,
+} from 'src/features/home/api/home.api'
 import classNames from 'classnames'
 
 export const MainNavigation = () => {
@@ -23,6 +27,10 @@ export const MainNavigation = () => {
 
 	const navRef = useRef<HTMLElement | null>(null)
 	const [navHeight, setNavHeight] = useState(0)
+
+	const { data: settingsData } = useGetSettingsSiteQuery(null)
+
+	const navigationElements = getNavigationElements(settingsData)
 
 	const rafRef = useRef<number | null>(null)
 	const timeoutRef = useRef<number | null>(null)
@@ -194,8 +202,12 @@ export const MainNavigation = () => {
 
 					<ul className={styles.navWrapper}>
 						{navigationElements.map((el, index) => (
-							<button key={index} className={styles.navEl} onClick={() => scrollToSection(el.link)}>
-								<li>{el.title}</li>
+							<button
+								key={index}
+								className={styles.navEl}
+								onClick={() => scrollToSection(el?.link ?? '')}
+							>
+								<li>{el?.title}</li>
 							</button>
 						))}
 					</ul>

@@ -68,7 +68,8 @@ export const ProgramList: FC<ProgramListProps> = ({ list, viewMode = 'list' }) =
 					<SliderBtns
 						className={styles.subEventsSliderBtns}
 						swiperRef={swiperRef}
-						color={'black'}
+						color='#000'
+						disabledColor='#fff'
 					/>
 				</div>
 			)}

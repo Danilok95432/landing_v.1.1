@@ -11,15 +11,12 @@ import { useGetEventByIdQuery } from 'src/features/home/api/home.api'
 import { partnersSliderOptions } from './consts'
 import { Autoplay } from 'swiper'
 import { FlexRow } from 'src/shared/ui/FlexRow/FlexRow'
-import { MainButton } from 'src/shared/ui/MainButton/MainButton'
-import { useNavigate } from 'react-router-dom'
 import { useEvent } from 'src/app/context/event-context'
 
 export const OrgsSection = () => {
 	const { eventId } = useEvent()
 	const { data: eventData } = useGetEventByIdQuery(eventId ?? '1', { skip: !eventId })
 	const swiperRef: RefObject<SwiperRef> = useRef<SwiperRef>(null)
-	const navigate = useNavigate()
 
 	const [activeIndex, setActiveIndex] = useState(0)
 
@@ -87,7 +84,8 @@ export const OrgsSection = () => {
 					<SliderBtns
 						className={styles.partnersSliderBtns}
 						swiperRef={swiperRef}
-						color='#fff'
+						color='#000'
+						disabledColor='#fff'
 						nextBtnColor={nextBtnColor}
 						prevBtnColor={prevBtnColor}
 					/>
@@ -96,4 +94,3 @@ export const OrgsSection = () => {
 		</Section>
 	)
 }
-

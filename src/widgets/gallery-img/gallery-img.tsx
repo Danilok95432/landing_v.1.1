@@ -18,6 +18,7 @@ import {
 	gallerySliderOptions,
 	gallerySliderNewsDetailsOptions,
 } from './consts'
+import { FlexRow } from 'src/shared/ui/FlexRow/FlexRow'
 
 SwiperCore.use([Navigation, Pagination])
 
@@ -28,11 +29,13 @@ type ImageGalleryProps = {
 	allPageImages?: ImageItem[]
 	limit?: number
 	limitController?: boolean
+	sliderClassname?: string
 	variant?: 'list' | 'slider' | 'newsMain' | 'newsDetailsSlider' | 'homeSliderDetails'
 }
 
 export const GalleryImg: FC<ImageGalleryProps> = ({
 	className,
+	sliderClassname,
 	listClassName,
 	images,
 	allPageImages,
@@ -84,27 +87,52 @@ export const GalleryImg: FC<ImageGalleryProps> = ({
 			<SliderBtns
 				className={styles.fullScreenSliderBtns}
 				swiperRef={overlaySwiperRef}
-				color={breakpoint === 'Xs' ? '#FFF' : '#FFFFFFB5'}
+				color={'#fff'}
 			/>
 		),
 		[breakpoint, overlaySwiperRef],
 	)
 
+	const [activeIndex, setActiveIndex] = useState(initialSlide)
+	const handleThumbClick = (index: number) => {
+		setActiveIndex(index)
+		overlaySwiperRef.current?.swiper.slideTo(index)
+	}
+
 	const swiperComponent = useMemo(
 		() => (
-			<Swiper
-				{...galleryFullScreenSliderOptions}
-				ref={overlaySwiperRef}
-				initialSlide={initialSlide}
-				pagination={{ clickable: true }}
-				className={styles.overlaySwiper}
-			>
-				{imagesForOverlay?.map((image, index) => (
-					<SwiperSlide key={image?.id}>
-						<img src={image?.original} alt={image?.title} className={styles.overlayImage} />
-					</SwiperSlide>
-				))}
-			</Swiper>
+			<>
+				<Swiper
+					{...galleryFullScreenSliderOptions}
+					ref={overlaySwiperRef}
+					initialSlide={initialSlide}
+					pagination={{ clickable: true }}
+					className={styles.overlaySwiper}
+				>
+					{imagesForOverlay?.map((image, index) => (
+						<SwiperSlide key={image?.id}>
+							<img src={image?.original} alt={image?.title} className={styles.overlayImage} />
+						</SwiperSlide>
+					))}
+				</Swiper>
+				{imagesForOverlay && imagesForOverlay?.length > 1 && (
+					<FlexRow className={styles.thumbs}>
+						{imagesForOverlay?.map((image, index) => (
+							<button
+								key={`${image.original}-thumb-${index}`}
+								type='button'
+								className={cn(styles.thumb, {
+									[styles.activeThumb]: activeIndex === index,
+								})}
+								onClick={() => handleThumbClick(index)}
+								aria-label={`Открыть изображение ${index + 1}`}
+							>
+								<img src={image.original} alt={`миниатюра ${index + 1}`} />
+							</button>
+						))}
+					</FlexRow>
+				)}
+			</>
 		),
 		[imagesForOverlay, initialSlide, overlaySwiperRef],
 	)
@@ -267,7 +295,7 @@ export const GalleryImg: FC<ImageGalleryProps> = ({
 		<div className={className}>
 			{variant === 'slider' ? (
 				<div className={styles.gallerySliderWrapper}>
-					<Swiper {...gallerySliderOptions} ref={swiperRef}>
+					<Swiper {...gallerySliderOptions} ref={swiperRef} className={sliderClassname}>
 						{images?.map((slideItem, idx) => (
 							<SwiperSlide
 								className={styles.gallerySlide}
@@ -278,20 +306,12 @@ export const GalleryImg: FC<ImageGalleryProps> = ({
 									<div className={styles.slideImg}>
 										<img src={slideItem.original} alt={slideItem.title} />
 									</div>
-									<h6>{slideItem.title}</h6>
-									{slideItem.author !== '' ? (
-										<span className={styles.author}>Автор: {slideItem.author}</span>
-									) : null}
 								</div>
 							</SwiperSlide>
 						))}
 					</Swiper>
 
-					<SliderBtns
-						className={styles.galleryBtns}
-						swiperRef={swiperRef}
-						color={breakpoint === 'XS' ? '#FFF' : '#5C5C5C'}
-					/>
+					<SliderBtns className={styles.galleryBtns} swiperRef={swiperRef} />
 				</div>
 			) : (
 				<ul className={cn(styles.gridGallery, listClassName)}>

@@ -50,7 +50,8 @@ export const NewsSection = () => {
 						<SliderBtns
 							className={styles.newsSliderBtns}
 							swiperRef={swiperRef}
-							color={'#fff'}
+							color='#000'
+							disabledColor='#fff'
 							nextBtnColor='#0000000D'
 							prevBtnColor='#0000000D'
 						/>

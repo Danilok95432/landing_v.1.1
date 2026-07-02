@@ -171,4 +171,13 @@ export type CardEventItem = {
 
 export type SiteSettings = {
 	metric: string
+	isShowEvents: true
+	isShowFaq: true
+	isShowHistory: true
+	isShowInfo: false
+	isShowNews: true
+	isShowOrg: true
+	isShowPartners: true
+	isShowPromo: true
+	isShowVideos: true
 }

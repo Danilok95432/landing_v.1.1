@@ -153,6 +153,10 @@
 				align-items: start;
 				gap: 24px;
 			}
+			.link {
+				width: 100%;
+				max-width: 390px;
+			}
 			.blockEl {
 				padding: 24px;
 				flex-direction: row;
@@ -193,7 +197,7 @@
 						font-size: 14px;
 						font-weight: normal;
 					}
-					a {
+					.link {
 						font-size: 14px;
 						color: var(--main-link-color);
 					}

@@ -110,7 +110,8 @@ export const GallerySection = () => {
 				<SliderBtns
 					className={styles.sliderBtns}
 					swiperRef={swiperRef}
-					color={'#fff'}
+					color='#000'
+					disabledColor='#fff'
 					prevBtnColor={prevBtnColor}
 					nextBtnColor={nextBtnColor}
 				/>
@@ -148,7 +149,8 @@ export const GallerySection = () => {
 						<SliderBtns
 							className={styles.fullscreenBtns}
 							swiperRef={fullscreenSwiperRef}
-							color={'#fff'}
+							color='#000'
+							disabledColor='#fff'
 							prevBtnColor={'#000'}
 							nextBtnColor={'#000'}
 						/>

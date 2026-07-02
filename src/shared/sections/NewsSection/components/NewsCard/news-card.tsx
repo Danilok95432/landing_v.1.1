@@ -72,7 +72,7 @@ export const NewsCard: FC<NewsCardProps> = ({
 				<figcaption className={styles.newsItemContent}>
 					<h4 className={cn(styles.newsItemTitle, { [styles.linkTitle]: titleLink })}>{title}</h4>
 					<p className={styles.newsDate}>{formatSingleDate(date)}</p>
-					<p className={styles.newsDesc}>{desc}</p>
+					{/* <p className={styles.newsDesc}>{desc}</p> */}
 				</figcaption>
 			</figure>
 		</Link>
