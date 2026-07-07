@@ -8,6 +8,7 @@ export type ProgramListItem = {
 	use_reg: number
 	use_real: number
 	photo: ImageItemWithText[]
+	date: Date
 }
 
 export type ProgramDay = {
@@ -36,6 +37,8 @@ export type SubEventResponse = {
 	email: string
 	short: string
 	rules: string
+	ageRating: string
 	reglament: string
 	trebovania: string
+	mainphoto: ImageItemWithText[]
 }

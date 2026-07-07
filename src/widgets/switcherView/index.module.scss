@@ -1,0 +1,29 @@
+.switcher {
+  width: 70px;
+  height: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #F2F1F7;
+  border-radius: 5px;
+  .switchButton {
+    width: 32px;
+    height: 32px;
+    transition: all .3s ease-in-out;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    svg {
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    &.active {
+      background: #fff;
+      svg {
+        fill: #000;
+        color: #000;
+      }
+    }
+  }
+}

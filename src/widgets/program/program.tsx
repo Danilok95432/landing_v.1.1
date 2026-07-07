@@ -20,7 +20,12 @@ export const Program: FC<EventProgramProps> = ({
 }) => {
 	const [activeDayId, setActiveDayId] = useState(defaultActiveDay)
 	const allDays = programDays.flatMap((day) =>
-		day.programList.filter((program) => program.use_real === 1),
+		day.programList
+			.filter((program) => program.use_real === 1)
+			.map((program) => ({
+				...program,
+				date: day.date,
+			})),
 	)
 
 	const filteredDays = programDays.filter((day) =>

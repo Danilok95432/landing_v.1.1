@@ -1,0 +1,72 @@
+.filterPanel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 15px;
+  .hiddenMobile {
+    @media (max-width: 1080px) {
+      display: none;
+    }
+  }
+  .filters {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    @media (max-width: 1080px) {
+      width: 100%;
+      justify-content: space-between;
+    }
+    .searchWrapper {
+      min-width: 336px;
+      @media (max-width: 1350px) {
+        min-width: 247px;
+        width: 100%;
+      }
+      .searchInput {
+        border: 1px solid #c5c5c5;
+        border-radius: 5px;
+        font-size: 16px;
+        padding: 0 10px 0 20px;
+        height: 38px;
+        background: #ffffff
+          url('data:image/svg+xml,<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.6146 13.786L12.3404 10.6466C13.1111 9.51709 13.5231 8.17861 13.5219 6.80821C13.5198 5.00319 12.8068 3.27268 11.5393 1.99634C10.2717 0.719999 8.5531 0.00205051 6.7605 0C4.96805 0.00227829 3.24968 0.720329 1.9823 1.99665C0.714927 3.27296 0.00203596 5.00334 0 6.80821C0.00226215 8.61293 0.715254 10.3431 1.9826 11.6192C3.24995 12.8953 4.9682 13.6133 6.7605 13.6156C8.10023 13.6179 9.41011 13.2172 10.522 12.4646L13.8459 15.6557C14.0931 15.8865 14.4206 16.0099 14.7575 15.9994C15.0944 15.9888 15.4137 15.8451 15.6462 15.5994C15.8787 15.3536 16.0057 15.0255 15.9998 14.6862C15.9939 14.3468 15.8555 14.0234 15.6146 13.786ZM2.22272 6.80821C2.22386 5.59665 2.70228 4.43502 3.55301 3.57824C4.40373 2.72145 5.55728 2.23949 6.7605 2.23813C7.9638 2.23949 9.11743 2.72142 9.9683 3.57818C10.8192 4.43494 11.2978 5.59657 11.2991 6.80821C11.2975 8.0197 10.8188 9.18111 9.968 10.0377C9.11716 10.8943 7.96366 11.3761 6.7605 11.3774C5.55742 11.3761 4.40401 10.8942 3.55331 10.0376C2.7026 9.18103 2.22408 8.01962 2.22272 6.80821Z" fill="%239D9D9D"/></svg>')
+          no-repeat right 12px center;
+        @media (max-width: 768px) {
+          padding: 0 30px 0 10px;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          text-wrap: nowrap;
+        }
+      }
+      ._activeSearch {
+        background: #ffffff;
+        padding-left: 10px;
+      }
+    }
+    .mobileFilters {
+      width: 38px;
+      height: 0px;
+      visibility: hidden;
+      border: 1px solid #E1E1E1;
+      background: #fff;
+      box-shadow: 0 0 15px 0 rgb(0 0 0 / 0.1);
+      padding: 11px 9px;
+      @media (max-width: 1080px) {
+        height: 38px;
+        visibility: visible;
+      }
+    }
+    .searchSelect {
+      border: 1px solid #c5c5c5;
+      border-radius: 5px;
+      height: 38px;
+      background: #ffffff;
+      select {
+        width: 100%;
+        border: none;
+        height: 100%;
+        font-size: 17px;
+      }
+    }
+  }
+}

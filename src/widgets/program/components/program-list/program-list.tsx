@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 import { Swiper, type SwiperRef, SwiperSlide } from 'swiper/react'
 import { homeVideosSliderOptions } from './consts'
 import { SliderBtns } from 'src/widgets/slider-btns/slider-btns'
+import { mainFormatDate } from 'src/shared/helpers/utils'
 
 type ProgramListProps = {
 	list: ProgramListItem[]
@@ -25,7 +26,7 @@ export const ProgramList: FC<ProgramListProps> = ({ list, viewMode = 'list' }) =
 						<li key={programEL.id}>
 							<p className={styles.programTime}>{programEL.time}</p>
 							<span className={styles.programPlace}>{programEL.place}</span>
-							<Link to={`https://этноспорт.рф/events/1/event-program/${programEL.id}`}>
+							<Link to={`/sub-event/${programEL.id}`}>
 								<span className={styles.programTitle}>{programEL.title}</span>
 							</Link>
 							{/* {programEL.use_reg === 1 && (
@@ -48,9 +49,10 @@ export const ProgramList: FC<ProgramListProps> = ({ list, viewMode = 'list' }) =
 											<img src={programEL?.photo[0]?.original ?? skeleton} alt='' />
 										</div>
 										<figcaption>
-											<Link to={`https://этноспорт.рф/events/1/event-program/${programEL.id}`}>
+											<Link to={`/sub-event/${programEL.id}`}>
 												<h3 className={styles.programTitle}>{programEL.title}</h3>
 											</Link>
+											<p className={styles.programDate}>{mainFormatDate(programEL.date)}</p>
 											<p className={styles.programTime}>{programEL.time}</p>
 											<p className={styles.programPlace}>{programEL.place}</p>
 											{/* {programEL.use_reg === 1 && (

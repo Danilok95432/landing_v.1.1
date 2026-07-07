@@ -29,7 +29,7 @@ export const VideosSection = () => {
 		return () => window.removeEventListener('resize', handleResize)
 	}, [])
 	return (
-		<Section id='videos' className={cn(styles.videos)}>
+		<Section id='video' className={cn(styles.videos)}>
 			<Container off={isMobile}>
 				<FlexRow className={styles.btnRow}>
 					<h2 className={styles.sectionTitle}>Видео</h2>

@@ -1,0 +1,60 @@
+.customTable {
+  display: grid;
+  min-width: 100%;
+  width: auto;
+
+  border: none;
+  border-collapse: collapse;
+  overflow-x: auto;
+
+  thead,
+  tbody,
+  tr {
+    display: contents;
+    cursor: pointer;
+  }
+
+  td,
+  th {
+    padding-right: 5px;
+  }
+
+  th {
+    font-weight: 500;
+    font-size: 17px;
+    color: #a3a3a3;
+    line-height: 1.2;
+    display: flex;
+    flex-grow: 1;
+    border-bottom: 1px solid #e1e1e1;
+    padding: 8px 10px;
+
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    min-height: 47px;
+  }
+
+  td {
+    display: flex;
+    align-items: center;
+    font-size: 17px;
+    padding: 8px 10px;
+    line-height: 1.2;
+    border-bottom: 1px solid #e1e1e1;
+    a {
+      margin: 0;
+    }
+  }
+
+  a {
+    color: #015db9;
+    font-size: 16px;
+    font-weight: 400;
+  }
+}
+
+.showMoreBtn {
+  width: 100%;
+  margin-top: 20px;
+}

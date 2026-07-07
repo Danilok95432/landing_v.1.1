@@ -14,6 +14,7 @@ import { AboutPlacement } from 'src/pages/about-page/layout/placement/placement'
 import { AboutRoute } from 'src/pages/about-page/layout/route/route'
 import { AboutRules } from 'src/pages/about-page/layout/rules/rules'
 import { AboutSchema } from 'src/pages/about-page/layout/schema/schema'
+import { SubEventPage } from 'src/pages/sub-event-page/sub-event-page'
 
 export const MainRoutes = () => {
 	return (
@@ -37,6 +38,7 @@ export const MainRoutes = () => {
 					<Route path={AppRoute.AboutPlacement} element={<AboutPlacement />} />
 					<Route path={AppRoute.AboutTickets} element={<AboutTickets />} />
 				</Route>
+				<Route path='/sub-event/:id' element={<SubEventPage />} />
 			</Route>
 		</Routes>
 	)

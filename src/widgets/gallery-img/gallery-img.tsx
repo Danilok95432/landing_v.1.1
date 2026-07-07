@@ -87,7 +87,8 @@ export const GalleryImg: FC<ImageGalleryProps> = ({
 			<SliderBtns
 				className={styles.fullScreenSliderBtns}
 				swiperRef={overlaySwiperRef}
-				color={'#fff'}
+				color={'#000'}
+				disabledColor='#0000007a'
 			/>
 		),
 		[breakpoint, overlaySwiperRef],

@@ -1,7 +1,7 @@
 import { type LinkItem, type SourceLink } from 'src/types/global'
 import { type ShortDocument } from 'src/types/document'
 import { type SelOption } from 'src/types/select'
-import { format, isValid } from 'date-fns'
+import { format, isValid, parseISO } from 'date-fns'
 import { ru } from 'date-fns/locale'
 import { type FieldValues } from 'react-hook-form'
 
@@ -343,6 +343,19 @@ export const mainFormatDate = (
 	if (!date) return null
 	const formatedDate = typeof date === 'string' ? new Date(date) : date
 	return format(formatedDate, dateFormat, { locale: ru })
+}
+
+export const formatDateWithTime = (
+	dateStr: string | undefined,
+	timeStr: string | undefined,
+): string | null => {
+	if (!dateStr || !timeStr) return null
+
+	// Склеиваем в ISO-строку (формат "YYYY-MM-DDTHH:mm:ss")
+	const dateTimeStr = `${dateStr}T${timeStr}`
+	const date = parseISO(dateTimeStr)
+
+	return format(date, 'dd.MM.yyyy, HH:mm')
 }
 
 export const parseTimeFromDate = (date: Date | string | undefined): string | null => {
