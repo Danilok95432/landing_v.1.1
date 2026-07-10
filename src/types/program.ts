@@ -17,9 +17,24 @@ export type ProgramDay = {
 	programList: ProgramListItem[]
 }
 
+export type RequestItem = {
+	id: string
+	group_name: string
+	surname: string
+	firstname: string
+	nickname: string
+	region_name: string
+	createdate: string
+}
+
+export type ListRegSubEventReponse = {
+	requests: RequestItem[]
+}
+
 export type SubEventResponse = {
 	id: string
 	title: string
+	full: string
 	itemdate: string
 	begin_time: string
 	use_end_time: boolean

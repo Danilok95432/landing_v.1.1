@@ -85,6 +85,9 @@ export const TableGroup: FC = () => {
 			registration: '2025-06-01T14:30:00+03:00',
 		},
 	]
+	// const { id } = useParams()
+
+	// const { data } = useGetSubEventListRegQuery({ id: id ?? '', type: 'group' })
 
 	const breakpoint = useBreakPoint()
 	const navigate = useNavigate()

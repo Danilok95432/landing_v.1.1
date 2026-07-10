@@ -182,7 +182,11 @@ export const MainNavigation = () => {
 			<nav ref={navRef} className={styles.navigation}>
 				<Container className={styles.navigationCont}>
 					<div className={styles.logoCont} onClick={scrollToTop}>
-						<LogoSVG />
+						{settingsData?.event_logo && settingsData?.event_logo.length > 0 ? (
+							<img src={settingsData?.event_logo[0].original} />
+						) : (
+							<LogoSVG />
+						)}
 					</div>
 					<FlexRow className={styles.mobileRow}>
 						<BurgerMenu />

@@ -9,7 +9,11 @@ import {
 	type SiteSettings,
 } from 'src/types/event'
 import { type CardNewsItem } from 'src/types/news'
-import { type ProgramDay, type SubEventResponse } from 'src/types/program'
+import {
+	type ListRegSubEventReponse,
+	type ProgramDay,
+	type SubEventResponse,
+} from 'src/types/program'
 import { type RegType } from 'src/types/registration'
 import { type TicketTypes } from 'src/types/ticket'
 import { type VideoItem } from 'src/types/videos'
@@ -93,6 +97,15 @@ export const homeApi = createApi({
 				url: `sub_events/${subEventId}`,
 			}),
 		}),
+		getSubEventListReg: build.query<ListRegSubEventReponse, { id: string; type: string }>({
+			query: ({ id, type }) => ({
+				url: `sub_events/list_reg`,
+				params: {
+					id_sub_event: id,
+					reg_type: type,
+				},
+			}),
+		}),
 		getFaqById: build.query<EventFaq[], string>({
 			query: (idEvent) => ({
 				url: `home/faq`,
@@ -131,4 +144,5 @@ export const {
 	useGetRegSettingsQuery,
 	useGetAllFaqByIdQuery,
 	useGetSettingsSiteQuery,
+	useGetSubEventListRegQuery,
 } = homeApi

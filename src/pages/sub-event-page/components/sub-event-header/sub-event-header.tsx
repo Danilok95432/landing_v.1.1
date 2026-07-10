@@ -7,18 +7,9 @@ import { type ImageItemWithText } from 'src/types/photos'
 import { useGetSubEventProgramByIdQuery } from 'src/features/home/api/home.api'
 import { useAdditionalCrumbs } from 'src/app/store/hooks/additional-crumbs'
 import { FlexRow } from 'src/shared/ui/FlexRow/FlexRow'
-import { InfoRow } from 'src/shared/ui/InfoRow/InfoRow'
-import { PlaceIconSVG } from 'src/shared/ui/icons/placeIconSVG'
-import { ObjectIconSVG } from 'src/shared/ui/icons/objectIconSVG'
-import { SiteIconSVG } from 'src/shared/ui/icons/siteIconSVG'
-import { PhoneEventIconSVG } from 'src/shared/ui/icons/phoneEventIconSVG'
-import { TgEventIconSVG } from 'src/shared/ui/icons/tgEventIconSVG'
-import { MailEventIconSVG } from 'src/shared/ui/icons/mailEventIconSVG'
 import { GalleryImg } from 'src/widgets/gallery-img/gallery-img'
 import { formatDateWithTime } from 'src/shared/helpers/utils'
-import { MainButton } from 'src/shared/ui/MainButton/MainButton'
 import { CalendarSVG } from 'src/shared/ui/icons/calendarSVG'
-import { GroupSVG } from 'src/shared/ui/icons/groupSVG'
 
 export const SubEventHeader = () => {
 	const { id = '' } = useParams()
@@ -46,31 +37,28 @@ export const SubEventHeader = () => {
 								<CalendarSVG />
 								<p>{formatDateWithTime(eventData?.itemdate, eventData?.begin_time)}</p>
 							</FlexRow>
-							<div className={styles.dot}></div>
+							{/* <div className={styles.dot}></div>
 							<p>{eventData?.is_etnosport ? 'Этноспорт' : 'Вид'}</p>
 							<div className={styles.dot}></div>
 							<FlexRow className={styles.calendarRow}>
 								<GroupSVG />
 								<p>{eventData?.is_group ? 'Групповой вид' : 'Одиночный вид'}</p>
 							</FlexRow>
-							{/* <EventStatus className={styles.status} statusCode={eventData?.status} /> */}
+							<EventStatus className={styles.status} statusCode={eventData?.status} />
 							<div className={cn(styles.dot)}></div>
 							<p>{`Вид этноспорта «${eventData?.vid}»`}</p>
 							<div className={cn(styles.dot)}></div>
-							<p className={styles.ageRating}>{eventData?.ageRating ?? '18'}+</p>
-							{/* <p>
-							{`Начало: ${formatSingleDate(eventData?.date && eventData?.date.length > 0 ? eventData?.date[0] : new Date())}, в ${parseTimeFromDate(eventData?.date && eventData?.date.length > 0 ? eventData?.date[0] : '')}`}
-						</p> */}
+							<p className={styles.ageRating}>{eventData?.ageRating ?? '18'}+</p> */}
 						</FlexRow>
-						<FlexRow className={styles.linkRules}>
+						{/* <FlexRow className={styles.linkRules}>
 							<a href='#'>Правила вида</a>
 							<a href='#'>Регламент проведения</a>
 							<a href='#'>Требования к участникам</a>
-						</FlexRow>
-						<FlexRow className={styles.regButtons}>
+						</FlexRow> */}
+						{/* <FlexRow className={styles.regButtons}>
 							<MainButton>Подать заявку</MainButton>
-						</FlexRow>
-						<div className={styles.listInfo}>
+						</FlexRow> */}
+						{/* <div className={styles.listInfo}>
 							<div className={styles.locationInfo}>
 								{eventData?.address && (
 									<InfoRow
@@ -172,15 +160,15 @@ export const SubEventHeader = () => {
 									/>
 								)}
 							</div>
+						</div> */}
+						<div className={eventData?.short ? cn(styles.infoBlockText, styles.descInfo) : ''}>
+							{eventData?.short && <div dangerouslySetInnerHTML={{ __html: eventData?.short }} />}
 						</div>
 					</div>
 				</FlexRow>
 				<div className={styles.avatarWrapper}>
 					<GalleryImg images={allPagePhoto} variant='newsMain' />
 				</div>
-			</div>
-			<div className={eventData?.short ? cn(styles.infoBlockText, styles.descInfo) : ''}>
-				{eventData?.short && <div dangerouslySetInnerHTML={{ __html: eventData?.short }} />}
 			</div>
 		</div>
 	)

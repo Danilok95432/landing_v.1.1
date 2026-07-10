@@ -180,4 +180,5 @@ export type SiteSettings = {
 	isShowPartners: true
 	isShowPromo: true
 	isShowVideos: true
+	event_logo: ImageItemWithText[]
 }

@@ -28,6 +28,7 @@
 			border-radius: 0px;
 			margin-bottom: 8px;
 			max-height: 480px;
+			object-fit: cover;
 			@media (max-width: 768px) {
 				display: none;
 			}
@@ -189,13 +190,20 @@
 					flex-direction: column;
 					justify-content: space-between;
 					max-width: 245px;
+					flex-wrap: nowrap;
 					.title {
 						font-size: 18px;
 						font-weight: 600;
 					}
-					p {
+					.address {
 						font-size: 14px;
 						font-weight: normal;
+						display: -webkit-box;
+						-webkit-line-clamp: 2;
+						-webkit-box-orient: vertical;
+						overflow: hidden;
+						text-overflow: ellipsis;
+						line-clamp: 2;
 					}
 					.link {
 						font-size: 14px;

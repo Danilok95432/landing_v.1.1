@@ -133,7 +133,7 @@ export const MainInfoSection = () => {
 							<FlexRow className={styles.blockEl}>
 								<FlexRow className={styles.infoBlock}>
 									<p className={styles.title}>{eventData?.location.title}</p>
-									<p>{eventData?.location.address}</p>
+									<p className={styles.address}>{eventData?.location.address}</p>
 									<p className={styles.link}>На карте</p>
 								</FlexRow>
 								<div className={styles.vector}>

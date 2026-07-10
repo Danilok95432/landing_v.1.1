@@ -1,9 +1,10 @@
 import { Container } from 'src/shared/ui/Container/Container'
 import { SubEventHeader } from './components/sub-event-header/sub-event-header'
+
+import styles from './index.module.scss'
 import { useParams } from 'react-router-dom'
 import { useGetSubEventProgramByIdQuery } from 'src/features/home/api/home.api'
-import { TableGroup } from './components/table-group/table-group'
-import { TableSolo } from './components/table-solo/table-solo'
+import cn from 'classnames'
 
 export const SubEventPage = () => {
 	const { id = '' } = useParams()
@@ -11,7 +12,12 @@ export const SubEventPage = () => {
 	return (
 		<Container>
 			<SubEventHeader />
-			{eventData?.is_group ? <TableGroup /> : <TableSolo />}
+			{/* {eventData?.is_group ? <TableGroup /> : <TableSolo />} */}
+			<div className={styles.block}>
+				<div className={eventData?.full ? cn(styles.infoBlockText, styles.descInfo) : ''}>
+					{eventData?.full && <div dangerouslySetInnerHTML={{ __html: eventData?.full }} />}
+				</div>
+			</div>
 		</Container>
 	)
 }
