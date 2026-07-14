@@ -37,7 +37,7 @@ export const OrgsSection = () => {
 
 	const { prevBtnColor, nextBtnColor } = getButtonColors()
 
-	if (!eventData?.organizerGameLinks) return ''
+	if (!eventData?.organizerGameLinks || eventData.organizerGameLinks.length === 0) return ''
 	return (
 		<Section id='orgs' className={cn(styles.orgs)}>
 			<Container>

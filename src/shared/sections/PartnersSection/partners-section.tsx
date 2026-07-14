@@ -37,7 +37,7 @@ export const PartnersSection = () => {
 
 	const { prevBtnColor, nextBtnColor } = getButtonColors()
 
-	if (!eventData?.partnerLinks) return ''
+	if (!eventData?.partnerLinks || eventData.partnerLinks.length === 0) return ''
 	return (
 		<Section id='partners' className={cn(styles.partners)}>
 			<Container>
