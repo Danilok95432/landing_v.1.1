@@ -28,7 +28,7 @@ export const NewsSection = () => {
 		window.addEventListener('resize', handleResize)
 		return () => window.removeEventListener('resize', handleResize)
 	}, [])
-
+	if (!newsList || newsList.length === 0) return null
 	return (
 		<Section id='news' className={cn(styles.news)}>
 			<Container off={isMobile} className={styles.newsCont}>

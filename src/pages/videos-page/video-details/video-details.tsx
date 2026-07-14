@@ -12,7 +12,7 @@ import { Container } from 'src/shared/ui/Container/Container'
 import { type FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import { toast } from 'react-toastify'
 import { FlexRow } from 'src/shared/ui/FlexRow/FlexRow'
-import { mainFormatDate } from 'src/shared/helpers/utils'
+import { formatRussianDateTime } from 'src/shared/helpers/utils'
 
 type ApiErrorResponse = {
 	status: 'error'
@@ -102,7 +102,7 @@ export const VideoDetails: FC = () => {
 						</Link>
 						<FlexRow className={styles.wrapper}>
 							<FlexRow className={styles.contentRow}>
-								<p className={styles.date}>{mainFormatDate(videoDetails?.date, 'dd.MM.yyyy')}</p>
+								<p className={styles.date}>{formatRussianDateTime(String(videoDetails?.date))}</p>
 								<h2>{videoDetails.title}</h2>
 								<div className={styles.mainVideo}>
 									<iframe

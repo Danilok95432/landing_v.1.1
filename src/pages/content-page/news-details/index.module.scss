@@ -3,7 +3,54 @@
 	flex-direction: column;
 	gap: 32px;
 	padding-bottom: 36px;
-	margin-top: 85px;
+	width: 100%;
+	min-width: 0;
+	max-width: 100%;
+
+	.wrapper {
+		flex-direction: row;
+		justify-content: space-between;
+		flex-wrap: nowrap;
+		width: 100%;
+		min-width: 0;
+		max-width: 100%;
+		align-items: flex-start;
+		gap: 32px;
+
+		@media (max-width: 1060px) {
+			flex-direction: column;
+		}
+
+		.contentRow {
+			flex-direction: column;
+			flex: 1 1 auto;
+			width: 100%;
+			max-width: 900px;
+			min-width: 0;
+		}
+	}
+
+	.asideNewsDetails {
+		flex: 0 0 286px;
+		width: 286px;
+		max-width: 286px;
+		min-width: 0;
+		overflow: hidden;
+
+		@media (max-width: 1060px) {
+			flex: 0 1 auto;
+			width: 100%;
+			max-width: 100%;
+			min-width: 0;
+		}
+	}
+}
+
+.newsItemPageContent {
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
+	padding-bottom: 36px;
 	.linkBack {
 		color: var(--main-link-color);
 		font-size: 16px;
@@ -26,27 +73,64 @@
 			background-repeat: no-repeat;
 		}
 	}
+	.wrapper {
+		flex-direction: row;
+		justify-content: space-between;
+		flex-wrap: nowrap;
+		min-width: 0;
+		@media (max-width: 1060px) {
+			flex-direction: column;
+		}
+		.contentRow {
+			flex-direction: column;
+			max-width: 900px;
+			.newsShortDescs {
+				font-weight: 500;
+				margin-bottom: 28px;
+			}
+			.date {
+				color: #00000070;
+				font-size: 16px;
+				margin-bottom: 4px;
+			}
+		}
+	}
 	img {
-		max-height: 480px;
+		max-height: 506px;
 		border-radius: 0px;
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
 	}
+	h2 {
+		font-size: 48px;
+		margin-bottom: 4px;
+		@media (max-width: 768px) {
+			font-size: 28px;
+		}
+	}
 	.newsItemInfoContent {
-		padding-left: 52px;
 		padding-bottom: 48px;
-		border-bottom: 1px solid #00000010;
+		width: 100%;
+		// border-bottom: 1px solid #00000010;
 		@media (max-width: 768px) {
 			padding-left: 0;
 		}
 		.contentInfo {
-      max-width: 850px;
+			max-width: 850px;
+			width: 100%;
 			h2 {
 				font-size: 48px;
 				margin-bottom: 32px;
 				@media (max-width: 768px) {
 					font-size: 28px;
+				}
+			}
+			iframe {
+				width: 100%;
+				height: 400px;
+				@media (max-width: 768px) {
+					height: 300px;
 				}
 			}
 		}

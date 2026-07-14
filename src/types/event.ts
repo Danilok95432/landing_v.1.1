@@ -149,6 +149,8 @@ export type EventItem = {
 	contact_email?: string
 	contact_telphone?: string
 	contact_tg?: string
+	event_schema?: ImageItemWithText[]
+	tickets?: string[]
 } & Omit<CardEventItem, 'date'>
 
 export type CardEventItem = {
@@ -181,4 +183,6 @@ export type SiteSettings = {
 	isShowPromo: true
 	isShowVideos: true
 	event_logo: ImageItemWithText[]
+	fullname: string
+	shortname: string
 }

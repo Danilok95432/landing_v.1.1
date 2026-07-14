@@ -1,6 +1,6 @@
 .asideVideos {
-	min-width: 290px;
-	width: 290px;
+	min-width: 257px;
+	width: 257px;
 	@media (max-width: 768px) {
 		min-width: auto;
 		width: 100%;
@@ -79,15 +79,15 @@
 
 	.videosList {
 		display: flex;
-		flex-direction: row;
+		flex-direction: column;
 		gap: 20px;
 		.videoCardAside {
-			width: 290px;
+			width: 245px;
 			position: relative;
 			img {
 				border-radius: 0px;
 				width: 100%;
-				height: 163px;
+				height: 138px;
 				object-fit: cover;
 				object-position: top left;
 				aspect-ratio: 3 / 2;
@@ -123,6 +123,7 @@
 			color: var(--main-link-color);
 			text-overflow: ellipsis;
 			-webkit-line-clamp: 3;
+			line-clamp: 3;
 			@include mobile {
 				font-size: 16px;
 			}

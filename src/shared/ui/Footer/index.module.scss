@@ -12,6 +12,7 @@
 		gap: 15px;
 		button.disabled {
 			background: #ffffff80;
+			display: none;
 		}
 		.buyBtn {
 			display: flex;
@@ -63,7 +64,7 @@
 				flex-direction: row;
 				justify-content: center;
 				align-items: center;
-				background: var(--additional-theme-color);
+				background: transparent;
 				color: var(--additional-theme-color-2);
 				font-size: 18px;
 				font-weight: 500;

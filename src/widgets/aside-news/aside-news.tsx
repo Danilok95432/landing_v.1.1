@@ -23,7 +23,7 @@ export const AsideNews: FC<AsideNewsProps> = ({
 
 	useEffect(() => {
 		const handleResize = () => {
-			setIsSmallScreen(window.innerWidth <= 1448)
+			setIsSmallScreen(window.innerWidth <= 1060)
 		}
 		handleResize()
 		window.addEventListener('resize', handleResize)
@@ -47,27 +47,29 @@ export const AsideNews: FC<AsideNewsProps> = ({
 			{isSmallScreen ? (
 				<div className='slider-with-btns'>
 					<Swiper {...newsSliderOptions} ref={swiperRef}>
-						{sortedNews.map((newsEl, idx) => (
-							<SwiperSlide className={styles.newsSlide} key={idx}>
-								<Link
-									to={`/content/news/${newsEl.id}`}
-									aria-label={newsEl.title}
-									title={newsEl.title}
-								>
-									<div className={styles.asideNewsCard} key={newsEl.id}>
-										<img
-											src={newsEl.mainphoto[0]?.original}
-											alt={newsEl.title}
-											width={286}
-											height={160}
-											loading='lazy'
-										/>
-										<p className={styles.asideNewsCardTitle}>{newsEl.title}</p>
-										<p className={styles.asideNewsCardDate}>{mainFormatDate(newsEl.date)}</p>
-									</div>
-								</Link>
-							</SwiperSlide>
-						))}
+						{sortedNews
+							.filter((el) => el.id !== currentNewsId)
+							.map((newsEl, idx) => (
+								<SwiperSlide className={styles.newsSlide} key={idx}>
+									<Link
+										to={`/content/news/${newsEl.id}`}
+										aria-label={newsEl.title}
+										title={newsEl.title}
+									>
+										<div className={styles.asideNewsCard} key={newsEl.id}>
+											<img
+												src={newsEl.mainphoto[0]?.original}
+												alt={newsEl.title}
+												width={286}
+												height={160}
+												loading='lazy'
+											/>
+											<p className={styles.asideNewsCardTitle}>{newsEl.title}</p>
+											<p className={styles.asideNewsCardDate}>{mainFormatDate(newsEl.date)}</p>
+										</div>
+									</Link>
+								</SwiperSlide>
+							))}
 					</Swiper>
 					<SliderBtns className={styles.newsSliderBtns} swiperRef={swiperRef} color={'#5C5C5C'} />
 				</div>

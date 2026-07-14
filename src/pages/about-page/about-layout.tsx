@@ -1,13 +1,15 @@
-import { type FC } from 'react'
+import { useMemo, type FC } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 
 import styles from './index.module.scss'
 import { Container } from 'src/shared/ui/Container/Container'
-import { AboutMenuItems } from './consts'
 import { AboutLayoutHeader } from './components/about-layout-header'
 import { useBreakPoint } from 'src/features/useBreakPoint/useBreakPoint'
 import { BreadCrumbs } from 'src/widgets/bread-crumbs/bread-crumbs'
 import { HeadMenu } from 'src/widgets/head-menu/head-menu'
+import { getAboutMenuItems } from './consts'
+import { useEvent } from 'src/app/context/event-context'
+import { useGetEventByIdQuery } from 'src/features/home/api/home.api'
 
 export const AboutLayout: FC = () => {
 	const location = useLocation()
@@ -23,6 +25,13 @@ export const AboutLayout: FC = () => {
 		return false
 	}
 
+	const { eventId } = useEvent()
+	const { data: eventData } = useGetEventByIdQuery(eventId ?? '1', { skip: !eventId })
+
+	const aboutMenuItems = useMemo(() => {
+		return getAboutMenuItems(eventData)
+	}, [eventData])
+
 	const isTraditionPage = getCurrentLocation()
 
 	return (
@@ -30,7 +39,7 @@ export const AboutLayout: FC = () => {
 			<Container>
 				<BreadCrumbs
 					crumbsLinksMap={[
-						...AboutMenuItems,
+						...aboutMenuItems,
 						{
 							title: 'О событии',
 							link: 'about',
@@ -49,7 +58,7 @@ export const AboutLayout: FC = () => {
 									title: 'Информация',
 									link: '/about',
 								},
-								...AboutMenuItems,
+								...aboutMenuItems,
 							]}
 						/>
 					</>
@@ -59,7 +68,7 @@ export const AboutLayout: FC = () => {
 			<Container>
 				<BreadCrumbs
 					crumbsLinksMap={[
-						...AboutMenuItems,
+						...aboutMenuItems,
 						{
 							title: 'О событии',
 							link: 'about',

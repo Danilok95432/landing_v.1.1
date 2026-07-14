@@ -69,7 +69,7 @@ export const GallerySection = () => {
 		document.addEventListener('keydown', onKeyDown)
 		return () => document.removeEventListener('keydown', onKeyDown)
 	}, [isFullscreenOpen])
-
+	if (!eventData?.photos || eventData.photos.length === 0) return null
 	return (
 		<Section id='photo' className={styles.gallerySection}>
 			<Container className={styles.galleryCont}>

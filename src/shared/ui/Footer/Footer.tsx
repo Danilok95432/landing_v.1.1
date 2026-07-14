@@ -12,7 +12,7 @@ export const Footer = () => {
 	const { eventId } = useEvent()
 	const { data: eventData } = useGetEventByIdQuery(eventId ?? '1', { skip: !eventId })
 	const { openModal } = useActions()
-	const { data: regSettings } = useGetRegSettingsQuery(eventId)
+	const { data: regSettings } = useGetRegSettingsQuery(eventId ?? '1')
 	const useReg = regSettings?.status
 	return (
 		<footer className={styles.footer}>
@@ -44,9 +44,9 @@ export const Footer = () => {
 							</Link>
 						</FlexRow>
 						<div className={styles.ageBlock}>
-							<p>
+							{/* <p>
 								18<span className={styles.plus}>+</span>
-							</p>
+							</p> */}
 						</div>
 					</FlexRow>
 				</FlexRow>

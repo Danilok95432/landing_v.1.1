@@ -1,5 +1,29 @@
 .asideNews {
-	padding-top: 2px;
+	width: 100%;
+	max-width: 100%;
+	min-width: 0;
+
+	:global(.slider-with-btns) {
+		width: 100%;
+		max-width: 100%;
+		min-width: 0;
+	}
+
+	:global(.swiper) {
+		width: 100%;
+		max-width: 100%;
+		min-width: 0;
+		overflow: hidden;
+	}
+
+	:global(.swiper-wrapper) {
+		min-width: 0;
+	}
+
+	:global(.swiper-slide) {
+		min-width: 0;
+		box-sizing: border-box;
+	}
 	.asideNewsTitle {
 		font-size: 24px;
 		margin-bottom: 24px;
@@ -8,24 +32,25 @@
 	@media (max-width: 768px) {
 		min-width: auto;
 		width: 100%;
+		max-width: 100%;
 	}
 	.newsList {
 		display: flex;
-		flex-direction: row;
+		flex-direction: column;
 		gap: 20px;
 		// max-height: 1050px;
 		// overflow-y: scroll;
 		.asideNewsCard {
 			display: flex;
 			flex-direction: column;
-			width: 290px;
+			width: 245px;
 			gap: 5px;
 			img {
 				width: 100%;
 				aspect-ratio: 3 / 2;
 				object-fit: cover;
 				border-radius: 0px;
-				height: 163px;
+				height: 138px;
 			}
 			.asideNewsCardTitle {
 				font-size: 16px;
@@ -39,6 +64,9 @@
 		}
 	}
   .newsSliderBtns {
+		top: 40%;
+		width: 100%;
+		height: max-content;
 		@media (max-width: 768px) {
 			top: 40%;
 			width: 70%;
@@ -63,7 +91,7 @@
 		width: 100%;
 		aspect-ratio: 3 / 2;
 		object-fit: cover;
-		border-radius: 5px;
+		border-radius: 0px;
 		@media (max-width: 768px) {
 			height: 200px !important;
 		}

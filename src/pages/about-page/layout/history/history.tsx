@@ -39,10 +39,10 @@ export const AboutHistory: FC = () => {
 					allPageImages={allPagePhoto}
 					className={styles.gallery}
 				/>
-				{eventData?.description && (
+				{eventData?.descs && (
 					<div
 						className={styles.mainDescs}
-						dangerouslySetInnerHTML={{ __html: eventData?.description }}
+						dangerouslySetInnerHTML={{ __html: eventData?.descs }}
 					/>
 				)}
 				{/* <div className={styles.infoWrapper}>

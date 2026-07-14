@@ -5,7 +5,6 @@ import { AboutHistory } from 'src/pages/about-page/layout/history/history'
 import { AppLayout } from 'src/pages/app-layout/app-layout'
 import { ContentPageLayout } from 'src/pages/content-page/content-page-layout'
 import { NewsDetailsNew } from 'src/pages/content-page/news-details/news-details'
-import { VideoDetails } from 'src/pages/content-page/video-details/video-details'
 import { HomePage } from 'src/pages/home-page/HomePage'
 import { VideosPage } from 'src/pages/videos-page/videos-page'
 import { AppRoute } from './consts'
@@ -15,6 +14,7 @@ import { AboutRoute } from 'src/pages/about-page/layout/route/route'
 import { AboutRules } from 'src/pages/about-page/layout/rules/rules'
 import { AboutSchema } from 'src/pages/about-page/layout/schema/schema'
 import { SubEventPage } from 'src/pages/sub-event-page/sub-event-page'
+import { VideoDetails } from 'src/pages/videos-page/video-details/video-details'
 
 export const MainRoutes = () => {
 	return (

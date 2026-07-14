@@ -3,12 +3,14 @@ import { Helmet } from 'react-helmet-async'
 
 import styles from './index.module.scss'
 import { FlexRow } from 'src/shared/ui/FlexRow/FlexRow'
-import { useGetPageHeaderQuery } from 'src/features/content/api/content'
 import { DocFileIconSVG } from 'src/shared/ui/icons/DOCFileIconSVG'
 import { PDFFileIconSVG } from 'src/shared/ui/icons/PDFFileIconSVG'
+import { useEvent } from 'src/app/context/event-context'
+import { useGetEventByIdQuery } from 'src/features/home/api/home.api'
 
 export const AboutDocs: FC = () => {
-	const { data: aboutPageData } = useGetPageHeaderQuery('premia')
+	const { eventId } = useEvent()
+	const { data: eventData } = useGetEventByIdQuery(eventId ?? '1', { skip: !eventId })
 	return (
 		<div className={styles.aboutGeneralPage}>
 			<Helmet>
@@ -18,7 +20,7 @@ export const AboutDocs: FC = () => {
 			<div className={styles.inner}>
 				<h2>Документы</h2>
 				<FlexRow className={styles.docsList}>
-					{aboutPageData?.page?.documents?.map((doc) => {
+					{eventData?.documents?.map((doc) => {
 						return (
 							<a key={doc.id} className={styles.doc} href={doc.url} download>
 								<div className={styles.file}>
@@ -30,7 +32,7 @@ export const AboutDocs: FC = () => {
 								</div>
 								<FlexRow className={styles.info}>
 									<p className={styles.title}>{doc.name.split('.')[0]}</p>
-									<p>{`${(Number(doc.size) / 1024).toFixed(1)} КВ`}</p>
+									{/* <p>{`${(Number(doc.size) / 1024).toFixed(1)} КВ`}</p> */}
 								</FlexRow>
 							</a>
 						)

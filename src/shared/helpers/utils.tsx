@@ -405,6 +405,41 @@ export const formatSingleDate = (dateString: Date | string): string => {
 	return `${day}.${month}.${year}`
 }
 
+export function formatRussianDateTime(dateString: string): string {
+	const match = dateString.match(
+		/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})([+-]\d{2}:\d{2}|Z)$/,
+	)
+
+	if (!match) {
+		throw new Error('Неверный формат даты')
+	}
+
+	const [, year, month, day, hours, minutes] = match
+
+	const months = [
+		'января',
+		'февраля',
+		'марта',
+		'апреля',
+		'мая',
+		'июня',
+		'июля',
+		'августа',
+		'сентября',
+		'октября',
+		'ноября',
+		'декабря',
+	]
+
+	const monthIndex = Number(month) - 1
+
+	if (monthIndex < 0 || monthIndex > 11) {
+		throw new Error('Неверный месяц')
+	}
+
+	return `${Number(day)} ${months[monthIndex]} ${year} года, ${hours}:${minutes}`
+}
+
 export const formatDateRangeNumeric = (dates: [Date, Date]): string => {
 	if (!Array.isArray(dates) || dates.length !== 2) {
 		throw new Error('Функция принимает массив ровно из двух дат')

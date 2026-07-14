@@ -10,6 +10,7 @@ import { useEvent } from 'src/app/context/event-context'
 export const SubEventsSection = () => {
 	const { eventId } = useEvent()
 	const { data: programDays } = useGetEventProgramByIdQuery(eventId ?? '1', { skip: !eventId })
+	if (!programDays || programDays.length === 0) return null
 	return (
 		<Section className={cn(styles.subEvents)}>
 			<Container>

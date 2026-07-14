@@ -99,7 +99,7 @@ export const ProgramSection = () => {
 				})
 			})
 	}
-
+	if (!programDays || programDays.length === 0) return null
 	return (
 		<Section id='program' className={cn(styles.program)}>
 			<Container>

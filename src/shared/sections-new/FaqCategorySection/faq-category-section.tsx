@@ -21,6 +21,7 @@ export const FaqCategorySection = () => {
 		{ id: '4', title: 'Оплата' },
 		{ id: '5', title: 'Отмена и возврат билетов' },
 	]
+	if (!faqList?.items || faqList.items.length === 0) return null
 	return (
 		<Section id='faq' className={cn(styles.faq)}>
 			<Container>

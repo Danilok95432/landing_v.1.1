@@ -28,6 +28,7 @@ export const VideosSection = () => {
 		window.addEventListener('resize', handleResize)
 		return () => window.removeEventListener('resize', handleResize)
 	}, [])
+	if (!videos || videos.length === 0) return null
 	return (
 		<Section id='video' className={cn(styles.videos)}>
 			<Container off={isMobile}>
