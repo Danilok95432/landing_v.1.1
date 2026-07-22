@@ -5,6 +5,9 @@
 		justify-content: space-between;
 		gap: 17px;
 	}
+	.videosSlide {
+		max-width: max-content;
+	}
 	.btnRow {
 		justify-content: space-between;
 		.sectionTitle {
@@ -45,7 +48,7 @@
 	.videoSliderBtns {
 		top: 50%;
 		width: calc(100% + 118px);
-		@media (max-width: 768px) {
+		@media (max-width: 1350px) {
 			display: none;
 		}
 	}

@@ -1,8 +1,12 @@
-.section {
+section.section {
   padding: 25px 0;
   h2 {
     font-size: 28px;
     font-weight: 500;
+  }
+  @media (max-width: 1260px) {
+    padding-left: 16px;
+    padding-right: 16px;
   }
   @media (max-width: 768px) {
     padding: 0;

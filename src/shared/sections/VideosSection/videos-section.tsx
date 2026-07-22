@@ -41,7 +41,7 @@ export const VideosSection = () => {
 				<div>
 					<Swiper {...homeVideosSliderOptions} ref={swiperRef}>
 						{videos?.map((slideItem, idx) => (
-							<SwiperSlide key={idx}>
+							<SwiperSlide key={idx} className={styles.videosSlide}>
 								<VideoCard key={slideItem.id} {...slideItem} />
 							</SwiperSlide>
 						))}

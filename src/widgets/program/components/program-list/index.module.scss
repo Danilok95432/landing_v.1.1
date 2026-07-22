@@ -78,6 +78,13 @@ div.swiperSliderSubEvents {
 .subEventsSliderBtns {
 	top: 50%;
 	width: calc(100% + 98px);
+	@media (max-width: 1320px) {
+		width: 96%;
+		top: 40%;
+	}
+	@media (max-width: 768px) {
+		display: none;
+	}
 	@media (max-width: 440px) {
 		width: calc(100% + 20px);
 	}

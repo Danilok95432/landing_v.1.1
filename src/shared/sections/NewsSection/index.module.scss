@@ -36,10 +36,14 @@
 	.newsSlider {
 		position: relative;
 	}
+	.newsSlide {
+		max-width: max-content;
+	}
 	.newsCont {
 		position: relative;
 		.btnRow {
 			justify-content: space-between;
+			flex-wrap: nowrap;
 			.sectionTitle {
 				font-weight: 600;
 				font-size: 32px;
@@ -64,7 +68,7 @@
 .newsSliderBtns {
 	top: 42%;
 	width: calc(100% + 118px);
-	@media (max-width: 768px) {
+	@media (max-width: 1350px) {
 		display: none;
 	}
 }
