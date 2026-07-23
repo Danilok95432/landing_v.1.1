@@ -38,6 +38,29 @@ export const authApi = createApi({
 				body: formData,
 			}),
 		}),
+		getRegistrationCodeEmail: build.mutation<
+			{ status: string; errortext?: string; ticket?: string },
+			{ email: string; idEvent: string }
+		>({
+			query: ({ email, idEvent }) => ({
+				url: '/event_registration/getemailcode',
+				method: 'GET',
+				params: {
+					email,
+					id_event: idEvent,
+				},
+			}),
+		}),
+		checkRegistrationCodeEmail: build.mutation<
+			{ status: string; errortext: string; ticket_link?: string },
+			FieldValues
+		>({
+			query: (formData) => ({
+				url: '/event_registration/checkemailcode',
+				method: 'POST',
+				body: formData,
+			}),
+		}),
 		sendRegistrationForm: build.mutation<
 			{ status: string; errortext: string; ticket_link: string },
 			FieldValues
@@ -124,4 +147,6 @@ export const {
 	useSendRegistrationFormMutation,
 	useLogoutUserMutation,
 	useCheckRegistrationCodeMutation,
+	useGetRegistrationCodeEmailMutation,
+	useCheckRegistrationCodeEmailMutation,
 } = authApi
