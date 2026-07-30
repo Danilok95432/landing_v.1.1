@@ -51,14 +51,10 @@ export const RegSection: FC<RegSectionProps> = ({
 	return (
 		<div className={classNames(styles.formSection, styles.formSectionReg)}>
 			<FlexRow className={styles.regHead}>
-				<span className={styles.titleSmall}>Регистрация гостя</span>
+				<span className={styles.title}>Заявка на участие</span>
 				<FlexRow className={styles.disclaimer}>
 					<div className={styles.grayBox}>
-						{!sale ? (
-							<p>Регистрация гостя обязательна, без нее мы не сможем пустить Вас на событие.</p>
-						) : (
-							<p>Регистрация гостя обязательна, без нее мы не сможем продать Вам билеты.</p>
-						)}
+						<p>Заявка обязательна — без нее мы не сможем допустить Вас как участника.</p>
 					</div>
 				</FlexRow>
 			</FlexRow>

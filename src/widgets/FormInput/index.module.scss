@@ -12,6 +12,7 @@
   border: 1px solid #00000031;
   padding: 6.56px 0;
   border-radius: 8px;
+  min-height: 50px;
   @media (max-width: 768px) {
     min-height: 50px;
   }
@@ -24,7 +25,7 @@
     font-size: 14px;
     height: 27px;
     padding: 7px 12px;
-    border-radius: 8px;
+    border-radius: 0px;
     @media (max-width: 768px) {
       left: 0px;
       top: 85px;

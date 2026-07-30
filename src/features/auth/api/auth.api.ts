@@ -110,6 +110,7 @@ export const authApi = createApi({
 				zabavy?: MultiSelOption[]
 				event_roles?: RoleSelOption[]
 				sub_events?: SubEventOptions[]
+				use_sale?: boolean
 			},
 			string
 		>({

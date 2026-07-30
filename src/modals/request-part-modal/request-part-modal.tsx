@@ -12,13 +12,11 @@ import {
 	useGetRegionsByValueQuery,
 	useSendRegistrationFormMutation,
 } from 'src/features/auth/api/auth.api'
-import { useGetRegListQuery } from 'src/features/home/api/home.api'
 import { FlexRow } from 'src/shared/ui/FlexRow/FlexRow'
 import { MainButton } from 'src/shared/ui/MainButton/MainButton'
 import { useActions } from 'src/app/store/hooks/actions'
 import { useLocation } from 'react-router-dom'
 import { type RegInputs, regSchema } from './schema'
-import { HeadSection } from './components/head-section/head-section'
 import { RegSection } from './components/reg-section/reg-section'
 import { type SelOption } from 'src/types/select'
 import { PartSection } from './components/PartSection/PartSection'
@@ -28,7 +26,7 @@ type RegEventPartModalProps = {
 	id: string
 }
 
-export const BuyTicketModal: FC<RegEventPartModalProps> = ({ id }) => {
+export const RequestPartModal: FC<RegEventPartModalProps> = ({ id }) => {
 	const { closeModal } = useActions()
 	const modalRef = useRef<HTMLDivElement>(null)
 	const location = useLocation()
@@ -37,8 +35,6 @@ export const BuyTicketModal: FC<RegEventPartModalProps> = ({ id }) => {
 	const [isCodeAccepted, setIsCodeAccepted] = useState(false)
 	const [errorForm, setErrorForm] = useState('')
 	const [selectedRegion, setSelectedRegion] = useState<SelOption | null>(null)
-
-	const { data: tickets } = useGetRegListQuery(id)
 	const { data: selectOptions } = useGetInfoRegistationQuery(id)
 
 	const methods = useForm<RegInputs>({
@@ -176,7 +172,6 @@ export const BuyTicketModal: FC<RegEventPartModalProps> = ({ id }) => {
 							noValidate
 							className={styles.ticketForm}
 						>
-							{selectOptions?.use_sale && <HeadSection ticketTypeList={tickets?.ticket_types} />}
 							<RegSection
 								id={id}
 								regions={regionOptions}
@@ -185,7 +180,6 @@ export const BuyTicketModal: FC<RegEventPartModalProps> = ({ id }) => {
 								setIsCodeAccepted={setIsCodeAccepted}
 								errorForm={errorForm}
 								setErrorForm={setErrorForm}
-								sale={selectOptions?.use_sale}
 							/>
 							<PartSection
 								selectOptionsCars={selectOptions?.car_types}
@@ -194,11 +188,6 @@ export const BuyTicketModal: FC<RegEventPartModalProps> = ({ id }) => {
 								subEvents={selectOptions?.sub_events}
 							/>
 							{/* <DatesSection /> */}
-							{selectOptions?.use_sale && (
-								<p className={styles.specialDesc}>
-									Электронный кассовый чек будет выслан Вам вместе с билетом на e-mail или телефон.
-								</p>
-							)}
 							<FlexRow className={cn(styles.disclaimer, styles._last)}>
 								<div className={styles.grayBox}>
 									<p>
@@ -211,9 +200,7 @@ export const BuyTicketModal: FC<RegEventPartModalProps> = ({ id }) => {
 								</div>
 							</FlexRow>
 							<MainButton type='submit' disabled={!isCodeAccepted}>
-								{selectOptions?.use_sale
-									? 'Перейти к оплате билетов'
-									: 'Завершить регистрацию гостя'}
+								Подать заявку на участие
 							</MainButton>
 						</form>
 					</FormProvider>
