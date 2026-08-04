@@ -226,6 +226,16 @@ export const MainNavigation = () => {
 							<p>от {eventData?.min_price} ₽</p>
 						</div>
 					</button>
+					{/* <button
+						className={classNames(styles.buyBtn, { [styles.disabled]: !useReg })}
+						onClick={() => openModal(<RequestPartModal id={eventId ?? '1'} />)}
+						disabled={!useReg}
+					>
+						<div className={styles.text}>
+							<p>Заявка</p>
+							<p>от {eventData?.min_price} ₽</p>
+						</div>
+					</button> */}
 				</Container>
 			</nav>
 		</>

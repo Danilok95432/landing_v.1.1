@@ -7,7 +7,7 @@ import classNames from 'classnames'
 import { ErrorMessage } from '@hookform/error-message'
 import { useFormContext } from 'react-hook-form'
 import { type SelOption } from 'src/types/select'
-import { useGetRegSettingsQuery } from 'src/features/home/api/home.api'
+import { useGetRegPartSettingsQuery } from 'src/features/home/api/home.api'
 
 type RegSectionProps = {
 	errorForm?: string
@@ -32,7 +32,7 @@ export const RegSection: FC<RegSectionProps> = ({
 }) => {
 	const verificationSourceRef = useRef<HTMLDivElement>(null)
 	const codeInputRef = useRef<HTMLDivElement>(null)
-	const { data: regSettings } = useGetRegSettingsQuery(id)
+	const { data: regSettings } = useGetRegPartSettingsQuery(id)
 
 	const {
 		formState: { errors },

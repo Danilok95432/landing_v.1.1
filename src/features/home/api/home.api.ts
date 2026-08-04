@@ -46,6 +46,14 @@ export const homeApi = createApi({
 				},
 			}),
 		}),
+		getRegPartSettings: build.query<RegType, string>({
+			query: (id) => ({
+				url: `event_registration/get_reg_participants`,
+				params: {
+					id_event: id,
+				},
+			}),
+		}),
 		getEventsMonths: build.query<CardEventItem[], { date: string; category: string }>({
 			query: ({ date = '0', category = '0' }) => ({
 				url: 'events',
@@ -145,4 +153,5 @@ export const {
 	useGetAllFaqByIdQuery,
 	useGetSettingsSiteQuery,
 	useGetSubEventListRegQuery,
+	useGetRegPartSettingsQuery,
 } = homeApi
