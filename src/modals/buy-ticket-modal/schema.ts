@@ -32,6 +32,7 @@ export type RegInputs = {
 	sub_events_group?: SubEventOptions[] | string
 	sub_events_etno?: SubEventOptions[] | string
 	sub_events_fun?: SubEventOptions[] | string
+	photos?: File[]
 }
 
 export const regSchema = yup.object().shape({

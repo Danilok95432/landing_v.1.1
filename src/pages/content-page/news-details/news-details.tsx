@@ -13,6 +13,8 @@ import { type FetchBaseQueryError } from '@reduxjs/toolkit/query'
 import { toast } from 'react-toastify'
 import { FlexRow } from 'src/shared/ui/FlexRow/FlexRow'
 import { formatRussianDateTime } from 'src/shared/helpers/utils'
+import { type ImageItemWithText } from 'src/types/photos'
+import { GalleryImg } from 'src/widgets/gallery-img/gallery-img'
 
 type ApiErrorResponse = {
 	status: 'error'
@@ -46,6 +48,21 @@ export const NewsDetailsNew = () => {
 	const [previewCount, setPreviewCount] = useState<number>(1)
 	const contentRef = useRef<HTMLDivElement>(null)
 	const navigate = useNavigate()
+
+	const [allNewsPagePhoto, setAllNewsPagePhoto] = useState<ImageItemWithText[]>([])
+
+	useEffect(() => {
+		if (newsItemData) {
+			const images: ImageItemWithText[] = []
+			if (newsItemData.mainphoto) {
+				images.push(newsItemData.mainphoto[0])
+			}
+			if (newsItemData.imgGallery && Array.isArray(newsItemData.imgGallery)) {
+				images.push(...newsItemData.imgGallery)
+			}
+			setAllNewsPagePhoto(images)
+		}
+	}, [newsItemData])
 
 	useEffect(() => {
 		if (!isNewsItemError) return
@@ -116,6 +133,12 @@ export const NewsDetailsNew = () => {
 													<div dangerouslySetInnerHTML={{ __html: newsItemData.full }} />
 												)}
 											</div>
+											<GalleryImg
+												className={styles.gallery}
+												images={newsItemData?.imgGallery}
+												allPageImages={allNewsPagePhoto}
+												variant='newsDetailsSlider'
+											/>
 										</div>
 									</div>
 								</FlexRow>

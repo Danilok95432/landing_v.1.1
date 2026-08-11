@@ -335,6 +335,63 @@ export const defineFileFormat = (fileName: string) => {
 	return formatFileArr[formatFileArr.length - 1]
 }
 
+export function formatDate(dateInput: string | Date, time?: boolean): string {
+	let year: number
+	let month: number // 1–12
+	let day: number
+	let hours: number
+	let minutes: number
+
+	if (typeof dateInput === 'string') {
+		// Разбираем строку, игнорируя часовой пояс и секунды
+		const dateTimeParts = dateInput.split('T')
+		const datePart = dateTimeParts[0] // "YYYY-MM-DD"
+		const timePart = dateTimeParts[1]
+			? dateTimeParts[1].split('+')[0].split('-')[0].split('Z')[0] // убираем смещение и Z
+			: '00:00:00'
+
+		const [yearStr, monthStr, dayStr] = datePart.split('-')
+		const [hoursStr, minutesStr] = timePart.split(':')
+
+		year = parseInt(yearStr, 10)
+		month = parseInt(monthStr, 10)
+		day = parseInt(dayStr, 10)
+		hours = parseInt(hoursStr, 10) || 0
+		minutes = parseInt(minutesStr, 10) || 0
+	} else {
+		// Объект Date – используем локальные компоненты
+		year = dateInput.getFullYear()
+		month = dateInput.getMonth() + 1 // getMonth() возвращает 0–11
+		day = dateInput.getDate()
+		hours = dateInput.getHours()
+		minutes = dateInput.getMinutes()
+	}
+
+	// Названия месяцев в родительном падеже (для дат: 1 января, 2 февраля, …)
+	const monthNames = [
+		'января',
+		'февраля',
+		'марта',
+		'апреля',
+		'мая',
+		'июня',
+		'июля',
+		'августа',
+		'сентября',
+		'октября',
+		'ноября',
+		'декабря',
+	]
+
+	const monthName = monthNames[month - 1]
+
+	// Форматирование времени с ведущими нулями
+	const formattedHours = String(hours).padStart(2, '0')
+	const formattedMinutes = String(minutes).padStart(2, '0')
+	if (time) return `${day} ${monthName} ${year}, ${formattedHours}:${formattedMinutes}`
+	else return `${day} ${monthName} ${year}`
+}
+
 // функция форматирования даты с локализацией
 export const mainFormatDate = (
 	date: Date | string | undefined,

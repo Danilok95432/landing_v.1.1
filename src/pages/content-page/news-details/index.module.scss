@@ -133,6 +133,11 @@
 					height: 300px;
 				}
 			}
+			.gallery {
+				@media (max-width: 768px) {
+					margin-top: 20px;
+				}
+			}
 		}
 	}
 }

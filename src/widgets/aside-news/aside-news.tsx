@@ -6,7 +6,7 @@ import { Swiper, type SwiperRef, SwiperSlide } from 'swiper/react'
 import { SliderBtns } from '../slider-btns/slider-btns'
 import { Link } from 'react-router-dom'
 import { newsSliderOptions } from './consts'
-import { mainFormatDate } from 'src/shared/helpers/utils'
+import { formatDate, mainFormatDate } from 'src/shared/helpers/utils'
 
 type AsideNewsProps = {
 	previewCount?: number
@@ -94,9 +94,7 @@ export const AsideNews: FC<AsideNewsProps> = ({
 										loading='lazy'
 									/>
 									<p className={styles.asideNewsCardTitle}>{newsEl.title}</p>
-									<p className={styles.asideNewsCardDate}>
-										{mainFormatDate(newsEl.date, 'dd.MM.yyyy')}
-									</p>
+									<p className={styles.asideNewsCardDate}>{formatDate(newsEl.date, false)}</p>
 								</div>
 							</Link>
 						))}

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
-import { FormProvider, type SubmitHandler, useForm, useWatch } from 'react-hook-form'
+import { Controller, FormProvider, type SubmitHandler, useForm, useWatch } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import type * as yup from 'yup'
 
@@ -23,6 +23,7 @@ import { RegSection } from './components/reg-section/reg-section'
 import { type SelOption } from 'src/types/select'
 import { PartSection } from './components/PartSection/PartSection'
 import { booleanToNumberString } from 'src/shared/helpers/utils'
+import { PhotoUploader } from 'src/widgets/photo-loader/photo-loader'
 
 type RegEventPartModalProps = {
 	id: string
@@ -40,6 +41,12 @@ export const BuyTicketModal: FC<RegEventPartModalProps> = ({ id }) => {
 
 	const { data: tickets } = useGetRegListQuery(id)
 	const { data: selectOptions } = useGetInfoRegistationQuery(id)
+
+	const { control } = useForm<RegInputs>({
+		defaultValues: {
+			photos: [],
+		},
+	})
 
 	const methods = useForm<RegInputs>({
 		mode: 'onBlur',
@@ -186,6 +193,20 @@ export const BuyTicketModal: FC<RegEventPartModalProps> = ({ id }) => {
 								errorForm={errorForm}
 								setErrorForm={setErrorForm}
 								sale={selectOptions?.use_sale}
+							/>
+							<Controller
+								name='photos'
+								control={control}
+								render={({ field }) => (
+									<PhotoUploader
+										value={field.value}
+										onChange={field.onChange}
+										multiple
+										maxFiles={5}
+										minWidth={400}
+										minHeight={400}
+									/>
+								)}
 							/>
 							<PartSection
 								selectOptionsCars={selectOptions?.car_types}

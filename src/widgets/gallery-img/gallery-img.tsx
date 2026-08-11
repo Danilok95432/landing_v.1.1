@@ -80,13 +80,7 @@ export const GalleryImg: FC<ImageGalleryProps> = ({
 	}, [openOverlay, images])
 
 	const sliderBtns = useMemo(
-		() => (
-			<SliderBtns
-				className={styles.fullScreenSliderBtns}
-				swiperRef={overlaySwiperRef}
-				color={breakpoint === 'Xs' ? '#000' : '#000'}
-			/>
-		),
+		() => <SliderBtns className={styles.fullScreenSliderBtns} swiperRef={overlaySwiperRef} />,
 		[breakpoint, overlaySwiperRef],
 	)
 
@@ -222,11 +216,7 @@ export const GalleryImg: FC<ImageGalleryProps> = ({
 						))}
 					</Swiper>
 
-					<SliderBtns
-						className={styles.galleryBtns}
-						swiperRef={swiperRef}
-						color={breakpoint === 'XS' ? '#FFF' : '#5C5C5C'}
-					/>
+					<SliderBtns className={styles.galleryBtns} swiperRef={swiperRef} />
 				</div>
 				{limitController && limit && limit < images.length && (
 					<button

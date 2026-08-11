@@ -71,7 +71,7 @@ export const gallerySliderNewsDetailsOptions: SwiperProps = {
 			spaceBetween: 4,
 		},
 		[DisplayBreakpoints.Xxl]: {
-			slidesPerView: 5,
+			slidesPerView: 4.28,
 			spaceBetween: 4,
 		},
 	},
