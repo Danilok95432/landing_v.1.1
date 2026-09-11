@@ -27,7 +27,7 @@
 	.asideNewsTitle {
 		font-size: 24px;
 		margin-bottom: 24px;
-    font-weight: 500;
+		font-weight: 500;
 	}
 	@media (max-width: 768px) {
 		min-width: auto;
@@ -43,27 +43,27 @@
 		.asideNewsCard {
 			display: flex;
 			flex-direction: column;
-			width: 245px;
+			width: 246px;
 			gap: 5px;
 			img {
 				width: 100%;
 				aspect-ratio: 3 / 2;
 				object-fit: cover;
-				border-radius: 0px;
-				height: 138px;
+				border-radius: 4px;
+				height: 164px;
 			}
 			.asideNewsCardTitle {
 				font-size: 16px;
-        color: var(--main-link-color);
+				color: var(--main-link-color);
 			}
 			.asideNewsCardDate {
 				font-size: 16px;
 				color: var(--color-gray-03);
-        margin-top: 12px;
+				margin-top: 12px;
 			}
 		}
 	}
-  .newsSliderBtns {
+	.newsSliderBtns {
 		top: 40%;
 		width: 100%;
 		height: max-content;
@@ -84,14 +84,15 @@
 	width: 245px;
 	gap: 5px;
 	@media (max-width: 768px) {
-		width: 300px!important;
+		width: 300px !important;
 		margin: 0 auto;
 	}
 	img {
 		width: 100%;
+		width: 100%;
 		aspect-ratio: 3 / 2;
 		object-fit: cover;
-		border-radius: 0px;
+		border-radius: 4px;
 		@media (max-width: 768px) {
 			height: 200px !important;
 		}
