@@ -6,8 +6,7 @@ import { FlexRow } from 'src/shared/ui/FlexRow/FlexRow'
 import { useState } from 'react'
 import { MainInfoDateSVG } from 'src/shared/ui/icons/mainInfoDateSVG'
 import { MainInfoLocationSVG } from 'src/shared/ui/icons/mainInfoLocationSVG'
-import { MainInfoOrgSVG } from 'src/shared/ui/icons/mainInfoOrgSVG'
-import { useGetEventByIdQuery, useGetSettingsSiteQuery } from 'src/features/home/api/home.api'
+import { useGetEventByIdQuery } from 'src/features/home/api/home.api'
 import { formatMainDateRange, formatRangeMeta } from 'src/shared/helpers/utils'
 import { useEvent } from 'src/app/context/event-context'
 import { MainButton } from 'src/shared/ui/MainButton/MainButton'
@@ -16,7 +15,6 @@ import { useNavigate } from 'react-router-dom'
 export const MainInfoSection = () => {
 	const { eventId } = useEvent()
 	const { data: eventData } = useGetEventByIdQuery(eventId ?? '1', { skip: !eventId })
-	const { data: settings } = useGetSettingsSiteQuery(null)
 	const [activeCont] = useState<boolean>(false)
 	const navigate = useNavigate()
 	if (!eventData) return null
@@ -143,7 +141,7 @@ export const MainInfoSection = () => {
 								</div>
 							</FlexRow>
 						</a>
-						<a href={`https://t6site.npotau.ru/`} className={styles.link}>
+						{/* <a href={`https://t6site.npotau.ru/`} className={styles.link}>
 							<FlexRow className={styles.blockEl}>
 								<FlexRow className={styles.infoBlock}>
 									<p className={styles.title}>{settings?.shortname}</p>
@@ -155,7 +153,7 @@ export const MainInfoSection = () => {
 									<MainInfoOrgSVG />
 								</div>
 							</FlexRow>
-						</a>
+						</a> */}
 					</FlexRow>
 					<FlexRow className={styles.infoRow}>
 						<div className={styles.textCont}>

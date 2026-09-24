@@ -181,13 +181,15 @@ export const MainNavigation = () => {
 
 			<nav ref={navRef} className={styles.navigation}>
 				<Container className={styles.navigationCont}>
-					<div className={styles.logoCont} onClick={scrollToTop}>
-						{settingsData?.event_logo && settingsData?.event_logo.length > 0 ? (
-							<img src={settingsData?.event_logo[0].original} />
-						) : (
-							<LogoSVG />
-						)}
-					</div>
+					<a href='https://t6site.npotau.ru'>
+						<div className={styles.logoCont} onClick={scrollToTop}>
+							{settingsData?.event_logo && settingsData?.event_logo.length > 0 ? (
+								<img src={settingsData?.event_logo[0].original} />
+							) : (
+								<LogoSVG />
+							)}
+						</div>
+					</a>
 					<FlexRow className={styles.mobileRow}>
 						<BurgerMenu />
 						<button

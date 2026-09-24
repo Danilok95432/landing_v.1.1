@@ -28,6 +28,7 @@
 			border-radius: 0px;
 			margin-bottom: 8px;
 			max-height: 610px;
+			aspect-ratio: 2 / 1;
 			object-fit: cover;
 			@media (max-width: 768px) {
 				display: none;
@@ -141,7 +142,7 @@
 			max-width: 1220px;
 			width: 100%;
 			margin-bottom: 8px;
-			gap: 0;
+			gap: 20px;
 			justify-content: space-between;
 			align-items: center;
 			flex-wrap: nowrap;
@@ -156,14 +157,12 @@
 			}
 			.link {
 				width: 100%;
-				max-width: 390px;
 			}
 			.blockEl {
 				padding: 24px;
 				flex-direction: row;
 				justify-content: space-between;
 				flex-wrap: nowrap;
-				max-width: 390px;
 				min-height: 165px;
 				max-height: 165px;
 				width: 100%;
