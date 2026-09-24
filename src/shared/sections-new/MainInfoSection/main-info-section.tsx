@@ -90,7 +90,6 @@ export const MainInfoSection = () => {
 											],
 										)[0]}
 									{' — '}
-									<br />
 									{eventData?.date &&
 										eventData?.date.length > 1 &&
 										formatMainDateRange(
